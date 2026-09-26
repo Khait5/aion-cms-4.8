@@ -35,21 +35,56 @@ document.addEventListener("DOMContentLoaded", function() {
     const USERNAME = "<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'daeva'; ?>";
     const CORRECT_CODE = "0305";
 
-    let isAuthenticated = false; // Estado de la autenticación
+    let isAuthenticated = false; 
+    let isBusy = false; // Bloquea el input mientras escribe la secuencia
 
     const inputField = document.getElementById("terminal-input");
     const historyContainer = document.getElementById("terminal-history");
     const terminalContainer = document.getElementById("terminal-container");
     const promptSpan = document.getElementById("terminal-prompt");
 
+    // Función auxiliar para simular efecto máquina de escribir con retraso de 1s al terminar cada línea
+    function typeWriterSequence(sequenceArray, index = 0, callback) {
+        if (index >= sequenceArray.length) {
+            if (callback) callback();
+            return;
+        }
+
+        const item = sequenceArray[index];
+        const p = document.createElement("p");
+        p.style.color = item.color;
+        p.style.margin = "0";
+        historyContainer.appendChild(p);
+
+        let charIdx = 0;
+        const speed = 15; // Velocidad de escritura letra a letra (cuanto menor, más rápido)
+
+        function typeChar() {
+            if (charIdx < item.text.length) {
+                p.textContent += item.text.charAt(charIdx);
+                charIdx++;
+                terminalContainer.scrollTop = terminalContainer.scrollHeight;
+                setTimeout(typeChar, speed);
+            } else {
+                // Al terminar la línea actual, espera exactamente 1 segundo (1000ms) antes de la siguiente
+                setTimeout(function() {
+                    typeWriterSequence(sequenceArray, index + 1, callback);
+                }, 1000);
+            }
+        }
+
+        typeChar();
+    }
+
     inputField.addEventListener("keypress", function(e) {
         if (e.key === "Enter") {
+            if (isBusy) return; // Si está imprimiendo la secuencia, ignora el enter
+
             const inputVal = inputField.value.trim();
             if (inputVal === "") return;
 
             // PASO 1: Control de acceso por código
             if (!isAuthenticated) {
-                // Mostrar lo que escribió el usuario en blanco
                 const userP = document.createElement("p");
                 userP.style.color = "#fff"; 
                 userP.style.margin = "0";
@@ -61,9 +96,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (inputVal === CORRECT_CODE) {
                     isAuthenticated = true;
-                    promptSpan.textContent = USERNAME + "@atreia:"; // Cambia el prompt al normal
+                    isBusy = true; // Bloqueamos la terminal durante la secuencia animada
+                    inputField.disabled = true; 
 
-                    // Secuencia de conexión exitosa
+                    promptSpan.textContent = USERNAME + "@atreia:"; 
+
                     const successSeq = [
                         { text: "> CÓDIGO CORRECTO. Autorización concedida.", color: "#0f0" },
                         { text: "> Estableciendo enlace encriptado...", color: "#0f0" },
@@ -73,15 +110,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         { text: "> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a", color: "#0f0" }
                     ];
 
-                    successSeq.forEach(seq => {
-                        const p = document.createElement("p");
-                        p.style.color = seq.color;
-                        p.style.margin = "0";
-                        p.textContent = seq.text;
-                        historyContainer.appendChild(p);
+                    // Ejecutamos la secuencia animada y al terminar reactivamos el input
+                    typeWriterSequence(successSeq, 0, function() {
+                        isBusy = false;
+                        inputField.disabled = false;
+                        inputField.focus();
                     });
+
                 } else {
-                    // Código incorrecto: Deniega el enlace por completo
                     const errP = document.createElement("p");
                     errP.style.color = "#ff3333";
                     errP.style.margin = "0";
@@ -90,10 +126,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
 
                 terminalContainer.scrollTop = terminalContainer.scrollHeight;
-                return; // Corta la ejecución para que no intente hablar con la IA
+                return; 
             }
 
-            // PASO 2: Funcionamiento normal del chat (Una vez logueado con el código)
+            // PASO 2: Funcionamiento normal del chat (Una vez autenticado)
             const message = inputVal;
 
             const userP = document.createElement("p");
