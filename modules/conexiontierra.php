@@ -17,17 +17,12 @@ if (!isLoggedIn()) {
 
     <div id="terminal-container" style="background-color: #000; padding: 20px; font-family: monospace; color: #0f0; min-height: 400px; max-height: 500px; overflow-y: auto; border: 1px solid #333;">
         <div id="terminal-history">
-            <p style="color: #0f0; margin: 0;">> Estableciendo enlace encriptado...</p>
-            <p style="color: #0f0; margin: 0;">> ENLACE ESTABLECIDO</p>
-            <p style="color: #0f0; margin: 0;">> Buscando señales...</p>
-            <p style="color: #0f0; margin: 0;">> (1) SEÑAL ENCONTRADA</p>
-            <p style="color: #0f0; margin: 0;">> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a</p>
+            <p style="color: #f39c12; margin: 0;">> SISTEMA DE SEGURIDAD ACTIVADO</p>
+            <p style="color: #f39c12; margin: 0;">> INTRODUZCA CÓDIGO DE ACCESO EXTERIOR:</p>
         </div>
 
         <div style="margin-top: 15px; display: flex;">
-            <!-- He cambiado el color del span a blanco (#fff) para que se mantenga blanco -->
-            <span id="terminal-prompt" style="color: #fff; margin-right: 10px;"><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'daeva'; ?>@atreia:</span>
-            <!-- He cambiado el color del input a blanco (#fff) para que lo que escribas y lo que se mantenga sea blanco -->
+            <span id="terminal-prompt" style="color: #fff; margin-right: 10px;"><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'daeva'; ?>@atreia (AUTH):</span>
             <input type="text" id="terminal-input" style="background: transparent; border: none; color: #fff; font-family: monospace; flex-grow: 1; outline: none; width: 100%;" autocomplete="off" autofocus />
         </div>
     </div>
@@ -38,17 +33,69 @@ if (!isLoggedIn()) {
 document.addEventListener("DOMContentLoaded", function() {
     const CLOUDFLARE_LLM_URL = "https://llm-colombianage.eveblack.workers.dev/api/chat";
     const USERNAME = "<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'daeva'; ?>";
+    const CORRECT_CODE = "0305";
+
+    let isAuthenticated = false; // Estado de la autenticación
 
     const inputField = document.getElementById("terminal-input");
     const historyContainer = document.getElementById("terminal-history");
     const terminalContainer = document.getElementById("terminal-container");
+    const promptSpan = document.getElementById("terminal-prompt");
 
     inputField.addEventListener("keypress", function(e) {
         if (e.key === "Enter") {
-            const message = inputField.value.trim();
-            if (message === "") return;
+            const inputVal = inputField.value.trim();
+            if (inputVal === "") return;
 
-            // 1. Mensaje del Usuario (en blanco)
+            // PASO 1: Control de acceso por código
+            if (!isAuthenticated) {
+                // Mostrar lo que escribió el usuario en blanco
+                const userP = document.createElement("p");
+                userP.style.color = "#fff"; 
+                userP.style.margin = "0";
+                userP.textContent = USERNAME + "@atreia (AUTH): " + inputVal;
+                historyContainer.appendChild(userP);
+
+                inputField.value = "";
+                terminalContainer.scrollTop = terminalContainer.scrollHeight;
+
+                if (inputVal === CORRECT_CODE) {
+                    isAuthenticated = true;
+                    promptSpan.textContent = USERNAME + "@atreia:"; // Cambia el prompt al normal
+
+                    // Secuencia de conexión exitosa
+                    const successSeq = [
+                        { text: "> CÓDIGO CORRECTO. Autorización concedida.", color: "#0f0" },
+                        { text: "> Estableciendo enlace encriptado...", color: "#0f0" },
+                        { text: "> ENLACE ESTABLECIDO", color: "#0f0" },
+                        { text: "> Buscando señales...", color: "#0f0" },
+                        { text: "> (1) SEÑAL ENCONTRADA", color: "#0f0" },
+                        { text: "> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a", color: "#0f0" }
+                    ];
+
+                    successSeq.forEach(seq => {
+                        const p = document.createElement("p");
+                        p.style.color = seq.color;
+                        p.style.margin = "0";
+                        p.textContent = seq.text;
+                        historyContainer.appendChild(p);
+                    });
+                } else {
+                    // Código incorrecto: Deniega el enlace por completo
+                    const errP = document.createElement("p");
+                    errP.style.color = "#ff3333";
+                    errP.style.margin = "0";
+                    errP.textContent = "> ERROR: Código incorrecto. Acceso denegado. No se establecerá ningún enlace.";
+                    historyContainer.appendChild(errP);
+                }
+
+                terminalContainer.scrollTop = terminalContainer.scrollHeight;
+                return; // Corta la ejecución para que no intente hablar con la IA
+            }
+
+            // PASO 2: Funcionamiento normal del chat (Una vez logueado con el código)
+            const message = inputVal;
+
             const userP = document.createElement("p");
             userP.style.color = "#fff"; 
             userP.style.margin = "0";
@@ -58,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function() {
             inputField.value = "";
             terminalContainer.scrollTop = terminalContainer.scrollHeight;
 
-            // Mensaje de carga (en verde intermitente/sistema)
             const loadingP = document.createElement("p");
             loadingP.style.color = "#0f0";
             loadingP.style.margin = "0";
@@ -78,9 +124,8 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => {
                 historyContainer.removeChild(loadingP);
 
-                // 2. Mensaje de la IA (Cambiado a color ROJO #f00)
                 const replyP = document.createElement("p");
-                replyP.style.color = "#f00";
+                replyP.style.color = "#f00"; // Respuesta de la IA en rojo
                 replyP.style.margin = "0";
                 
                 const llmResponse = data.response || data.reply || "TRANSMISIÓN RECIBIDA: " + JSON.stringify(data);
