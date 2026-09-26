@@ -108,7 +108,20 @@ if (!isLoggedIn()) {
             Y nosotros,<br>
             Solo vinimos a okuparlo porque el nuestro se destruyó."
         </div>
-    </div>
+             <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
+            La Torre de la eternidad
+        </h3>
+        <div class="lore-content" style="padding: 15px; display: none; background: #111; color: #ddd; margin-bottom: 15px; line-height: 1.6;">
+            "Explorando, nos dimos cuenta que en cierto punto del planeta, surgía muchas particulas magicas.<br>
+            Hasta el punto que alteraban nuestras herramientas y los hechizos que aprendimos, ya no funcionaban.<br>
+            El aire se condensaba, costaba respirar, así fue como encontramos la torre.
+            
+            Asi la llamaron, la torre de la eternidad, el nucleo del planeta, lo que sostenia el planeta unido y generaba las particulas mágicas.
+            
+            Sin esa torre, el planeta se destruiría, y los humanos también, gracias a esa torre podiamos vivir, respirar, protegernos y usar la magia a nuestro antojo en nuestro día a día.
+            
+            Y los balaur, lo sabian."<br>
+        </div>
 
 </div>
 
