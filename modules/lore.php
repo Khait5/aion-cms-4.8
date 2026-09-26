@@ -79,7 +79,7 @@ if (!isLoggedIn()) {
 
 <div class="server-info-container" style="padding: 20px;">
     <div class="book-container">
-        <div class="page-header-block ">
+        <div class="page-header-block " styles="    background: NULL; !important;">
             <div class="book-title">📖 ARCHIVOS DEL CÓDEX: HISTORIA DE ATREIA</div>
         </div>
         
