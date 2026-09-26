@@ -80,9 +80,10 @@ if (!isLoggedIn()) {
             Así que ambas facciones, tomaron un interes común y dijeron:<br>
             Atreia Este es para vosotros,<br>
             Atreia Oeste es para nosotros.<br><br>
-            Y así fue.<br>
-            Con casi mas de la mitad de la humanidad destruida,<br>
-            Fueron a lo que nunca antes hicieron desde que llegaron, explorar, y colonizar todo el planeta."
+            Una paz temporal.<br>
+            Todos somos humanos, todos usamos lo mismo, investiguemos juntos en nuestras partes del planeta, y compartamos nuestros descubrimientos.<br>
+            Con casi mas de la mitad de la humanidad destruida, eligieron a los 12 Señores de los Cumulos, 6 Eyos, y 6 Asmodianos, creando el Consejo de la Ultima Humanidad.<br>
+            Y así, fueron a lo que nunca antes hicieron desde que llegaron, explorar, y colonizar todo el planeta."
         </div>
                     
          <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
@@ -108,19 +109,43 @@ if (!isLoggedIn()) {
             Y nosotros,<br>
             Solo vinimos a okuparlo porque el nuestro se destruyó."
         </div>
-             <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
+        <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
             La Torre de la eternidad
         </h3>
         <div class="lore-content" style="padding: 15px; display: none; background: #111; color: #ddd; margin-bottom: 15px; line-height: 1.6;">
             "Explorando, nos dimos cuenta que en cierto punto del planeta, surgía muchas particulas magicas.<br>
             Hasta el punto que alteraban nuestras herramientas y los hechizos que aprendimos, ya no funcionaban.<br>
-            El aire se condensaba, costaba respirar, así fue como encontramos la torre.
-            
+            El aire se condensaba, costaba respirar, así fue como encontramos la torre.<br>
+            <br>
             Asi la llamaron, la torre de la eternidad, el nucleo del planeta, lo que sostenia el planeta unido y generaba las particulas mágicas.
-            
-            Sin esa torre, el planeta se destruiría, y los humanos también, gracias a esa torre podiamos vivir, respirar, protegernos y usar la magia a nuestro antojo en nuestro día a día.
-            
+            <br>
+            Sin esa torre, el planeta se destruiría, y los humanos también, gracias a esa torre podiamos vivir, respirar, protegernos y usar la magia a nuestro antojo en nuestro día a día.<br>
+            <br>
             Y los balaur, lo sabian."<br>
+        </div>
+         <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
+         El camino a la locura.
+        </h3>
+        <div class="lore-content" style="padding: 15px; display: none; background: #111; color: #ddd; margin-bottom: 15px; line-height: 1.6;">
+            "Los balaur, como la raza superior para proteger y gobernar el planeta, se corrompieron por una insaciable ansia de poder absoluto.<br>
+            No les bastaba con reinar sobre las demás criaturas; querían subyugar al propio "Dios" del planeta, la torre.<br>
+            Controlar la torre significaba adueñarse de la fuente de las particulas de todo el planeta, lo que les otorgaría un poder divino e ilimitado para moldear Atreia a su antojo y destruir a cualquiera que se les opusiera.<br>
+            Y así fue, como los balaur, ansiosos de poder, atacaro la torre con todas sus fuerzas."<br>
+        </div>
+        <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
+         Gran Cataclismo
+        </h3>
+        <div class="lore-content" style="padding: 15px; display: none; background: #111; color: #ddd; margin-bottom: 15px; line-height: 1.6;">
+            "El Gran Cataclismo fue el evento apocalíptico que partió el planeta Atreia en dos y destruyó la Torre de la Eternidad.<br>
+            Ocurrió tras 5 años de una cruenta guerra de desgaste entre los Balaur y los humanos.<br>
+            En un intento desesperado por lograr la paz, el Señor Israel propuso un tratado de paz con los Balaur, el cual aceptaron, todo el Consejo se puso de acuerdo, y los Balaur también se abrieron a negociar.<br>
+            Sin embargo, durante las negociaciones dentro de la barrera de la torre, la tensión estalló: uno de los líderes Balaur fue asesinado bajo circunstancias misteriosas.<br>
+            Creyéndose traicionados, los Balaur atacaron con furia ciega, logrando destruir el núcleo de la Torre de la Eternidad.<bR>
+        </br>La destrucción de la torre desató una inmensa inestabilidad energética que comenzó a desintegrar el planeta. <br>
+            Para salvar el mundo, dos de los Señores de los Cúmulos sacrificaron sus propias vidas para proyectar una barrera mágica que detuvo la destrucción absoluta,<br>
+            pero el daño ya estaba hecho: la sección central de la torre se convirtió en un campo de escombros flotantes conocido como el Abismo, y el planeta quedó fragmentado para siempre en dos mitades:<br>
+            La luminosa Elysea y la oscura Asmodae, dando origen al odio eterno entre Elyos y Asmodianos, echandose las culpas uno al otro de quien fué que ataco a los balaur,
+            originando la muerte de 2 de los 12 Señores del Cumulo, de los humanos mas fuertes jamas conocidos, dejandoles debiles, contra los balaur, los cuales ganaron más fuerza que nunca."<br>
         </div>
 
 </div>
