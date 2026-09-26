@@ -36,49 +36,94 @@ document.addEventListener("DOMContentLoaded", function() {
     const CORRECT_CODE = "0305";
 
     let isAuthenticated = false; 
-    let isBusy = false; // Bloquea el input mientras escribe la secuencia
+    let isBusy = false; 
 
     const inputField = document.getElementById("terminal-input");
     const historyContainer = document.getElementById("terminal-history");
     const terminalContainer = document.getElementById("terminal-container");
     const promptSpan = document.getElementById("terminal-prompt");
 
-    // Función auxiliar para simular efecto máquina de escribir con retraso de 1s al terminar cada línea
-    function typeWriterSequence(sequenceArray, index = 0, callback) {
-        if (index >= sequenceArray.length) {
-            if (callback) callback();
-            return;
-        }
+    // Función avanzada para la secuencia de arranque con puntos suspensivos y limpieza final
+    function runStartupSequence(callback) {
+        const p1 = document.createElement("p");
+        p1.style.color = "#0f0"; p1.style.margin = "0"; historyContainer.appendChild(p1);
+        typeText(p1, "> CÓDIGO CORRECTO. Autorización concedida.", 15, function() {
+            setTimeout(function() {
+                const p2 = document.createElement("p");
+                p2.style.color = "#0f0"; p2.style.margin = "0"; historyContainer.appendChild(p2);
+                typeText(p2, "> Estableciendo enlace encriptado...", 15, function() {
+                    setTimeout(function() {
+                        const p3 = document.createElement("p");
+                        p3.style.color = "#0f0"; p3.style.margin = "0"; historyContainer.appendChild(p3);
+                        typeText(p3, "> ENLACE ESTABLECIDO", 15, function() {
+                            setTimeout(function() {
+                                const p4 = document.createElement("p");
+                                p4.style.color = "#0f0"; p4.style.margin = "0"; historyContainer.appendChild(p4);
+                                typeText(p4, "> Buscando señales", 15, function() {
+                                    // Añadir los 3 puntos uno a uno cada 1 segundo
+                                    setTimeout(function() {
+                                        p4.textContent += ".";
+                                        terminalContainer.scrollTop = terminalContainer.scrollHeight;
+                                        setTimeout(function() {
+                                            p4.textContent += ".";
+                                            terminalContainer.scrollTop = terminalContainer.scrollHeight;
+                                            setTimeout(function() {
+                                                p4.textContent += ".";
+                                                terminalContainer.scrollTop = terminalContainer.scrollHeight;
+                                                setTimeout(function() {
+                                                    const p5 = document.createElement("p");
+                                                    p5.style.color = "#0f0"; p5.style.margin = "0"; historyContainer.appendChild(p5);
+                                                    typeText(p5, "> (1) SEÑAL ENCONTRADA", 15, function() {
+                                                        setTimeout(function() {
+                                                            const p6 = document.createElement("p");
+                                                            p6.style.color = "#0f0"; p6.style.margin = "0"; historyContainer.appendChild(p6);
+                                                            typeText(p6, "> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a", 15, function() {
+                                                                setTimeout(function() {
+                                                                    // LIMPIAR TODO EL HISTORIAL Y DEJAR SOLO EL MENSAJE FINAL
+                                                                    historyContainer.innerHTML = '';
+                                                                    const finalP = document.createElement("p");
+                                                                    finalP.style.color = "#0f0";
+                                                                    finalP.style.margin = "0";
+                                                                    finalP.textContent = "> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a";
+                                                                    historyContainer.appendChild(finalP);
+                                                                    terminalContainer.scrollTop = terminalContainer.scrollHeight;
 
-        const item = sequenceArray[index];
-        const p = document.createElement("p");
-        p.style.color = item.color;
-        p.style.margin = "0";
-        historyContainer.appendChild(p);
+                                                                    if (callback) callback();
+                                                                }, 1000);
+                                                            });
+                                                        }, 1000);
+                                                    });
+                                                }, 1000);
+                                            }, 1000);
+                                        }, 1000);
+                                    }, 1000);
+                                });
+                            }, 1000);
+                        });
+                    }, 1000);
+                });
+            }, 1000);
+        });
+    }
 
+    function typeText(element, text, speed, callback) {
         let charIdx = 0;
-        const speed = 15; // Velocidad de escritura letra a letra (cuanto menor, más rápido)
-
-        function typeChar() {
-            if (charIdx < item.text.length) {
-                p.textContent += item.text.charAt(charIdx);
+        function type() {
+            if (charIdx < text.length) {
+                element.textContent += text.charAt(charIdx);
                 charIdx++;
                 terminalContainer.scrollTop = terminalContainer.scrollHeight;
-                setTimeout(typeChar, speed);
+                setTimeout(type, speed);
             } else {
-                // Al terminar la línea actual, espera exactamente 1 segundo (1000ms) antes de la siguiente
-                setTimeout(function() {
-                    typeWriterSequence(sequenceArray, index + 1, callback);
-                }, 1000);
+                if (callback) callback();
             }
         }
-
-        typeChar();
+        type();
     }
 
     inputField.addEventListener("keypress", function(e) {
         if (e.key === "Enter") {
-            if (isBusy) return; // Si está imprimiendo la secuencia, ignora el enter
+            if (isBusy) return; 
 
             const inputVal = inputField.value.trim();
             if (inputVal === "") return;
@@ -96,22 +141,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (inputVal === CORRECT_CODE) {
                     isAuthenticated = true;
-                    isBusy = true; // Bloqueamos la terminal durante la secuencia animada
+                    isBusy = true; 
                     inputField.disabled = true; 
 
                     promptSpan.textContent = USERNAME + "@atreia:"; 
 
-                    const successSeq = [
-                        { text: "> CÓDIGO CORRECTO. Autorización concedida.", color: "#0f0" },
-                        { text: "> Estableciendo enlace encriptado...", color: "#0f0" },
-                        { text: "> ENLACE ESTABLECIDO", color: "#0f0" },
-                        { text: "> Buscando señales...", color: "#0f0" },
-                        { text: "> (1) SEÑAL ENCONTRADA", color: "#0f0" },
-                        { text: "> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a", color: "#0f0" }
-                    ];
-
-                    // Ejecutamos la secuencia animada y al terminar reactivamos el input
-                    typeWriterSequence(successSeq, 0, function() {
+                    runStartupSequence(function() {
                         isBusy = false;
                         inputField.disabled = false;
                         inputField.focus();
