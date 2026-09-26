@@ -11,13 +11,13 @@
 <div class="server-info-container" style="padding: 20px;">
     
     <h2>Información del Servidor</h2>
-    <p>Bienvenido a nuestro servidor de Beyond Aion 4.8. A continuación, los detalles y rates de nuestro proyecto:</p>
+    <p>Bienvenido a nuestro servidor de ColombianAge 4.8. A continuación, los detalles y rates de nuestro proyecto:</p>
 
     <table class="table table-hover table-bordered" style="width: 100%; max-width: 600px; margin-top: 20px;">
         <tbody>
             <tr>
                 <td><strong>Versión del Cliente</strong></td>
-                <td>4.8 (Beyond Aion)</td>
+                <td>4.8 (ColombianAge)</td>
             </tr>
             <tr>
                 <td><strong>Experiencia (XP)</strong></td>

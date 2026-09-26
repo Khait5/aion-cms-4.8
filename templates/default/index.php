@@ -43,16 +43,14 @@
 		<div class="main-navbar">
 			<div class="main-navbar-container">
 			<ul class="left">
-				<li><a href="<?php base_url(); ?>">Home</a></li>
-				<li><a href="<?php module_url(); ?>connect/">Connect</a></li>
-				<li><a href="<?php module_url(); ?>info/">Server Info</a></li>
-				<li><a href="<?php module_url(); ?>support/">Support</a></li>
+				<li><a href="<?php base_url(); ?>">Inicio</a></li>
+				<li><a href="<?php module_url(); ?>connect/">Conectar</a></li>
+				<li><a href="<?php module_url(); ?>info/">Info. Servidor</a></li>
+				<li><a href="<?php module_url(); ?>lore/">Lore</a></li>
+				<li><a href="<?php module_url(); ?>conexion_tierra/">Conexión a la TIERRA</a></li>
 			</ul>
 			<ul class="right">
-				<li><a href="<?php module_url(); ?>rankings/">Rankings</a></li>
-				<li><a href="<?php module_url(); ?>usercp/vote/">Vote Reward</a></li>
-				<li><a href="<?php module_url(); ?>donate/">Donate</a></li>
-				<li><a href="https://aioncms.com/" target="_blank">Forum</a></li>
+				<li><a href="<?php module_url(); ?>rankings/">Clasificación</a></li>
 			</ul>
 			</div>
 		</div>
