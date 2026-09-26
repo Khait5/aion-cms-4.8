@@ -59,7 +59,7 @@
 					<a href="https://esrb.org/" rel="noreferrer" target="_blank"><img src="<?php template_img(); ?>img_esrb.jpeg" height="40px" width="auto" title="ESRB Ratings" style="margin-right: 15px;"/></a>
 					<a href="https://pegi.info/" rel="noreferrer" target="_blank"><img src="<?php template_img(); ?>img_pegi.png" height="40px" width="auto" title="Pan European Game Information"/></a>
 				</div>
-				<div class="col-xs-4 text-center">
+				<!--<div class="col-xs-4 text-center">
 					Copyright &copy; 2019 Aion, All Rights Reserved.<br />
 					This site is in no way associated with or endorsed by &copy; NCSOFT Corp.<br />
 					<a href="https://aioncms.com/" style="color:#ffe4a9;" target="_blank">Powered by AionCMS v<?php echo __AIONCMS_VERSION__; ?></a><br />
@@ -67,7 +67,7 @@
 				<div class="col-xs-4 text-left">
 					<a href="https://aioncms.com/" target="_blank"><img src="<?php template_img(); ?>aioncms_footer_logo_xs.png" height="40px" width="auto" title="AionCMS" style="margin-right: 15px;"/></a>
 					<img src="<?php template_img(); ?>aion_logo_footer.png" height="40px" width="auto" title="Aion Online"/>
-				</div>
+				</div>-->
 			</div>
 			<!-- <a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/17.png" style="display:none;"></a> -->
 		</div>
