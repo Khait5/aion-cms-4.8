@@ -10,8 +10,8 @@
 <div class="page-header-block accsecurity"></div>
 <br /><br />
 
-<h3>Security PIN</h3>
-<p>Configuring the security PIN will help you confirm ownership of your account.</p>
+<h3>PIN de Seguridad</h3>
+<p>Configurar el PIN de seguridad te ayudará a confirmar la propiedad de tu cuenta.</p>
 <br />
 
 <?php
@@ -22,19 +22,19 @@ try {
 	$accountData = $Account->getAccountData();
 	$accountSecurity = $Account->getExtraSecurityData();
 	
-	if(!is_array($accountData)) throw new Exception('Could not load your account\'s information.');
-	if(check($accountSecurity['security_pin'])) throw new Exception('You have already set your security pin.');
+	if(!is_array($accountData)) throw new Exception('No se pudo cargar la información de tu cuenta.');
+	if(check($accountSecurity['security_pin'])) throw new Exception('Ya has configurado tu PIN de seguridad.');
 	
 	if(isset($_POST['sp_submit']) && check($_POST['sp_submit'])) {
 		try {
 			# filters
-			if(!check($_POST['sp_pin'])) throw new Exception('Please fill all the required fields.');
-			if(!Validator::Length($_POST['sp_pin'], 4, 4)) throw new Exception('Your security PIN must contain 4 digits.');
-			if(!Validator::UnsignedNumber($_POST['sp_pin'])) throw new Exception('Your security PIN must contain 4 digits.');
+			if(!check($_POST['sp_pin'])) throw new Exception('Por favor completa todos los campos requeridos.');
+			if(!Validator::Length($_POST['sp_pin'], 4, 4)) throw new Exception('Tu PIN de seguridad debe contener 4 dígitos.');
+			if(!Validator::UnsignedNumber($_POST['sp_pin'])) throw new Exception('Tu PIN de seguridad debe contener 4 dígitos.');
 
 			# save pin
 			$savePin = $Account->setSecurityPIN($_POST['sp_pin']);
-			if(!$savePin) throw new Exception("Your request could not be completed. If this problem persists contact the administrator. [E-A004]");
+			if(!$savePin) throw new Exception("Tu petición no pudo ser completada. Si este problema persiste contacta al administrador. [E-A004]");
 			
 			logSystem::add('set security pin');
 			redirect('usercp/account/');
@@ -47,13 +47,13 @@ try {
 	echo '<form action="'.module_url('usercp/securitypin/', true).'" method="post">';
 	echo '<table class="my-account-table">';
 		echo '<tr>';
-			echo '<td>Security PIN:</td>';
+			echo '<td>PIN de Seguridad:</td>';
 			echo '<td><input type="text" name="sp_pin" class="form-control" placeholder="1234..." maxlength="4" autofocus/></td>';
 		echo '</tr>';
 		
 		echo '<tr>';
 			echo '<td></td>';
-			echo '<td><button type="submit" name="sp_submit" value="ok" class="btn btn-primary">Save Security PIN</button></td>';
+			echo '<td><button type="submit" name="sp_submit" value="ok" class="btn btn-primary">Guardar PIN de Seguridad</button></td>';
 		echo '</tr>';
 	echo '</table>';
 	echo '</form>';

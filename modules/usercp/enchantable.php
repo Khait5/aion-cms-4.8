@@ -10,8 +10,8 @@
 <div class="page-header-block itemenchant"></div>
 <br /><br />
 
-<h3>Enchantable Items List</h3>
-<p>The following items are available to be enchanted using the web tool.</p>
+<h3>Lista de Objetos Encantables</h3>
+<p>Los siguientes objetos están disponibles para ser encantados usando la herramienta web.</p>
 <br />
 
 <?php

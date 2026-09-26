@@ -10,32 +10,32 @@
 <div class="page-header-block votenreward"></div>
 <br /><br />
 
-<h3>Vote Rankings</h3>
-<p>Get even more rewards by staying at the top of the monthly voting rankings.</p>
+<h3>Clasificación de Votos</h3>
+<p>Obtén aún más recompensas manteniéndote en la cima de la clasificación de votos mensual.</p>
 
 <br /><br />
 
-<h4>How it works:</h4>
+<h4>Cómo funciona:</h4>
 <ol>
-	<li>Select your main character (will be shown in the rankings)</li>
-	<li>Opt-in to participate (you have to opt-in each month)</li>
-	<li>Vote!</li>
+	<li>Selecciona tu personaje principal (se mostrará en la clasificación)</li>
+	<li>Inscríbete para participar (tienes que inscribirte cada mes)</li>
+	<li>¡Vota!</li>
 </ol>
 
 <br /><br />
 
-<h4>Rewards (<?php echo date("F"); ?>):</h4>
+<h4>Recompensas (<?php echo date("F"); ?>):</h4>
 <table class="table table-bordered table-striped">
 	<tr>
-		<td>1st place</td>
+		<td>1er lugar</td>
 		<td>
-			1x Item of choice from our Web Shop<br /><br />
+			1x Objeto a elección de nuestra Tienda Web<br /><br />
 		</td>
 	</tr>
 	<tr>
-		<td>2nd place</td>
+		<td>2do lugar</td>
 		<td>
-			7 Days VIP<br /><br />
+			7 Días de VIP<br /><br />
 		</td>
 	</tr>
 </table>
@@ -60,39 +60,39 @@
 			
 			# ALREADY PARTICIPATING
 			
-			echo '<h4>You are in!</h4>';
-			echo '<h6>here are your votes so far</h6>';
+			echo '<h4>¡Ya estás participando!</h4>';
+			echo '<h6>aquí están tus votos hasta ahora</h6>';
 			echo '<br />';
 			echo '<br />';
-			echo '<p>'.number_format($checkVoteCount['votes']).' votes</p>';
+			echo '<p>'.number_format($checkVoteCount['votes']).' votos</p>';
 			
 		} else {
 			
 			# NOT PARTICIPATING
 			
-			echo '<h4>Lets get started!</h4>';
-			echo '<h6>choose your main character</h6>';
+			echo '<h4>¡Empecemos!</h4>';
+			echo '<h6>elige tu personaje principal</h6>';
 			echo '<br />';
 			
 			if(!is_array($sielCharacters)) {
-				throw new Exception('You don\'t have any characters in SIEL.');
+				throw new Exception('No tienes ningún personaje en SIEL.');
 			}
 			
 			# opt-in process
 			if(isset($_POST['character_submit']) && check($_POST['character_submit'])) {
 				try {
-					if(!check($_POST['character_name'])) throw new Exception('The character you selected is not valid.');
+					if(!check($_POST['character_name'])) throw new Exception('El personaje que seleccionaste no es válido.');
 					
 					$playerInfo = $sdb->queryFetchSingle("SELECT * FROM `players` WHERE `name` = ? AND `account_id` = ?", array($_POST['character_name'], $_SESSION['userid']));
-					if(!is_array($playerInfo)) throw new Exception('The character you selected is not valid. [NiA]');
+					if(!is_array($playerInfo)) throw new Exception('El personaje que seleccionaste no es válido. [NiA]');
 					
 					$voteCount = $db->queryFetchSingle("SELECT * FROM `aioncms`.`votes_count` WHERE `id` = ? AND `year` = ? AND `month` = ?", array($_SESSION['userid'], $currentYear, $currentMonth));
 					if(!is_array($voteCount)) {
 						# not in vote count table
-						if($currentDay > 5) throw new Exception('Sorry! You can only opt-in within the first 5 days of each month.');
+						if($currentDay > 5) throw new Exception('¡Lo siento! Sólo puedes inscribirte dentro de los primeros 5 días de cada mes.');
 						
 						$optIn = $db->query("INSERT INTO `aioncms`.`votes_count` (`id`, `year`, `month`, `character`, `last_update`) VALUES (?, ?, ?, ?, now())", array($_SESSION['userid'], $currentYear, $currentMonth, $playerInfo['name']));
-						if(!$optIn) throw new Exception('There was an error, please contact support. [F-OI]');
+						if(!$optIn) throw new Exception('Hubo un error, por favor contacta a soporte. [F-OI]');
 						
 						# load info again
 						$voteCount = $db->queryFetchSingle("SELECT * FROM `aioncms`.`votes_count` WHERE `id` = ? AND `year` = ? AND `month` = ?", array($_SESSION['userid'], $currentYear, $currentMonth));
@@ -101,7 +101,7 @@
 					if(!check($voteCount['character'])) {
 						# update character name
 						$updateCharacter = $db->query("UPDATE `aioncms`.`votes_count` SET `character` = ?, `last_update` = now() WHERE `id` = ? AND `year` = ? AND `month` = ?", array($playerInfo['name'], $_SESSION['userid'], $currentYear, $currentMonth));
-						if(!$updateCharacter) throw new Exception('There was an error, please contact support. [F-UCN]');
+						if(!$updateCharacter) throw new Exception('Hubo un error, por favor contacta a soporte. [F-UCN]');
 					}
 					
 					redirect('usercp/voteranking/');
@@ -122,7 +122,7 @@
 						}
 					echo '</select>';
 				echo '</div>';
-				echo '<button type="submit" class="btn btn-primary btn-block" name="character_submit" value="1">Opt-in</button>';
+				echo '<button type="submit" class="btn btn-primary btn-block" name="character_submit" value="1">Inscribirse</button>';
 			echo '</form>';
 		
 		}

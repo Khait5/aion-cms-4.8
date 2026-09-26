@@ -10,8 +10,8 @@
 <div class="page-header-block accsecurity"></div>
 <br /><br />
 
-<h3>Validate Account</h3>
-<p>Use this only if a staff member requested you to do so.</p>
+<h3>Validar Cuenta</h3>
+<p>Usa esto solo si un miembro del equipo te lo pidió.</p>
 <br />
 <br />
 <br />
@@ -25,12 +25,12 @@ if(check($_POST['acc_submit'], $_POST['acc_pwd'])) {
 		$Account->setId($_SESSION['userid']);
 		$accountData = $Account->getAccountData();
 		
-		if(!is_array($accountData)) throw new Exception('Bad request.');
+		if(!is_array($accountData)) throw new Exception('Petición incorrecta.');
 		$encryptPwd = base64_encode(sha1($_POST['acc_pwd'], true));
-		if($accountData['password'] != $encryptPwd) throw new Exception('Your password is not correct.');
+		if($accountData['password'] != $encryptPwd) throw new Exception('Tu contraseña no es correcta.');
 		
 		echo '<div class="col-md-6 col-md-offset-3 text-center">';
-			echo '<h4>Validation Code</h4><br />';
+			echo '<h4>Código de Validación</h4><br />';
 			echo '<p style="color:red;">'.md5($_SESSION['username'] . md5('validateUser3000')).'</p>';
 		echo '</div>';
 		
@@ -40,11 +40,11 @@ if(check($_POST['acc_submit'], $_POST['acc_pwd'])) {
 } else {
 ?>
 <div class="col-md-6 col-md-offset-3 text-center">
-	<h4>Enter your account password</h4><br />
+	<h4>Ingresa la contraseña de tu cuenta</h4><br />
 	<form method="post" action="">
 		<div class="form-group">
 			<input class="form-control" type="password" name="acc_pwd" /><br />
-			<button type="submit" name="acc_submit" value="ok" class="btn btn-success">Create Validation Code</button>
+			<button type="submit" name="acc_submit" value="ok" class="btn btn-success">Crear Código de Validación</button>
 		</div>
 	</form>
 </div>

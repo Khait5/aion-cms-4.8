@@ -10,8 +10,8 @@
 <div class="page-header-block accsecurity"></div>
 <br /><br />
 
-<h3>Verify Email Address</h3>
-<p>Verifying your account's email address helps you keep your account more secure.</p>
+<h3>Verificar Dirección de Email</h3>
+<p>Verificar la dirección de email de tu cuenta te ayuda a mantener tu cuenta más segura.</p>
 <br />
 
 <?php
@@ -22,8 +22,8 @@ try {
 	$accountData = $Account->getAccountData();
 	$accountSecurity = $Account->getExtraSecurityData();
 	
-	if(!is_array($accountData)) throw new Exception('Could not load your account\'s information.');
-	if($accountSecurity['email_confirmed'] == 1) throw new Exception('Your email address is already verified.');
+	if(!is_array($accountData)) throw new Exception('No se pudo cargar la información de tu cuenta.');
+	if($accountSecurity['email_confirmed'] == 1) throw new Exception('Tu dirección de email ya está verificada.');
 	
 	if(check($_GET['send'])) {
 		# send verification email
@@ -40,10 +40,10 @@ try {
 			$email->send();
 			
 		} catch(Exception $ex) {
-			throw new Exception('We could not send you the verification email, please contact support.');
+			throw new Exception('No pudimos enviarte el email de verificación, por favor contacta a soporte.');
 		}
 		
-		message('<strong>Almost done!</strong> We have sent a verification email to <strong>'.$accountData['email'].'</strong>. Once you click the link we sent you your email will be verified.', 'success');
+		message('<strong>¡Casi listo!</strong> Hemos enviado un email de verificación a <strong>'.$accountData['email'].'</strong>. Una vez que hagas clic en el enlace que te enviamos, tu email será verificado.', 'success');
 		
 		logSystem::add('requested email verification');
 	}
@@ -55,7 +55,7 @@ try {
 		echo '</tr>';
 		echo '<tr>';
 			echo '<td></td>';
-			echo '<td><a href="'.module_url('usercp/verifyemail/send/1', true).'" class="btn btn-primary">Send Verification Email</a></td>';
+			echo '<td><a href="'.module_url('usercp/verifyemail/send/1', true).'" class="btn btn-primary">Enviar Email de Verificación</a></td>';
 		echo '</tr>';
 	echo '</table>';
 	

@@ -10,7 +10,7 @@
 <div class="page-header-block usercp"></div>
 <br /><br />
 
-<h3>My Characters</h3>
+<h3>Mis Personajes</h3>
 <br />
 <?php
 try {
@@ -21,7 +21,7 @@ try {
 	
 	if(!is_array($sielCharacters)) {
 		echo '<br />';
-		message('Looks like you don\'t have any characters yet.', 'error');
+		message('Parece que aún no tienes ningún personaje.', 'error');
 	}
 	
 	# SIEL
@@ -50,10 +50,10 @@ try {
 					echo '<div class="col-md-5">';
 						echo '<span style="font-weight: bold;font-size: 24px;">'.$character['name'].'</span> ';
 						echo $characterStatus;
-						echo '<br /><span style="font-size: 11px;margin-bottom: 5px;">Level '.$characterLevel.'</span>';
-						if($characterLegion) echo '<br /><span style="font-size: 11px;">Legion:</span>';
-						if($characterLegion) echo '<br /><span><a href="'.$characterLegionProfileLink.'">'.$characterLegion.'</a></span> <a href="'.module_url('usercp/legionprofile/id/'.$legionData['id'], true).'" class="btn btn-xs btn-default">customize</a>';
-						echo '<br /><span style="font-size: 11px;">Last seen at:</span>';
+						echo '<br /><span style="font-size: 11px;margin-bottom: 5px;">Nivel '.$characterLevel.'</span>';
+						if($characterLegion) echo '<br /><span style="font-size: 11px;">Legión:</span>';
+						if($characterLegion) echo '<br /><span><a href="'.$characterLegionProfileLink.'">'.$characterLegion.'</a></span> <a href="'.module_url('usercp/legionprofile/id/'.$legionData['id'], true).'" class="btn btn-xs btn-default">personalizar</a>';
+						echo '<br /><span style="font-size: 11px;">Visto por última vez en:</span>';
 						echo '<br /><span>'.$characterLocation.'</span> <span style="font-size: 11px;font-weight:bold;">(SIEL)</span>';
 					echo '</div>';
 					echo '<div class="col-md-5">';
@@ -69,14 +69,14 @@ try {
 						
 						if($characterLevel >= 70 && $characterLevel < 75) {
 							echo '<div class="col-md-12 text-center" style="padding-top: 10px;">';
-								echo '<a href="'.module_url('usercp/boost/server/siel/player/'.$character['name'], true).'" class="btn btn-xs btn-danger">Level Boost</a>';
+								echo '<a href="'.module_url('usercp/boost/server/siel/player/'.$character['name'], true).'" class="btn btn-xs btn-danger">Impulso de Nivel</a>';
 							echo '</div>';
 						}
 						
 					echo '</div>';
 					echo '<div class="col-md-2">';
-						echo '<a href="'.module_url('usercp/inventory/server/siel/player/'.$character['name'], true).'" class="btn btn-xs btn-block btn-primary">Inventory</a>';
-						echo '<a href="'.module_url('usercp/unstuck/server/siel/player/'.$character['name'], true).'" class="btn btn-xs btn-block btn-primary">Unstick</a>';
+						echo '<a href="'.module_url('usercp/inventory/server/siel/player/'.$character['name'], true).'" class="btn btn-xs btn-block btn-primary">Inventario</a>';
+						echo '<a href="'.module_url('usercp/unstuck/server/siel/player/'.$character['name'], true).'" class="btn btn-xs btn-block btn-primary">Destrabar</a>';
 						//echo '<a href="'.module_url('usercp/transfer/server/siel/player/'.$character['name'], true).'" class="btn btn-xs btn-block btn-primary">Transfer</a>';
 					echo '</div>';
 				echo '</div>';
