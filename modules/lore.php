@@ -16,10 +16,10 @@ if (!isLoggedIn()) {
 
     <div id="lore-accordion">
         <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
-            Capítulo 1
+           Introducción
         </h3>
         <div class="lore-content" style="padding: 10px; display: none; background: #111; color: #ddd; margin-bottom: 15px;">
-            <p>"Las cosas han cambiado, [%username]. Te metiste en una máquina de criogenización junto a tu pareja justo antes del desastre. El maldito Pedro Sánchez empezó una guerra nuclear con Estados Unidos, y Trump se equivocó y tiró una bomba atómica en Marruecos. Descubrimos este nuevo planeta, empezamos de cero, y hay algo en el aire que permite que hagamos magia."</p>
+            <p>"Las cosas han cambiado, <?php echo $_SESSION['username']; ?>. Te metiste en una máquina de criogenización junto a tu pareja justo antes del desastre. El maldito Pedro Sánchez empezó una guerra nuclear con Estados Unidos, y Trump se equivocó y tiró una bomba atómica en Marruecos. Descubrimos este nuevo planeta, empezamos de cero, y hay algo en el aire que permite que hagamos magia."</p>
         </div>
 
         <!-- More chapters can be added here following the same structure -->
