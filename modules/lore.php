@@ -81,9 +81,10 @@ if (!isLoggedIn()) {
     <div class="book-container">
         <div class="page-header-block " style="background-color: transparent; !important;">
             <div class="book-title">CODEX DE ATREIA</div>
-        </div>
-        Este, es el libro donde Skipper, Kowalski, Rico y Cabo recogen toda la información de los sucesos de la Humanidad en Atreia.
+            Este, es el libro donde Skipper, Kowalski, Rico y Cabo recogen toda la información de los sucesos de la Humanidad en Atreia.
         Firmado por ellos 4.
+        </div>
+        
 
         <div id="lore-accordion">
             <div class="lore-chapter">C1: Introducción</div>
