@@ -12,13 +12,16 @@ if (!isLoggedIn()) {
 <div class="page-header-block info"></div>
 <div class="server-info-container" style="padding: 20px;">
 
-    <h2>Conexión a la TIERRA</h2>
-    <p style="color: #666; font-style: italic;">Estableciendo enlace encriptado...</p>
+    <h2>TERMINAL</h2>
+    <p style="color: #666; font-style: italic;"></p>
 
     <div id="terminal-container" style="background-color: #000; padding: 20px; font-family: monospace; color: #0f0; min-height: 400px; max-height: 500px; overflow-y: auto; border: 1px solid #333;">
         <div id="terminal-history">
+            <p style="color: #0f0; margin: 0;">> Estableciendo enlace encriptado...</p>
             <p style="color: #0f0; margin: 0;">> ENLACE ESTABLECIDO</p>
-            <p style="color: #0f0; margin: 0;">> ESPERANDO INPUT DEL USUARIO...</p>
+            <p style="color: #0f0; margin: 0;">> Buscando señales...</p>
+            <p style="color: #0f0; margin: 0;">> (1) SEÑAL ENCONTRADA</p>
+            <p style="color: #0f0; margin: 0;">> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a</p>
         </div>
 
         <div style="margin-top: 15px; display: flex;">
