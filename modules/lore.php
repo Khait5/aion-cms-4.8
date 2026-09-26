@@ -9,7 +9,6 @@ if (!isLoggedIn()) {
     return; // Evita que cargue el resto de la página
 }
 ?>
-<div class="page-header-block info"></div>
 <div class="server-info-container" style="padding: 20px;">
 
     <h2>Lore del Juego</h2>
