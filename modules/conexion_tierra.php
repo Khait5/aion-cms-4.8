@@ -25,7 +25,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const CLOUDFLARE_LLM_URL = "URL_AQUI";
+    const CLOUDFLARE_LLM_URL = "https://llm-colombianage.eveblack.workers.dev/api/chat";
 
     const inputField = document.getElementById("terminal-input");
     const historyContainer = document.getElementById("terminal-history");
