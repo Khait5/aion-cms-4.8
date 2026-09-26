@@ -76,13 +76,14 @@ if (!isLoggedIn()) {
             Libros, academias, calles, casas, familias.<br>
             Todo destruido por la supervivencia de una de las dos facciones.<br><br>
             Aunque los Asmodians eran fuertes, los Elyos tenian armas de fuego, potenciar herramientas para uso de batalla, algo que ellos estudiaron antes de que todo sucediera, para confrontar a los Asmodians.<br>
-            Los Asmodians robaron tecnologias y avances, todo quedando en un empate sin fin de guerra.<br><br>
-            Así que ambas facciones, tomaron un interes común y dijeron:<br>
+            Los Asmodians robaron tecnologias y avances, todo quedando en un empate sin fin de guerra, y se dió, una paz temporal.<br><br>
+            Una paz temporal, entre los unicos que sobrevivieron, los hispanohablantes.<br>
+            Todos somos humanos, todos usamos lo mismo, investiguemos juntos en nuestras partes del planeta, y compartamos nuestros descubrimientos.<br>
+            Con mas de la mitad de la ultima humanidad destruida, se eligieron a los 12 Señores de los Cumulos, los 12 humanos mas fuertes que quedaban, 6 Eyos, y 6 Asmodianos, creando el Consejo de la Ultima Humanidad,<br>
+            Para poder elegir en voto igual y decidido, que hacer, como hacerlo y donde. <br>
+            Así que ambas facciones, representadas por el consejo, tomaron un interes común y dijeron:<br>
             Atreia Este es para vosotros,<br>
             Atreia Oeste es para nosotros.<br><br>
-            Una paz temporal.<br>
-            Todos somos humanos, todos usamos lo mismo, investiguemos juntos en nuestras partes del planeta, y compartamos nuestros descubrimientos.<br>
-            Con casi mas de la mitad de la humanidad destruida, eligieron a los 12 Señores de los Cumulos, 6 Eyos, y 6 Asmodianos, creando el Consejo de la Ultima Humanidad.<br>
             Y así, fueron a lo que nunca antes hicieron desde que llegaron, explorar, y colonizar todo el planeta."
         </div>
                     
@@ -136,16 +137,17 @@ if (!isLoggedIn()) {
          Gran Cataclismo
         </h3>
         <div class="lore-content" style="padding: 15px; display: none; background: #111; color: #ddd; margin-bottom: 15px; line-height: 1.6;">
-            "El Gran Cataclismo fue el evento apocalíptico que partió el planeta Atreia en dos y destruyó la Torre de la Eternidad.<br>
-            Ocurrió tras 5 años de una cruenta guerra de desgaste entre los Balaur y los humanos.<br>
-            En un intento desesperado por lograr la paz, el Señor Israel propuso un tratado de paz con los Balaur, el cual aceptaron, todo el Consejo se puso de acuerdo, y los Balaur también se abrieron a negociar.<br>
+            "Tras 5 años de una cruenta guerra de desgaste entre los Balaur y los humanos,<br>
+            en un intento desesperado por lograr la paz, el Señor Israel propuso un tratado de paz con los Balaur, todo el Consejo se puso de acuerdo, y los Balaur también se abrieron a negociar.<br>
             Sin embargo, durante las negociaciones dentro de la barrera de la torre, la tensión estalló: uno de los líderes Balaur fue asesinado bajo circunstancias misteriosas.<br>
             Creyéndose traicionados, los Balaur atacaron con furia ciega, logrando destruir el núcleo de la Torre de la Eternidad.<bR>
         </br>La destrucción de la torre desató una inmensa inestabilidad energética que comenzó a desintegrar el planeta. <br>
             Para salvar el mundo, dos de los Señores de los Cúmulos sacrificaron sus propias vidas para proyectar una barrera mágica que detuvo la destrucción absoluta,<br>
             pero el daño ya estaba hecho: la sección central de la torre se convirtió en un campo de escombros flotantes conocido como el Abismo, y el planeta quedó fragmentado para siempre en dos mitades:<br>
             La luminosa Elysea y la oscura Asmodae, dando origen al odio eterno entre Elyos y Asmodianos, echandose las culpas uno al otro de quien fué que ataco a los balaur,
-            originando la muerte de 2 de los 12 Señores del Cumulo, de los humanos mas fuertes jamas conocidos, dejandoles debiles, contra los balaur, los cuales ganaron más fuerza que nunca."<br>
+            originando la muerte de 2 de los 12 Señores del Cumulo, de los humanos mas fuertes jamas conocidos, dejandoles debiles, contra los balaur, los cuales ganaron más fuerza que nunca.<br>
+            Y este suceso es lo que llamamos El Gran Cataciclismo.
+            "
         </div>
 
 </div>
