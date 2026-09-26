@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const loadingP = document.createElement("p");
             loadingP.style.color = "#0f0";
             loadingP.style.margin = "0";
-            loadingP.textContent = "Enviando transmisión...";
+            loadingP.textContent = "Esperando transmisión...";
             historyContainer.appendChild(loadingP);
             terminalContainer.scrollTop = terminalContainer.scrollHeight;
 
