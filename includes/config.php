@@ -153,70 +153,70 @@ $config['vote_enchant_token_chance'] = 1; // percent
 
 $config['usercp_sidebar_menu'] = array(
 	array(
-		'My Account',
+		'Mi Cuenta',
 		'usercp/account/',
 		'acc_ico.png',
 	),
 	array(
-		'My Characters',
+		'Mis Personajes',
 		'usercp/characters/',
 		'char_ico.png',
 	),
 	array(
-		'My Support Tickets',
+		'Mis Tickets de Soporte',
 		'tickets/list/',
 		'tokens_ico.png',
 	),
 	array(
-		'Webshop',
+		'Tienda',
 		'shop/',
 		'items_ico.png',
 	),
 	array(
-		'Weekly Special Shop',
+		'Ofertas Semanales',
 		'shop/',
 		'wsitems_ico.png',
 	),
 	array(
-		'Get Premium | VIP Membership',
+		'Membresía VIP | Premium',
 		'usercp/upgrade/',
 		'premium_ico.png',
 	),
 	array(
-		'Change Password',
+		'Cambiar Contraseña',
 		'usercp/password/',
 		'changepass_ico.png',
 	),
 	array(
-		'Ban System',
-		'usercp/bansystem/',
-		'bansystem_ico.png',
-	),
-	array(
-		'Forum Events',
+		'Eventos del Foro',
 		'forumevents/',
 		'forumevents_ico.png',
 	),
 	array(
-		'Online Time Exchange',
+		'Intercambio de Tiempo',
 		'usercp/timexchange/',
 		'xfer_ot_icon.png',
 	),
 	array(
-		'Lottery',
+		'Lotería',
 		'lottery/',
 		'lottery_ico.png',
 	),
 	array(
-		'Redeem Code',
+		'Canjear Código',
 		'usercp/redeem/',
 		'redeem_ico.png',
 	),
 	array(
-		'Referral System',
-		'usercp/referrals/',
-		'referrals_ico.png',
-		true //no separator at end
+		'Lore',
+		'lore/',
+		'forumevents_ico.png', 
+	),
+	array(
+		'Terminal',
+		'conexiontierra/', 
+		'acc_ico.png', 
+		true // Este 'true' elimina el separador visual en el último elemento
 	),
 );
 
