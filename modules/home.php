@@ -23,11 +23,11 @@
 			<div class="account-box">
 				<div class="account-box-content">
 					<div style="text-align:center;padding-top:20px;">
-						Welcome back, <?php echo $_SESSION['username']; ?><br />
-						<a href="<?php module_url(); ?>usercp/" style="color:#63c2ff;text-decoration:none;">[ usercp ]</a> | <a href="<?php module_url(); ?>logout/" style="color:#ff6363;text-decoration:none;">[ logout ]</a>
+						Bienvenido de nuevo, <?php echo $_SESSION['username']; ?><br />
+						<a href="<?php module_url(); ?>usercp/" style="color:#63c2ff;text-decoration:none;">[ panel de usuario ]</a> | <a href="<?php module_url(); ?>logout/" style="color:#ff6363;text-decoration:none;">[ salir ]</a>
 						<br />
 						<div style="font-size:11px;margin-top: 10px;">
-							<span style="color:#cccccc;">Server Time</span><br />
+							<span style="color:#cccccc;">Hora del Servidor</span><br />
 							<span style="color:#00ff00;"><?php echo date("Y-m-d h:i A"); ?></span>
 						</div>
 					</div>
@@ -35,8 +35,8 @@
 			</div>
 			<?php } ?>
 			<div class="left-text-container">
-				<p>Welcome to <span style="color:#d6be93;">AionCMS</span> Private Server.</p>
-				<p>Aion Online 5.8 (Heart of Frost) is now Live!</p>
+				<p>Bienvenido al Servidor Privado <span style="color:#d6be93;">AionCMS</span>.</p>
+				<p>¡ColombianAge 4.8 ya está disponible!</p>
 				<div class="left-text-container-newsblock">
 					<?php
 					$forumRss = 'FORUM_NEWS_RSS_LINK';
@@ -44,7 +44,7 @@
 					if($loadRssXml) {
 						$eventsFeed = $loadRssXml->channel;
 						
-						echo '<span class="newsheader">Latest News:</span>';
+						echo '<span class="newsheader">Últimas Noticias:</span>';
 						echo '<table class="newstable">';
 							$newsIndex = 0;
 							foreach($eventsFeed->item as $item) {
@@ -76,11 +76,11 @@
 				<!-- Nav tabs -->
 				<div class="text-center">
 					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a href="#abyss" aria-controls="abyss" role="tab" data-toggle="tab">Abyss</a></li>
-						<li role="presentation"><a href="#gp" aria-controls="gp" role="tab" data-toggle="tab">GP</a></li>
-						<li role="presentation"><a href="#kills" aria-controls="kills" role="tab" data-toggle="tab">Kills</a></li>
-						<li role="presentation"><a href="#legions" aria-controls="legions" role="tab" data-toggle="tab">Legions</a></li>
-						<li role="presentation"><a href="#votes" aria-controls="votes" role="tab" data-toggle="tab">Votes</a></li>
+						<li role="presentation" class="active"><a href="#abyss" aria-controls="abyss" role="tab" data-toggle="tab">Abismo</a></li>
+						<li role="presentation"><a href="#gp" aria-controls="gp" role="tab" data-toggle="tab">PG</a></li>
+						<li role="presentation"><a href="#kills" aria-controls="kills" role="tab" data-toggle="tab">Asesinatos</a></li>
+						<li role="presentation"><a href="#legions" aria-controls="legions" role="tab" data-toggle="tab">Legiones</a></li>
+						<li role="presentation"><a href="#votes" aria-controls="votes" role="tab" data-toggle="tab">Votos</a></li>
 					</ul>
 				</div>
 
@@ -101,8 +101,8 @@
 						
 						echo '<table class="abysstable">';
 							echo '<tr>';
-								echo '<th>Name</th>';
-								echo '<th>Abyss Points</th>';
+								echo '<th>Nombre</th>';
+								echo '<th>Puntos del Abismo</th>';
 								echo '<th></th>';
 								echo '<th></th>';
 								echo '<th></th>';
@@ -139,8 +139,8 @@
 							
 							echo '<table class="abysstable">';
 								echo '<tr>';
-									echo '<th>Name</th>';
-									echo '<th>Glory Points</th>';
+								echo '<th>Nombre</th>';
+								echo '<th>Puntos de Gloria</th>';
 									echo '<th></th>';
 									echo '<th></th>';
 									echo '<th></th>';
@@ -180,8 +180,8 @@
 							
 							echo '<table class="abysstable">';
 								echo '<tr>';
-									echo '<th>Name</th>';
-									echo '<th>Kills</th>';
+								echo '<th>Nombre</th>';
+								echo '<th>Asesinatos</th>';
 									echo '<th></th>';
 									echo '<th></th>';
 									echo '<th></th>';
@@ -219,8 +219,8 @@
 							
 							echo '<table class="legionstable">';
 								echo '<tr>';
-									echo '<th>Legion</th>';
-									echo '<th>Points</th>';
+									echo '<th>Legión</th>';
+									echo '<th>Puntos</th>';
 								echo '</tr>';
 								
 								$i = 1;
@@ -252,8 +252,8 @@
 						
 						echo '<table class="abysstable">';
 							echo '<tr>';
-								echo '<th>Name</th>';
-								echo '<th>Votes</th>';
+								echo '<th>Nombre</th>';
+								echo '<th>Votos</th>';
 								echo '<th></th>';
 								echo '<th></th>';
 								echo '<th></th>';
@@ -291,17 +291,17 @@
 			
 			<div class="connect-title"></div>
 			<div class="right-text-container">
-				<p><span style="color:#d6be93;font-size:16px;">Account Registration</span><br />
-				Create your Account <a href="<?php module_url('register/'); ?>" class="alt">Click Here to Register</a></p>
+				<p><span style="color:#d6be93;font-size:16px;">Registro de Cuenta</span><br />
+				Crea tu Cuenta <a href="<?php module_url('register/'); ?>" class="alt">Haz clic aquí para registrarte</a></p>
 
-				<p><span style="color:#d6be93;font-size:16px;">Download and Install Aion</span><br />
-				1. Download & Install uTorrent <a href="http://www.utorrent.com/downloads/complete/os/win/track/stable" target="_blank" class="alt">Here</a><br />
-				1. Download Aion <a href="#" target="_blank" class="alt">Torrent</a> or <a href="#" target="_blank" class="alt">Mega</a><br />
-				2. Download our Launcher <a href="#" target="_blank" class="alt">Here</a></p>
+				<p><span style="color:#d6be93;font-size:16px;">Descarga e Instala Aion</span><br />
+				1. Descarga e Instala uTorrent <a href="http://www.utorrent.com/downloads/complete/os/win/track/stable" target="_blank" class="alt">Aquí</a><br />
+				1. Descarga Aion <a href="#" target="_blank" class="alt">Torrent</a> o <a href="#" target="_blank" class="alt">Mega</a><br />
+				2. Descarga nuestro Lanzador <a href="#" target="_blank" class="alt">Aquí</a></p>
 
-				<p><span style="color:#d6be93;font-size:16px;">Connecting to Aion</span><br />
-				1. Open the AION Folder<br />
-				2. Run AION.exe to connect!</p>
+				<p><span style="color:#d6be93;font-size:16px;">Conectándose a Aion</span><br />
+				1. Abre la carpeta de AION<br />
+				2. ¡Ejecuta AION.exe para conectar!</p>
 			</div>
 		</div>
 	</div>
