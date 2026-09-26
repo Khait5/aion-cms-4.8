@@ -22,7 +22,7 @@ if (!isLoggedIn()) {
         </div>
 
         <div style="margin-top: 15px; display: flex;">
-            <span style="color: #0f0; margin-right: 10px;">root@tierra:~#</span>
+            <span style="color: #0f0; margin-right: 10px;"><?php echo $_SESSION['username']; ?>@atreia:</span>
             <input type="text" id="terminal-input" style="background: transparent; border: none; color: #0f0; font-family: monospace; flex-grow: 1; outline: none; width: 100%;" autocomplete="off" autofocus />
         </div>
     </div>
@@ -32,6 +32,9 @@ if (!isLoggedIn()) {
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const CLOUDFLARE_LLM_URL = "https://llm-colombianage.eveblack.workers.dev/api/chat";
+    
+    // Pasamos el nombre de usuario de PHP a JavaScript de forma segura
+    const USERNAME = "<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'daeva'; ?>";
 
     const inputField = document.getElementById("terminal-input");
     const historyContainer = document.getElementById("terminal-history");
@@ -42,17 +45,17 @@ document.addEventListener("DOMContentLoaded", function() {
             const message = inputField.value.trim();
             if (message === "") return;
 
-            // Add user message to history
+            // 1. Mensaje del Usuario (Ej: Khait5@atreia: hola)
             const userP = document.createElement("p");
-            userP.style.color = "#fff"; // User text in white
+            userP.style.color = "#fff"; 
             userP.style.margin = "0";
-            userP.textContent = "> " + message;
+            userP.textContent = USERNAME + "@atreia: " + message;
             historyContainer.appendChild(userP);
 
             inputField.value = "";
             terminalContainer.scrollTop = terminalContainer.scrollHeight;
 
-            // Add loading message
+            // Mensaje de carga
             const loadingP = document.createElement("p");
             loadingP.style.color = "#0f0";
             loadingP.style.margin = "0";
@@ -60,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
             historyContainer.appendChild(loadingP);
             terminalContainer.scrollTop = terminalContainer.scrollHeight;
 
-            // Send to LLM
+            // Enviar al LLM
             fetch(CLOUDFLARE_LLM_URL, {
                 method: "POST",
                 headers: {
@@ -72,13 +75,15 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => {
                 historyContainer.removeChild(loadingP);
 
+                // 2. Mensaje de la IA (Ej: A?1?p@t?er?a: respuesta)
                 const replyP = document.createElement("p");
                 replyP.style.color = "#0f0";
                 replyP.style.margin = "0";
-                // Assumes response has a "reply" or "response" field, fallback to raw text if needed
-                replyP.textContent = data.reply || data.response || "TRANSMISIÓN RECIBIDA: " + JSON.stringify(data);
+                
+                const llmResponse = data.response || data.reply || "TRANSMISIÓN RECIBIDA: " + JSON.stringify(data);
+                replyP.textContent = "A?1?p@t?er?a: " + llmResponse;
+                
                 historyContainer.appendChild(replyP);
-
                 terminalContainer.scrollTop = terminalContainer.scrollHeight;
             })
             .catch(error => {
@@ -95,5 +100,4 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-</script>
-<br /><br />
+</script><br /><br />
