@@ -81,7 +81,7 @@ if (!isLoggedIn()) {
     <div class="book-container">
         <div class="page-header-block " style="background-color: transparent; !important;">
             <div class="book-title">CODEX DE ATREIA</div>
-            Este, es el libro donde Skipper, Kowalski, Rico y Cabo recogen toda la información de los sucesos de la Humanidad en Atreia.
+            Este, es el libro donde Skipper, Kowalski, Rico y Cabo recogen toda la información de los sucesos de la Humanidad en Atreia.<br>
         Firmado por ellos 4.
         </div>
         
@@ -89,9 +89,8 @@ if (!isLoggedIn()) {
         <div id="lore-accordion">
             <div class="lore-chapter">C1: Introducción</div>
             <div class="lore-content">
-                "Las cosas han cambiado, <?php echo $_SESSION['username']; ?>.<br><br>
-                Te metiste en una máquina de criogenización junto a tu pareja justo antes del desastre.<br>
-                El maldito Pedro Sánchez empezó una guerra nuclear con Estados Unidos, y Trump se equivocó y tiró una bomba atómica en Marruecos.<br><br>
+                "El maldito Pedro Sánchez empezó una guerra nuclear con Estados Unidos, y Trump se equivocó y tiró una bomba atómica en Marruecos.<br><br>
+                Huimos en una máquina de criogenización junto a nuestras parejas justo antes del desastre, en 5 naves de transbordo recien hechas por la NASA.
                 Descubrimos este nuevo planeta, empezamos de cero, y hay algo en el aire que permite que hagamos magia.<br><br>
                 Este nuevo planeta se llama Atreia"
             </div>
@@ -200,14 +199,14 @@ if (!isLoggedIn()) {
                 originando la muerte de 2 de los 12 Señores del Cumulo, de los humanos mas fuertes jamas conocidos, dejandoles debiles, contra los balaur, los cuales ganaron más fuerza que nunca.<br>
                 Y este suceso es lo que llamamos El Gran Cataclismo."
             </div>
-
-            <div class="lore-chapter">C12: El Presente lleno de traiciones</div>
+            <hr />
+            <div class="lore-chapter">El Presente lleno de traiciones</div>
             <div class="lore-content">
                 "Y así fue cuando despiertas sin saber por qué, de tu capsula perdida.<br>
                 Con los recuerdos de uno de los Señores que murieron en tu cerebro.<br>
                 Es como si el mismo se hubiera inyectado en ti, para que lograras algo mas que una falsa paz.<br>
                 Tal vez, ¿Destapar una mentira?<br>
-                ¿Quien mató a Israel?<br>
+                ¿Quien atacó al lider balaur?<br>
                 ¿Porqué lo hizo?<br><br>
                 Casualmente en tu capsula, había una terminal que trajiste de la tierra, una terminal que teoricamente debías usar si encontrabas un planeta habitable, para que el resto de naves te siguieran.<br>
                 Pero te das cuenta que tu no debias tener eso en tus cosas.<br>
