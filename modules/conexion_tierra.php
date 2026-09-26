@@ -2,6 +2,16 @@
 /**
  * AionCMS Conexion Tierra
  */
+// Bloqueo de seguridad: Comprobar si el usuario NO está logueado
+if (!isset($_SESSION['id'])) {
+    echo '<div class="server-info-container" style="padding: 50px; text-align: center; border: 1px solid #333; background: #000;">';
+    echo '<h2 style="color: #ff3333;">[ ACCESO RESTRINGIDO ]</h2>';
+    echo '<p style="color: #0f0; font-family: monospace;">Nivel de autorización insuficiente.</p>';
+    echo '<p style="color: #aaa;">Debes <a href="?page=login" style="color: #fff; text-decoration: underline;">iniciar sesión</a> para acceder a este enlace de la red.</p>';
+    echo '</div>';
+    
+    return; // IMPORTANTE: Esto evita que cargue el chat o el lore que hay debajo
+}
 ?>
 <div class="page-header-block info"></div>
 <div class="server-info-container" style="padding: 20px;">
