@@ -10,7 +10,7 @@
 <div class="page-header-block usercp"></div>
 <br /><br />
 
-<h3>Upgrade Account</h3>
+<h3>Mejorar Cuenta</h3>
 
 <?php
 try {
@@ -23,28 +23,28 @@ try {
 	$Account->setId($_SESSION['userid']);
 	$accountData = $Account->getAccountData();
 	
-	if(!is_array($accountData)) throw new Exception('Could not load your account\'s information.');
+	if(!is_array($accountData)) throw new Exception('No se pudo cargar la información de tu cuenta.');
 	
 	$premiumCost = config('premium_cost', true);
 	$vipCost = config('vip_cost', true);
 	
 	
-	echo '<p>You currently have <strong>'.number_format($accountData['toll']).'</strong> credit(s). <a href="'.module_url('donate/', true).'" class="btn btn-success btn-xs">add credits</a></p><br />';
+	echo '<p>Actualmente tienes <strong>'.number_format($accountData['toll']).'</strong> crédito(s). <a href="'.module_url('donate/', true).'" class="btn btn-success btn-xs">agregar créditos</a></p><br />';
 	
 	if(check($_GET['type'])) {
 		try {
 			switch($_GET['type']) {
 				case 'premium':
 					# GET PREMIUM
-					if($premiumCost > $accountData['toll']) throw new Exception('You don\'t have enough credits.');
-					if($accountData['membership'] == 1) throw new Exception('Your account already has premium membership.');
-					if($accountData['old_membership'] == 1) throw new Exception('Your account already has premium membership.');
+					if($premiumCost > $accountData['toll']) throw new Exception('No tienes suficientes créditos.');
+					if($accountData['membership'] == 1) throw new Exception('Tu cuenta ya tiene membresía premium.');
+					if($accountData['old_membership'] == 1) throw new Exception('Tu cuenta ya tiene membresía premium.');
 					
 					$upgradeAccount = $Account->setPremium();
-					if(!$upgradeAccount) throw new Exception('Your account could not be upgraded, please contact the Administrator.');
+					if(!$upgradeAccount) throw new Exception('Tu cuenta no pudo ser mejorada, por favor contacta al Administrador.');
 					
 					$subtractCredits = $Account->subtractCredits($premiumCost);
-					if(!$subtractCredits) throw new Exception('An error ocurred, please contact the Administrator.');
+					if(!$subtractCredits) throw new Exception('Ocurrió un error, por favor contacta al Administrador.');
 					
 					logSystem::add('upgraded membership (premium)');
 					
@@ -52,20 +52,20 @@ try {
 					break;
 				case 'vip':
 					# GET VIP
-					if($vipCost > $accountData['toll']) throw new Exception('You don\'t have enough credits.');
+					if($vipCost > $accountData['toll']) throw new Exception('No tienes suficientes créditos.');
 					
 					$upgradeAccount = $Account->setVip(30);
-					if(!$upgradeAccount) throw new Exception('Your account could not be upgraded, please contact the Administrator.');
+					if(!$upgradeAccount) throw new Exception('Tu cuenta no pudo ser mejorada, por favor contacta al Administrador.');
 					
 					$subtractCredits = $Account->subtractCredits($vipCost);
-					if(!$subtractCredits) throw new Exception('An error ocurred, please contact the Administrator.');
+					if(!$subtractCredits) throw new Exception('Ocurrió un error, por favor contacta al Administrador.');
 					
 					logSystem::add('upgraded membership (vip)');
 					
 					redirect('usercp/upgrade/');
 					break;
 				default:
-					throw new Exception('Your request could not be completed.');
+					throw new Exception('Tu petición no pudo ser completada.');
 			}
 		} catch(Exception $ex) {
 			message($ex->getMessage(), 'error');
@@ -76,8 +76,8 @@ try {
 }
 ?>
 <div class="upgrade_premium">
-	<span style="color:#00ffc6;font-size:24px;font-weight:bold;">PREMIUM MEMBERSHIP</span><br />
-	<span style="color:#ffffff;font-size: 18px;font-weight:bold;"><?php echo number_format($premiumCost); ?> Credits | Lifetime</span>
+	<span style="color:#00ffc6;font-size:24px;font-weight:bold;">MEMBRESÍA PREMIUM</span><br />
+	<span style="color:#ffffff;font-size: 18px;font-weight:bold;"><?php echo number_format($premiumCost); ?> Créditos | De por vida</span>
 	
 	<br /><br />
 	<span style="font-weight:bold;color:#51b19c;">400x</span> Exp<br />
@@ -101,15 +101,15 @@ try {
 	<?php
 	if($accountData['membership'] == 1) {
 		# has premium
-		echo '<span style="font-size: 18px;font-weight:bold;color:#9effea;">Your account has Premium membership!</span>';
+		echo '<span style="font-size: 18px;font-weight:bold;color:#9effea;">¡Tu cuenta tiene membresía Premium!</span>';
 	} else {
 		if($accountData['old_membership'] == 1) {
 			# has premium
-			echo '<span style="font-size: 18px;font-weight:bold;color:#9effea;">Your account has Premium membership!</span>';
+			echo '<span style="font-size: 18px;font-weight:bold;color:#9effea;">¡Tu cuenta tiene membresía Premium!</span>';
 			
 		} else {
 			# not premium
-			echo '<a href="#" class="btn btn-default" data-toggle="modal" data-target="#upgradePremium">Upgrade Account</a>';
+			echo '<a href="#" class="btn btn-default" data-toggle="modal" data-target="#upgradePremium">Mejorar Cuenta</a>';
 		}
 	}
 	?>
@@ -117,8 +117,8 @@ try {
 </div>
 
 <div class="upgrade_vip">
-	<span style="color:#ffcc00;font-size:24px;font-weight:bold;">V.I.P. MEMBERSHIP</span><br />
-	<span style="color:#ffffff;font-size: 18px;font-weight:bold;"><?php echo number_format($vipCost); ?> Credits | 30 Days</span>
+	<span style="color:#ffcc00;font-size:24px;font-weight:bold;">MEMBRESÍA V.I.P.</span><br />
+	<span style="color:#ffffff;font-size: 18px;font-weight:bold;"><?php echo number_format($vipCost); ?> Créditos | 30 Días</span>
 	
 	<br /><br />
 	<span style="font-weight:bold;color:#b19351;">500x</span> Exp<br />
@@ -140,25 +140,25 @@ try {
 	
 	<br />
 	
-	<span style="font-weight:bold;">* All items tradeable with VIP Membership using the <a href="https://aioncms.com/" target="#"> Item Pak</a> *</span>
+	<span style="font-weight:bold;">* Todos los objetos son intercambiables con la Membresía VIP usando el <a href="https://aioncms.com/" target="#"> Item Pak</a> *</span>
 	
 	<br /><br />
 	<?php
 	if($accountData['membership'] == 2) {
 		# has vip
-		echo '<span style="font-size: 18px;font-weight:bold;color:#fff79e;">Your account has VIP membership!</span><br />';
-		echo '<span style="font-size: 18px;font-weight:bold;">Expiration Date: '.$accountData['expire'].'</span><br /><br />';
-		echo '<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#extendVip">Extend</a>';
+		echo '<span style="font-size: 18px;font-weight:bold;color:#fff79e;">¡Tu cuenta tiene membresía VIP!</span><br />';
+		echo '<span style="font-size: 18px;font-weight:bold;">Fecha de Expiración: '.$accountData['expire'].'</span><br /><br />';
+		echo '<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#extendVip">Extender</a>';
 	} else {
 		if($accountData['old_membership'] == 2) {
 			# has vip
-			echo '<span style="font-size: 18px;font-weight:bold;color:#fff79e;">Your account has VIP membership!</span><br />';
-			echo '<span style="font-size: 18px;font-weight:bold;">Expiration Date: '.$accountData['expire'].'</span><br /><br />';
-			echo '<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#extendVip">Extend</a>';
+			echo '<span style="font-size: 18px;font-weight:bold;color:#fff79e;">¡Tu cuenta tiene membresía VIP!</span><br />';
+			echo '<span style="font-size: 18px;font-weight:bold;">Fecha de Expiración: '.$accountData['expire'].'</span><br /><br />';
+			echo '<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#extendVip">Extender</a>';
 			
 		} else {
 			# not vip
-			echo '<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#upgradeVip">Upgrade Account</a>';
+			echo '<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#upgradeVip">Mejorar Cuenta</a>';
 		}
 	}
 	?>
@@ -171,14 +171,14 @@ try {
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="upgradePremiumConfirm">Upgrade to Premium</h4>
+				<h4 class="modal-title" id="upgradePremiumConfirm">Mejorar a Premium</h4>
 			</div>
 			<div class="modal-body">
-				Your credits will be deducted once you upgrade your account. To proceed please click the "Upgrade" button below.
+				Tus créditos serán deducidos una vez que mejores tu cuenta. Para proceder por favor haz clic en el botón "Mejorar" a continuación.
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-				<a href="<?php module_url('usercp/upgrade/type/premium/'); ?>" class="btn btn-success">Upgrade</a>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+				<a href="<?php module_url('usercp/upgrade/type/premium/'); ?>" class="btn btn-success">Mejorar</a>
 			</div>
 		</div>
 	</div>
@@ -190,14 +190,14 @@ try {
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="upgradeVipConfirm">Upgrade to V.I.P.</h4>
+				<h4 class="modal-title" id="upgradeVipConfirm">Mejorar a V.I.P.</h4>
 			</div>
 			<div class="modal-body">
-				Your credits will be deducted once you upgrade your account. To proceed please click the "Upgrade" button below.
+				Tus créditos serán deducidos una vez que mejores tu cuenta. Para proceder por favor haz clic en el botón "Mejorar" a continuación.
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-				<a href="<?php module_url('usercp/upgrade/type/vip/'); ?>" class="btn btn-success">Upgrade</a>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+				<a href="<?php module_url('usercp/upgrade/type/vip/'); ?>" class="btn btn-success">Mejorar</a>
 			</div>
 		</div>
 	</div>
@@ -209,14 +209,14 @@ try {
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="extendVipConfirm">Extend V.I.P. by 30 days.</h4>
+				<h4 class="modal-title" id="extendVipConfirm">Extender V.I.P. por 30 días.</h4>
 			</div>
 			<div class="modal-body">
-				Your credits will be deducted once you extend your V.I.P. membership. To proceed please click the "Extend" button below.
+				Tus créditos serán deducidos una vez que extiendas tu membresía V.I.P. Para proceder por favor haz clic en el botón "Extender" a continuación.
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-				<a href="<?php module_url('usercp/upgrade/type/vip/'); ?>" class="btn btn-success">Extend</a>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+				<a href="<?php module_url('usercp/upgrade/type/vip/'); ?>" class="btn btn-success">Extender</a>
 			</div>
 		</div>
 	</div>

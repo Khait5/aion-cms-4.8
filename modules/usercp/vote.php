@@ -264,8 +264,8 @@ try {
 	echo '<thead>';
 		echo '<tr>';
 			echo '<th></th>';
-			echo '<th>Cooldown</th>';
-			echo '<th>Reward</th>';
+			echo '<th>Enfriamiento</th>';
+			echo '<th>Recompensa</th>';
 			echo '<th></th>';
 		echo '</tr>';
 	echo '</thead>';
@@ -277,7 +277,7 @@ try {
 			if(array_key_exists($site, $accountVotes)) {
 				$offset = $accountVotes[$site]['newdate']-time();
 				if($offset < 1) {
-					$cooldown = '<i>none</i>';
+					$cooldown = '<i>ninguno</i>';
 				} else {
 					$cldn = sec_to_hms($offset);
 					if($cldn[0] == 0) {
@@ -287,15 +287,15 @@ try {
 					}
 				}
 			} else {
-				$cooldown = '<i>none</i>';
+				$cooldown = '<i>ninguno</i>';
 			}
 		} else {
-			$cooldown = '<i>none</i>';
+			$cooldown = '<i>ninguno</i>';
 		}
 		
-		$reward = '<td class="vert-align">'.$row[0].' credits</td>';
+		$reward = '<td class="vert-align">'.$row[0].' créditos</td>';
 		if($promoActive == true) {
-			$reward = '<td class="vert-align" style="color:green;"><strong>'.$activePromo['reward'].'</strong> credits</td>';
+			$reward = '<td class="vert-align" style="color:green;"><strong>'.$activePromo['reward'].'</strong> créditos</td>';
 		}
 		
 		if($accountData['membership'] == 2 && strtotime($accountData['expire']) > time()) {
@@ -305,7 +305,7 @@ try {
 				# vip + promo reward
 				$vipReward = floor($activePromo['reward']*2.75);
 			}
-			$reward = '<td class="vert-align" style="color:#ffae00;"><strong>'.$vipReward.'</strong> credits</td>';
+			$reward = '<td class="vert-align" style="color:#ffae00;"><strong>'.$vipReward.'</strong> créditos</td>';
 		} else {
 			if(isOnline($_SESSION['userid'], 'all')) {
 				$vipReward = floor($row[0]*2.75);
@@ -313,7 +313,7 @@ try {
 					# vip + promo reward
 					$vipReward = floor($activePromo['reward']*2.75);
 				}
-				$reward = '<td class="vert-align" style="color:#ffae00;"><strong>'.$vipReward.'</strong> credits</td>';
+				$reward = '<td class="vert-align" style="color:#ffae00;"><strong>'.$vipReward.'</strong> créditos</td>';
 			}
 		}
 		
@@ -321,13 +321,13 @@ try {
 			echo '<td class="vert-align"><img class="vote-img" src="'.template_img(true).'vote/'.$row[2].'" title="'.$row[3].'" alt="'.$row[3].'"/></td>';
 			echo '<td class="vert-align">'.$cooldown.'</td>';
 			echo $reward;
-			echo '<td class="vert-align"><a href="'.module_url('usercp/vote/site/' . $site, true).'" class="btn btn-xs btn-primary">Vote!</a></td>';
+			echo '<td class="vert-align"><a href="'.module_url('usercp/vote/site/' . $site, true).'" class="btn btn-xs btn-primary">¡Votar!</a></td>';
 		echo '</tr>';
 	}
 	echo '</tbody>';
 	echo '</table>';
 	
-	echo '<div class="text-center" style="color:red;font-size: 12px;">Abusing the vote reward system in any way will get your account permanently banned!</div>';
+	echo '<div class="text-center" style="color:red;font-size: 12px;">¡Abusar del sistema de recompensas de votos de cualquier manera resultará en un baneo permanente de tu cuenta!</div>';
 	
 } catch(Exception $ex) {
 	message($ex->getMessage(), 'warning');

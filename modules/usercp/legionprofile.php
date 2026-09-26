@@ -10,39 +10,39 @@
 <div class="page-header-block usercp"></div>
 <br /><br />
 
-<h3>Customize My Legion Profile</h3>
-<p>Customize your legion's profile with the settings displayed below.</p>
+<h3>Personalizar Perfil de Mi Legión</h3>
+<p>Personaliza el perfil de tu legión con la configuración que se muestra a continuación.</p>
 <br /><br />
 <?php
 try {
 	
 	// check id
-	if(!check($_GET['id'])) throw new Exception('The provided legion id is not valid.');
-	if(!Validator::UnsignedNumber($_GET['id'])) throw new Exception('The provided legion id is not valid.');
+	if(!check($_GET['id'])) throw new Exception('El id de la legión proporcionado no es válido.');
+	if(!Validator::UnsignedNumber($_GET['id'])) throw new Exception('El id de la legión proporcionado no es válido.');
 	
 	// legion info
 	$LegionProfile = new LegionProfile();
 	$LegionProfile->setId($_GET['id']);
 	$cacheData = $LegionProfile->getProfileInfo();
-	if(!is_array($cacheData)) throw new Exception('There was an error loading your legion\'s profile, contact support.');
+	if(!is_array($cacheData)) throw new Exception('Hubo un error cargando el perfil de tu legión, contacta a soporte.');
 	
 	// is banned from customizing ?
-	if($cacheData['profile']['banned'] == 1) throw new Exception('You have been banned from customizing your legion\'s profile, contact support.');
+	if($cacheData['profile']['banned'] == 1) throw new Exception('Has sido baneado de personalizar el perfil de tu legión, contacta a soporte.');
 	
 	// get playerlist
 	$sdb = Handler::loadDB('siel');
 	$characters = $sdb->queryFetch("SELECT * FROM `players` WHERE `account_id` = ?", array($_SESSION['userid']));
-	if(!is_array($characters)) throw new Exception('You don\'t have any characters in your account.');
+	if(!is_array($characters)) throw new Exception('No tienes ningún personaje en tu cuenta.');
 	foreach($characters as $character) {
 		$characterList[] = strtolower($character['name']);
 	}
 	
 	// check owner
-	if(!in_array(strtolower($cacheData['members']['BRIGADE_GENERAL'][0]['name']), $characterList)) throw new Exception('You do not have permission to customize this legion\'s profile.');
+	if(!in_array(strtolower($cacheData['members']['BRIGADE_GENERAL'][0]['name']), $characterList)) throw new Exception('No tienes permiso para personalizar el perfil de esta legión.');
 	
 	// pending approval
 	if($cacheData['profile']['requires_approval'] == 1) {
-		message('Your custom profile background is pending approval, submitting a new custom background is disabled until your request is processed. You may still change any other settings.', 'warning');
+		message('El fondo de tu perfil personalizado está pendiente de aprobación, enviar un nuevo fondo personalizado está deshabilitado hasta que se procese tu solicitud. Aún puedes cambiar cualquier otra configuración.', 'warning');
 	}
 	
 	// form submit
@@ -58,7 +58,7 @@ try {
 				if(check($_POST['profile_background'])) $LegionProfileUpdate->setCustomBackground($_POST['profile_background']);
 			}
 			$LegionProfileUpdate->saveProfile();
-			message('Your legion\'s profile has been successfully updated!', 'success');
+			message('¡El perfil de tu legión ha sido actualizado exitosamente!', 'success');
 			
 			// reload info
 			$cacheData = $LegionProfileUpdate->getProfileInfo();
@@ -72,7 +72,7 @@ try {
 	echo '<form action="'.module_url('usercp/legionprofile/id/' . $_GET['id'], true).'" method="post">';
 	echo '<table class="my-account-table">';
 		echo '<tr>';
-			echo '<td>Legion</td>';
+			echo '<td>Legión</td>';
 			echo '<td><a href="'.generateLegionProfileUrl($_GET['id'], $cacheData['name']).'" target="_blank">'.$cacheData['name'].'</a></td>';
 		echo '</tr>';
 		
@@ -81,13 +81,13 @@ try {
 		echo '</tr>';
 		
 		echo '<tr>';
-			echo '<td>Main Color</td>';
+			echo '<td>Color Principal</td>';
 			echo '<td>';
 				echo '<select name="profile_color" class="form-control">';
-					echo '<option value="gray" '.($cacheData['profile']['custom_color'] == 'gray' ? 'selected' : null).'>Gray (default)</option>';
-					echo '<option value="red" '.($cacheData['profile']['custom_color'] == 'red' ? 'selected' : null).'>Red</option>';
-					echo '<option value="green" '.($cacheData['profile']['custom_color'] == 'green' ? 'selected' : null).'>Green</option>';
-					echo '<option value="blue" '.($cacheData['profile']['custom_color'] == 'blue' ? 'selected' : null).'>Blue</option>';
+					echo '<option value="gray" '.($cacheData['profile']['custom_color'] == 'gray' ? 'selected' : null).'>Gris (por defecto)</option>';
+					echo '<option value="red" '.($cacheData['profile']['custom_color'] == 'red' ? 'selected' : null).'>Rojo</option>';
+					echo '<option value="green" '.($cacheData['profile']['custom_color'] == 'green' ? 'selected' : null).'>Verde</option>';
+					echo '<option value="blue" '.($cacheData['profile']['custom_color'] == 'blue' ? 'selected' : null).'>Azul</option>';
 				echo '</select>';
 			echo '</td>';
 		echo '</tr>';
@@ -97,13 +97,13 @@ try {
 		echo '</tr>';
 		
 		echo '<tr>';
-			echo '<td>Custom Message</td>';
+			echo '<td>Mensaje Personalizado</td>';
 			echo '<td><textarea name="profile_message" class="form-control" maxlength="250" style="height:150px;">'.$cacheData['profile']['custom_message'].'</textarea></td>';
 		echo '</tr>';
 		
 		echo '<tr>';
 			echo '<td></td>';
-			echo '<td><span style="font-size:11px;">Your custom message can contain 250 characters max.</span></td>';
+			echo '<td><span style="font-size:11px;">Tu mensaje personalizado puede contener 250 caracteres como máximo.</span></td>';
 		echo '</tr>';
 		
 		echo '<tr>';
@@ -111,12 +111,12 @@ try {
 		echo '</tr>';
 		
 		echo '<tr>';
-			echo '<td>YouTube Video</td>';
+			echo '<td>Video de YouTube</td>';
 			echo '<td><input type="text" name="profile_youtube" class="form-control" value="'.$cacheData['profile']['youtube_video'].'"/></td>';
 		echo '</tr>';
 		echo '<tr>';
 			echo '<td></td>';
-			echo '<td><span style="font-size:11px;">Provide the full video url, example:<br /><span style="color:red;font-weight:bold;">https://www.youtube.com/watch?v=dQw4w9WgXcQ</span></span></td>';
+			echo '<td><span style="font-size:11px;">Proporciona la url completa del video, ejemplo:<br /><span style="color:red;font-weight:bold;">https://www.youtube.com/watch?v=dQw4w9WgXcQ</span></span></td>';
 		echo '</tr>';
 		
 		echo '<tr>';
@@ -125,18 +125,18 @@ try {
 		
 		if($cacheData['profile']['requires_approval'] == 0) {
 			echo '<tr>';
-				echo '<td>Custom Background</td>';
-				echo '<td><input type="text" name="profile_background" class="form-control" placeholder="Leave empty to keep the current one..."/></td>';
+				echo '<td>Fondo Personalizado</td>';
+				echo '<td><input type="text" name="profile_background" class="form-control" placeholder="Déjalo vacío para mantener el actual..."/></td>';
 			echo '</tr>';
 			echo '<tr>';
 				echo '<td></td>';
-				echo '<td><span style="font-size:11px;">Provide a direct image link, example:<br /><span style="color:red;font-weight:bold;">https://i.imgur.com/qdvB89p.jpg</span><br ><br />Image Hosts: <a href="https://imgur.com/" target="_blank">Imgur</a></span></td>';
+				echo '<td><span style="font-size:11px;">Proporciona un enlace directo a la imagen, ejemplo:<br /><span style="color:red;font-weight:bold;">https://i.imgur.com/qdvB89p.jpg</span><br ><br />Hosts de Imágenes: <a href="https://imgur.com/" target="_blank">Imgur</a></span></td>';
 			echo '</tr>';
 		}
 		
 		echo '<tr>';
 			echo '<td></td>';
-			echo '<td><button type="submit" name="profile_submit" value="ok" class="btn btn-primary">Save Changes</button></td>';
+			echo '<td><button type="submit" name="profile_submit" value="ok" class="btn btn-primary">Guardar Cambios</button></td>';
 		echo '</tr>';
 	echo '</table>';
 	echo '</form>';

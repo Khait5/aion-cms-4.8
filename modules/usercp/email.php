@@ -10,9 +10,9 @@
 <div class="page-header-block usercp"></div>
 <br /><br />
 
-<h3>Change Email</h3>
-<p>To change your account's email address you need to submit your request in our support forum.</p>
+<h3>Cambiar Email</h3>
+<p>Para cambiar la dirección de email de tu cuenta necesitas enviar tu solicitud en nuestro foro de soporte.</p>
 <br />
 <br />
 
-<a href="https://aioncms.com/" target="_blank" class="btn btn-primary">More Information</a>
+<a href="https://aioncms.com/" target="_blank" class="btn btn-primary">Más Información</a>

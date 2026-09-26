@@ -9,13 +9,13 @@
 ?><div class="page-header-block usercp"></div>
 <br /><br />
 
-<h3>Player Unstuck Request</h3>
-<p>Your request will be reviewed as soon as possible!</p>
+<h3>Solicitud de Destrabe de Personaje</h3>
+<p>¡Tu solicitud será revisada lo antes posible!</p>
 
 <?php
 try {
 	
-	if(!isServerValid($_GET['server'])) throw new Exception('Your request could not be completed, please try again later.');
+	if(!isServerValid($_GET['server'])) throw new Exception('Tu petición no pudo ser completada, por favor intenta de nuevo más tarde.');
 	
 	# load server database
 	if($_GET['server'] == 'siel') {
@@ -26,17 +26,17 @@ try {
 	
 	# player data
 	$playerData = $sdb->queryFetchSingle("SELECT * FROM `players` WHERE `account_id` = ? AND `name` = ?", array($_SESSION['userid'], $_GET['player']));
-	if(!is_array($playerData)) throw new Exception('Your request could not be completed, please try again later. [2]');
+	if(!is_array($playerData)) throw new Exception('Tu petición no pudo ser completada, por favor intenta de nuevo más tarde. [2]');
 	
 	# check for existing requests
 	$existingRequest = $sdb->queryFetchSingle("SELECT * FROM `aioncms`.`unstick` WHERE `player` = ?", array($playerData['name']));
-	if(is_array($existingRequest)) throw new Exception('You already have an unstuck request for this character.');
+	if(is_array($existingRequest)) throw new Exception('Ya tienes una solicitud de destrabe para este personaje.');
 	
 	# add new request
 	$addRequest = $sdb->query("INSERT INTO `aioncms`.`unstick` (`player`,`race`,`account`) VALUES (?, ?, ?)", array($playerData['name'], $playerData['race'], $_SESSION['username']));
-	if(!$addRequest) throw new Exception('Your request could not be completed, please try again later. [3]');
+	if(!$addRequest) throw new Exception('Tu petición no pudo ser completada, por favor intenta de nuevo más tarde. [3]');
 	
-	message('Player unstuck request has been sent!', 'success');
+	message('¡La solicitud de destrabe de personaje ha sido enviada!', 'success');
 	logSystem::add('submitted unstuck request ('.$playerData['name'].')');
 	
 } catch(Exception $ex) {

@@ -10,8 +10,8 @@
 <div class="page-header-block itemenchant"></div>
 <br /><br />
 
-<h3>Item Enchantment</h3>
-<p>Web-based tool for enchanting your items!</p>
+<h3>Encantamiento de Objeto</h3>
+<p>¡Herramienta web para encantar tus objetos!</p>
 <br />
 
 <?php
@@ -35,25 +35,25 @@ try {
 	$Account = new Account();
 	$Account->setId($_SESSION['userid']);
 	$accountData = $Account->getAccountData();
-	if(!is_array($accountData)) throw new Exception('Could not load your account\'s information.');
+	if(!is_array($accountData)) throw new Exception('No se pudo cargar la información de tu cuenta.');
 	
 	# player data
 	$playerData = $sdb->queryFetchSingle("SELECT * FROM `players` WHERE `account_id` = ? AND `name` = ?", array($accountData['id'], $_GET['player']));
-	if(!is_array($playerData)) throw new Exception('Your request could not be completed, please try again later. [2]');
+	if(!is_array($playerData)) throw new Exception('Tu petición no pudo ser completada, por favor intenta de nuevo más tarde. [2]');
 	
 	# check item
 	$itemData = $sdb->queryFetchSingle("SELECT * FROM `inventory` WHERE `item_owner` = ? AND `is_equipped` = ? AND `item_unique_id` = ?", array($playerData['id'], 0, $_GET['item']));
-	if(!is_array($itemData)) throw new Exception('Oops! we could not find this item in your inventory!');
+	if(!is_array($itemData)) throw new Exception('¡Uy! ¡No pudimos encontrar este objeto en tu inventario!');
 	
 	# configs
 	$enchantableItems = config('enchantable_items', true);
 	$enchantablePrice = config('enchant_price', true);
 	
 	# is item enchantable?
-	if(!array_key_exists($itemData['item_id'], $enchantableItems)) throw new Exception('Sorry! this item can\'t be enchanted.');
+	if(!array_key_exists($itemData['item_id'], $enchantableItems)) throw new Exception('¡Lo siento! Este objeto no puede ser encantado.');
 	
 	# check enchant price
-	if(!array_key_exists($itemData['enchant'], $enchantablePrice)) throw new Exception('Sorry! this item has reached the maximum enchantment level allowed through the website.');
+	if(!array_key_exists($itemData['enchant'], $enchantablePrice)) throw new Exception('¡Lo siento! Este objeto ha alcanzado el nivel máximo de encantamiento permitido en el sitio web.');
 	$enchantPrice = $enchantablePrice[$itemData['enchant']];
 	
 	# VIP discount
@@ -63,10 +63,10 @@ try {
 	
 	# item name
 	$itemName = getItemName($itemData['item_id']);
-	if(!check($itemName)) throw new Exception('Sorry! we couldn\'t identify this item, please contact support.');
+	if(!check($itemName)) throw new Exception('¡Lo siento! No pudimos identificar este objeto, por favor contacta a soporte.');
 	
 	$itemSkills = $enchantableItems[$itemData['item_id']];
-	if(!is_array($itemSkills)) throw new Exception('Sorry! we couldn\'t identify this item, please contact support. [2]');
+	if(!is_array($itemSkills)) throw new Exception('¡Lo siento! No pudimos identificar este objeto, por favor contacta a soporte. [2]');
 	
 	$nextEnchantLevel = $itemData['enchant']+1;
 	
@@ -83,15 +83,15 @@ try {
 		try {
 			
 			# check online
-			if(isOnline($_SESSION['userid'], 'all')) throw new Exception('Your account is online, please disconnect.');
+			if(isOnline($_SESSION['userid'], 'all')) throw new Exception('Tu cuenta está conectada, por favor desconéctate.');
 			
 			# check credits
-			if($useEnchantToken == false) if($accountData['toll'] < $enchantPrice) throw new Exception('Sorry! you don\'t have anough credits to enchant this item.');
+			if($useEnchantToken == false) if($accountData['toll'] < $enchantPrice) throw new Exception('¡Lo siento! No tienes suficientes créditos para encantar este objeto.');
 			
 			if($itemData['enchant'] == 19) {
 				# choose random skill
 				$randomSkill = $itemSkills[mt_rand(0, 2)];
-				if(!check($randomSkill)) throw new Exception('There was a problem enchanting your item, please contact support. [0]');
+				if(!check($randomSkill)) throw new Exception('Hubo un problema encantando tu objeto, por favor contacta a soporte. [0]');
 				
 				$enchant = $sdb->query("UPDATE `inventory` SET `enchant` = `enchant` + 1, `is_amplified` = 1, `buff_skill` = ? WHERE `item_unique_id` = ?", array($randomSkill, $itemData['item_unique_id']));
 			} else {
@@ -100,18 +100,18 @@ try {
 			}
 			
 			# error in query
-			if(!$enchant) throw new Exception('There was a problem enchanting your item, please contact support.');
+			if(!$enchant) throw new Exception('Hubo un problema encantando tu objeto, por favor contacta a soporte.');
 			
 			# deduct credits
 			if($useEnchantToken == false) {
 				$subtractCredits = $Account->subtractCredits($enchantPrice);
-				if(!$subtractCredits) throw new Exception('An error ocurred, please contact the Administrator. [E-CS]');
+				if(!$subtractCredits) throw new Exception('Ocurrió un error, por favor contacta al Administrador. [E-CS]');
 			}
 			
 			# deduct token
 			if($useEnchantToken == true) {
 				$deductToken = $db->query("UPDATE `aioncms`.`website_enchant_tokens` SET `tokens` = `tokens` - 1 WHERE `account_id` = ?", array($accountData['id']));
-				if(!$deductToken) throw new Exception('An error ocurred, please contact the Administrator. [E-TS]');
+				if(!$deductToken) throw new Exception('Ocurrió un error, por favor contacta al Administrador. [E-TS]');
 			}
 			
 			# success message
@@ -122,7 +122,7 @@ try {
 			}
 			
 			if($itemData['enchant'] == 19) {
-				message('Your item has been successfully enchanted! You may now proceed to your <a href="'.module_url('usercp/inventory/server/'.$_GET['server'].'/player/'.$_GET['player'].'/', true).'" style="font-weight:bold;">inventory</a>.', 'success');
+				message('¡Tu objeto ha sido encantado exitosamente! Ahora puedes proceder a tu <a href="'.module_url('usercp/inventory/server/'.$_GET['server'].'/player/'.$_GET['player'].'/', true).'" style="font-weight:bold;">inventario</a>.', 'success');
 			} else {
 				redirect('usercp/enchant/server/'.$_GET['server'].'/player/'.$_GET['player'].'/item/'.$itemData['item_unique_id'].'/');
 			}
@@ -142,24 +142,24 @@ try {
 					echo '<h4>'.$_GET['player'].' ('.$_GET['server'].')</h4>';
 					echo '<br />';
 					
-					echo '<p>cost</p>';
+					echo '<p>costo</p>';
 					if($useEnchantToken == true) {
 						# use free token
-						echo '<h3>FREE</h3>';
-						echo '<p>(you have <strong>'.$checkTokens['tokens'].'</strong> tokens left)</p>';
+						echo '<h3>GRATIS</h3>';
+						echo '<p>(tienes <strong>'.$checkTokens['tokens'].'</strong> tokens restantes)</p>';
 						
 					} else {
 						# use credits
 						if($accountData['membership'] == 2 && strtotime($accountData['expire']) > time()) {
-							echo '<h3 style="color:#ffae00;">'.$enchantPrice.' credits<br />(VIP 10% off)</h3>';
+							echo '<h3 style="color:#ffae00;">'.$enchantPrice.' créditos<br />(10% de descuento VIP)</h3>';
 						} else {
-							echo '<h3>'.$enchantPrice.' credits</h3>';
+							echo '<h3>'.$enchantPrice.' créditos</h3>';
 						}
 					}
 					echo '<br />';
 					
-					echo '<p>100% success rate</p>';
-					echo '<p>Make sure your account is offline before enchanting.</p>';
+					echo '<p>100% de éxito</p>';
+					echo '<p>Asegúrate de que tu cuenta esté desconectada antes de encantar.</p>';
 					echo '<br />';
 					
 					if($itemData['enchant'] == 19) {
@@ -169,7 +169,7 @@ try {
 						$skill_2 = getSkillName($itemSkills[1]);
 						$skill_3 = getSkillName($itemSkills[2]);
 						
-						echo '<p>This item will receive one of the following skills:</p>';
+						echo '<p>Este objeto recibirá una de las siguientes habilidades:</p>';
 						echo '<p style="font-weight:bold;color:#73009e;">'.$skill_1.'</p>';
 						echo '<p style="font-weight:bold;color:#73009e;">'.$skill_2.'</p>';
 						echo '<p style="font-weight:bold;color:#73009e;">'.$skill_3.'</p>';
@@ -177,7 +177,7 @@ try {
 					}
 					
 					echo '<form action="" method="post">';
-						echo '<button type="submit" name="submit_enchant" value="ok" class="btn btn-success">Enchant to +'.$nextEnchantLevel.'</button>';
+						echo '<button type="submit" name="submit_enchant" value="ok" class="btn btn-success">Encantar a +'.$nextEnchantLevel.'</button>';
 					echo '</form>';
 					
 				echo '</div>';

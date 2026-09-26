@@ -48,8 +48,6 @@
 				<li><a href="<?php module_url(); ?>info/">Servidor</a></li>
 			</ul>
 			<ul class="right">
-				<li><a href="<?php module_url(); ?>lore/">Lore</a></li>
-				<li><a href="<?php module_url(); ?>conexion_tierra/">Terminal</a></li>
 				<li><a href="<?php module_url(); ?>rankings/">Clasificación</a></li>
 			</ul>
 			</div>
@@ -71,7 +69,7 @@
 					<img src="<?php template_img(); ?>aion_logo_footer.png" height="40px" width="auto" title="Aion Online"/>
 				</div>
 			</div>
-			<a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/17.png" style="display:none;"></a>
+			<!-- <a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/17.png" style="display:none;"></a> -->
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

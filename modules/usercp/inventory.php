@@ -10,7 +10,7 @@
 <div class="page-header-block usercp"></div>
 <br /><br />
 
-<h3>View Inventory</h3>
+<h3>Ver Inventario</h3>
 
 <?php
 try {
@@ -20,9 +20,9 @@ try {
 	
 	# player data
 	$playerData = $sdb->queryFetchSingle("SELECT * FROM `players` WHERE `account_id` = ? AND `name` = ?", array($_SESSION['userid'], $_GET['player']));
-	if(!is_array($playerData)) throw new Exception('Your request could not be completed, please try again later. [2]');
+	if(!is_array($playerData)) throw new Exception('Tu petición no pudo ser completada, por favor intenta de nuevo más tarde. [2]');
 	
-	echo '<p>You are now viewing <strong>'.$playerData['name'].'\'s</strong> inventory. For the complete list of enchantable items you may <a href="'.module_url('usercp/enchantable/', true).'">click here</a>.</p>';
+	echo '<p>Ahora estás viendo el inventario de <strong>'.$playerData['name'].'</strong>. Para la lista completa de objetos encantables puedes <a href="'.module_url('usercp/enchantable/', true).'">hacer click aquí</a>.</p>';
 	echo '<br /><br />';
 	
 	# player inventory (non-equipped)
@@ -34,7 +34,7 @@ try {
 	# EQUIPPED
 	if(is_array($playerInventoryEquipped)) {
 		
-		echo '<h4>Equipped Items:</h4>';
+		echo '<h4>Objetos Equipados:</h4>';
 		echo '<table class="inventory-table">';
 		foreach($playerInventoryEquipped as $itemInfo) {
 			$itemName = getItemName($itemInfo['item_id']);
@@ -43,7 +43,7 @@ try {
 			
 			if(!check($itemName)) {
 				aioncmsBuildAionItemList($itemInfo['item_id']);
-				$itemName = 'Unknown';
+				$itemName = 'Desconocido';
 			}
 			
 			$itemEnchantment = ($itemInfo['enchant'] > 0 ? ' <span style="color:red;font-weight:bold;">+'.$itemInfo['enchant'].'</span>' : null);
@@ -64,7 +64,7 @@ try {
 	if(is_array($playerInventory)) {
 		
 		echo '<br /><br />';
-		echo '<h4>Non-Equipped Items:</h4>';
+		echo '<h4>Objetos No Equipados:</h4>';
 		echo '<table class="inventory-table">';
 		foreach($playerInventory as $itemInfo) {
 			$itemName = getItemName($itemInfo['item_id']);
@@ -73,7 +73,7 @@ try {
 			
 			if(!check($itemName)) {
 				aioncmsBuildAionItemList($itemInfo['item_id']);
-				$itemName = 'Unknown';
+				$itemName = 'Desconocido';
 			}
 			
 			$itemEnchantment = ($itemInfo['enchant'] > 0 ? ' <span style="color:red;font-weight:bold;">+'.$itemInfo['enchant'].'</span>' : null);
@@ -87,11 +87,11 @@ try {
 					if(array_key_exists($itemInfo['item_id'], $enchantableItems)) {
 						if(array_key_exists($itemInfo['enchant'], $enchantablePrice)) {
 							//echo ' <a href="'.module_url('usercp/enchant/server/'.$_GET['server'].'/player/'.$playerData['name'].'/item/'.$itemInfo['item_unique_id'].'/', true).'" class="btn btn-xs btn-primary">Enchant ('.$enchantablePrice[$itemInfo['enchant']].' credits)</a>';
-							echo ' <a href="'.module_url('usercp/enchant/server/'.$_GET['server'].'/player/'.$playerData['name'].'/item/'.$itemInfo['item_unique_id'].'/', true).'" class="btn btn-xs btn-primary">Enchant</a>';
+							echo ' <a href="'.module_url('usercp/enchant/server/'.$_GET['server'].'/player/'.$playerData['name'].'/item/'.$itemInfo['item_unique_id'].'/', true).'" class="btn btn-xs btn-primary">Encantar</a>';
 						}
 						
 						if($itemInfo['enchant'] == 20) {
-							echo ' <a href="'.module_url('usercp/changeskill/server/'.$_GET['server'].'/player/'.$playerData['name'].'/item/'.$itemInfo['item_unique_id'].'/', true).'" class="btn btn-xs btn-default">Change Skill</a>';
+							echo ' <a href="'.module_url('usercp/changeskill/server/'.$_GET['server'].'/player/'.$playerData['name'].'/item/'.$itemInfo['item_unique_id'].'/', true).'" class="btn btn-xs btn-default">Cambiar Habilidad</a>';
 						}
 					}
 					

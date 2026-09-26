@@ -10,7 +10,7 @@
 <div class="page-header-block changepwd"></div>
 <br /><br />
 
-<h3>Change Password</h3>
+<h3>Cambiar Contraseña</h3>
 
 <br />
 
@@ -19,24 +19,24 @@
 if(isset($_POST['pwd_submit']) && check($_POST['pwd_submit'])) {
 	try {
 		
-		if(!check($_POST['pwd_old'], $_POST['pwd_new'], $_POST['pwd_new_confirm'])) throw new Exception('Please complete all fields.');
-		if($_POST['pwd_old'] == $_POST['pwd_new']) throw new Exception('Please choose a different new password.');
-		if($_POST['pwd_new'] != $_POST['pwd_new_confirm']) throw new Exception('New passwords did not match, please try again.');
+		if(!check($_POST['pwd_old'], $_POST['pwd_new'], $_POST['pwd_new_confirm'])) throw new Exception('Por favor completa todos los campos.');
+		if($_POST['pwd_old'] == $_POST['pwd_new']) throw new Exception('Por favor elige una nueva contraseña diferente.');
+		if($_POST['pwd_new'] != $_POST['pwd_new_confirm']) throw new Exception('Las contraseñas nuevas no coinciden, por favor intenta de nuevo.');
 		
 		
 		$Account = new Account();
 		$Account->setId($_SESSION['userid']);
 		$accountData = $Account->getAccountData();
 		
-		if(!is_array($accountData)) throw new Exception('Could not load your account\'s information.');
-		if(!$Account->validatePassword($_POST['pwd_old'])) throw new Exception('Your current password is not correct.');
+		if(!is_array($accountData)) throw new Exception('No se pudo cargar la información de tu cuenta.');
+		if(!$Account->validatePassword($_POST['pwd_old'])) throw new Exception('Tu contraseña actual no es correcta.');
 		if(check($accountData['hash'], $accountData['confirmed'])) {
 			if(Validator::UnsignedNumber($accountData['hash'])) {
 				if(time() > ($accountData['hash']+3600)) {
 					# expired password change
 					# do nothing
 				} else {
-					throw new Exception('You have an active password change, please check your email inbox.');
+					throw new Exception('Tienes un cambio de contraseña activo, por favor revisa la bandeja de entrada de tu email.');
 				}
 			}
 		}
@@ -55,14 +55,14 @@ if(isset($_POST['pwd_submit']) && check($_POST['pwd_submit'])) {
 			$email->send();
 			
 		} catch(Exception $ex) {
-			throw new Exception('We could not send you the verification email, please contact support.');
+			throw new Exception('No pudimos enviarte el email de verificación, por favor contacta a soporte.');
 		}
 		
 		# update account data
 		$setPasswordChange = $Account->setPasswordChange($_POST['pwd_new'], $verificationCode);
-		if(!$setPasswordChange) throw new Exception('There was a problem changing your password, please contact support.');
+		if(!$setPasswordChange) throw new Exception('Hubo un problema al cambiar tu contraseña, por favor contacta a soporte.');
 		
-		message('Almost done! We have sent a verification email to <strong>'.$accountData['email'].'</strong>. Follow the instructions given in the email to change your password.', 'success');
+		message('¡Casi listo! Hemos enviado un email de verificación a <strong>'.$accountData['email'].'</strong>. Sigue las instrucciones dadas en el email para cambiar tu contraseña.', 'success');
 		logSystem::add('password change request');
 		
 		# destroy current session (logout user)
@@ -82,28 +82,28 @@ if(isset($_POST['pwd_submit']) && check($_POST['pwd_submit'])) {
 <form action="<?php module_url(); ?>usercp/password/" method="post">
 <table class="login-form">
 	<tr>
-		<td>Current Password:</td>
+		<td>Contraseña Actual:</td>
 		<td><input type="password" name="pwd_old" autofocus/></td>
 	</tr>
 	<tr>
-		<td>New Password:</td>
+		<td>Nueva Contraseña:</td>
 		<td><input type="password" name="pwd_new" /></td>
 	</tr>
 	<tr>
-		<td>Confirm New Password:</td>
+		<td>Confirmar Nueva Contraseña:</td>
 		<td><input type="password" name="pwd_new_confirm" /></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td>
 			<div style="width: 300px;font-size: 12px;">
-				After submitting this form we will send you a verification link to <strong><?php echo $_SESSION['email']; ?></strong>. <br /><br />
+				Después de enviar este formulario, te enviaremos un enlace de verificación a <strong><?php echo $_SESSION['email']; ?></strong>. <br /><br />
 			</div>
 		</td>
 	</tr>
 	<tr>
 		<td></td>
-		<td><button type="submit" name="pwd_submit" value="ok">Change Password</button></td>
+		<td><button type="submit" name="pwd_submit" value="ok">Cambiar Contraseña</button></td>
 	</tr>
 </table>
 </form>
