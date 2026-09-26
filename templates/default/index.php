@@ -45,11 +45,11 @@
 			<ul class="left">
 				<li><a href="<?php base_url(); ?>">Inicio</a></li>
 				<li><a href="<?php module_url(); ?>connect/">Conectar</a></li>
-				<li><a href="<?php module_url(); ?>info/">Info. Servidor</a></li>
-				<li><a href="<?php module_url(); ?>lore/">Lore</a></li>
-				<li><a href="<?php module_url(); ?>conexion_tierra/">Conexión a la TIERRA</a></li>
+				<li><a href="<?php module_url(); ?>info/">Servidor</a></li>
 			</ul>
 			<ul class="right">
+				<li><a href="<?php module_url(); ?>lore/">Lore</a></li>
+				<li><a href="<?php module_url(); ?>conexion_tierra/">Terminal</a></li>
 				<li><a href="<?php module_url(); ?>rankings/">Clasificación</a></li>
 			</ul>
 			</div>
