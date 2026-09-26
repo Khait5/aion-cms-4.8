@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const terminalContainer = document.getElementById("terminal-container");
     const promptSpan = document.getElementById("terminal-prompt");
 
-    // Función avanzada para la secuencia de arranque con puntos suspensivos y limpieza final
+    // Función avanzada para la secuencia de arranque
     function runStartupSequence(callback) {
         const p1 = document.createElement("p");
         p1.style.color = "#0f0"; p1.style.margin = "0"; historyContainer.appendChild(p1);
@@ -75,21 +75,17 @@ document.addEventListener("DOMContentLoaded", function() {
                                                     p5.style.color = "#0f0"; p5.style.margin = "0"; historyContainer.appendChild(p5);
                                                     typeText(p5, "> (1) SEÑAL ENCONTRADA", 15, function() {
                                                         setTimeout(function() {
-                                                            const p6 = document.createElement("p");
-                                                            p6.style.color = "#0f0"; p6.style.margin = "0"; historyContainer.appendChild(p6);
-                                                            typeText(p6, "> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a", 15, function() {
-                                                                setTimeout(function() {
-                                                                    // LIMPIAR TODO EL HISTORIAL Y DEJAR SOLO EL MENSAJE FINAL
-                                                                    historyContainer.innerHTML = '';
-                                                                    const finalP = document.createElement("p");
-                                                                    finalP.style.color = "#0f0";
-                                                                    finalP.style.margin = "0";
-                                                                    finalP.textContent = "> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a";
-                                                                    historyContainer.appendChild(finalP);
-                                                                    terminalContainer.scrollTop = terminalContainer.scrollHeight;
-
-                                                                    if (callback) callback();
-                                                                }, 1000);
+                                                            // LIMPIAR TODO EL HISTORIAL ANTES DE ESCRIBIR EL MENSAJE FINAL
+                                                            historyContainer.innerHTML = '';
+                                                            
+                                                            const finalP = document.createElement("p");
+                                                            finalP.style.color = "#0f0";
+                                                            finalP.style.margin = "0";
+                                                            historyContainer.appendChild(finalP);
+                                                            
+                                                            // Escribir la línea final letra a letra
+                                                            typeText(finalP, "> ENLACE ACEPTADO con usuario:A?1?p servidor:t?er?a", 15, function() {
+                                                                if (callback) callback();
                                                             });
                                                         }, 1000);
                                                     });
