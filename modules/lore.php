@@ -149,6 +149,22 @@ if (!isLoggedIn()) {
             Y este suceso es lo que llamamos El Gran Cataciclismo.
             "
         </div>
+        <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
+         El Presente lleno de traiciones
+        </h3>
+        <div class="lore-content" style="padding: 15px; display: none; background: #111; color: #ddd; margin-bottom: 15px; line-height: 1.6;">
+            "Y así fue cuando despiertas sin saber por qué, de tu capsula perdida. <br>
+            Con los recuerdos de uno de los Señores que murieron en tu cerebro. <br>
+            Es como si el mismo se hubiera inyectado en ti, para que lograras algo mas que una falsa paz. <br>
+            Tal vez, ¿Destapar una mentira?<br>
+            ¿Quien mató a Israel? <br>
+            ¿Porqué lo hizo?<br>
+            Casualmente en tu capsula, había una terminal que trajiste de la tierra, una terminal que teoricamente debías usar si encontrabas un planeta habitable, para que el resto de naves te siguieran.<br>
+            Pero te das cuenta que tu no debias tener eso en tus cosas.<br>
+            Algo fue mal, algo no debió pasar así, alguien queria que cuando se pudiera avisar al resto, <br>
+            Fuera demasiado tarde <br>
+            "
+        </div>
 
 </div>
 
