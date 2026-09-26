@@ -9,7 +9,7 @@ if (!isLoggedIn()) {
     return; // Evita que cargue el resto de la página
 }
 ?>
-<div class="page-header-block info"></div>
+<div class="page-header-block "></div>
 
 <!-- Estilos específicos para simular un libro antiguo de atreia -->
 <style>
