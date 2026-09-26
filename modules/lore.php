@@ -80,12 +80,13 @@ if (!isLoggedIn()) {
 <div class="server-info-container" style="padding: 20px;">
     <div class="book-container">
         <div class="page-header-block " style="background-color: transparent; !important;">
-            <div class="book-title">📖 ARCHIVOS DEL CÓDEX: HISTORIA DE ATREIA</div>
+            <div class="book-title">CODEX DE ATREIA</div>
         </div>
-        
+        Este, es el libro donde Skipper, Kowalski, Rico y Cabo recogen toda la información de los sucesos de la Humanidad en Atreia.
+        Firmado por ellos 4.
 
         <div id="lore-accordion">
-            <div class="lore-chapter">Introducción</div>
+            <div class="lore-chapter">C1: Introducción</div>
             <div class="lore-content">
                 "Las cosas han cambiado, <?php echo $_SESSION['username']; ?>.<br><br>
                 Te metiste en una máquina de criogenización junto a tu pareja justo antes del desastre.<br>
@@ -94,7 +95,7 @@ if (!isLoggedIn()) {
                 Este nuevo planeta se llama Atreia"
             </div>
 
-            <div class="lore-chapter">Atreia</div>
+            <div class="lore-chapter">C2: Atreia</div>
             <div class="lore-content">
                 "Este planeta es diferente a la tierra.<br>
                 Nuestra capa de ozono no existe, pero hay una gran burbuja mágica que sostiene el oxigeno.<br>
@@ -104,7 +105,7 @@ if (!isLoggedIn()) {
                 Los cienttificos empezaron a investigar con que fines podrían usarlos."
             </div>
 
-            <div class="lore-chapter">Diferencias</div>
+            <div class="lore-chapter">C3: Diferencias</div>
             <div class="lore-content">
                 "Y así empezaron los problemas.<br><br>
                 Empezamos a descubrir que estas particulas eran mas útiles de lo que pensabamos.<br>
@@ -118,7 +119,7 @@ if (!isLoggedIn()) {
                 Pero poco despues, la población se dividió en dos."
             </div>
             
-            <div class="lore-chapter">La separación</div>
+            <div class="lore-chapter">C4: La separación</div>
             <div class="lore-content">
                 "Unos querian seguir el camino de la tecnología y ciencia, y veían el camino militar como algo en lo que no se debería usar, algo peligroso.<br>
                 Sobre todo en usarlos en cuerpos humanos.<br><br>
@@ -128,7 +129,7 @@ if (!isLoggedIn()) {
                 Elyos, inteligentes, Asmodians, guerreros expertos, libraron una guerra de facciones que partió atreia en dos y hizo despertar a otras facciones que permanecian dormidas."
             </div>
             
-            <div class="lore-chapter">Rozando la extinción</div>
+            <div class="lore-chapter">C5: Rozando la extinción</div>
             <div class="lore-content">
                 "En apenas 3 meses, una guerra empezó.<br>
                 Todo el progreso que hicieron juntos, los humanos lo rompieron.<br>
@@ -147,7 +148,7 @@ if (!isLoggedIn()) {
                 Y así, fueron a lo que nunca antes hicieron desde que llegaron, explorar, y colonizar todo el planeta."
             </div>
                         
-            <div class="lore-chapter">No estamos solos</div>
+            <div class="lore-chapter">C6: No estamos solos</div>
             <div class="lore-content">
                 "Así fue como la humanidad se dio cuenta de algo importante que obvió,<br>
                 No estamos solos.<br><br>
@@ -155,7 +156,7 @@ if (!isLoggedIn()) {
                 Pero una facción fue la mas ruidosa; Balaur."
             </div>
                         
-            <div class="lore-chapter">Okupas</div>
+            <div class="lore-chapter">C7: Okupas</div>
             <div class="lore-content">
                 "Es una raza ancestral de poderosos dragones surgida originalmente para gobernar el planeta.<br>
                 Sin embargo, se corrompieron por su propio ansia de poder y también, cayeron en guerras entre ellos.<br><br>
@@ -167,7 +168,7 @@ if (!isLoggedIn()) {
                 Solo vinimos a okuparlo porque el nuestro se destruyó."
             </div>
 
-            <div class="lore-chapter">La Torre de la eternidad</div>
+            <div class="lore-chapter">C9: La Torre de la eternidad</div>
             <div class="lore-content">
                 "Explorando, nos dimos cuenta que en cierto punto del planeta, surgía muchas particulas magicas.<br>
                 Hasta el punto que alteraban nuestras herramientas y los hechizos que aprendimos, ya no funcionaban.<br>
@@ -177,7 +178,7 @@ if (!isLoggedIn()) {
                 Y los balaur, lo sabian."
             </div>
 
-            <div class="lore-chapter">El camino a la locura</div>
+            <div class="lore-chapter">C10: El camino a la locura</div>
             <div class="lore-content">
                 "Los balaur, como la raza superior para proteger y gobernar el planeta, se corrompieron por una insaciable ansia de poder absoluto.<br>
                 No les bastaba con reinar sobre las demás criaturas; querían subyugar al propio 'Dios' del planeta, la torre.<br>
@@ -185,7 +186,7 @@ if (!isLoggedIn()) {
                 Y así fue, como los balaur, ansiosos de poder, atacaron la torre con todas sus fuerzas."
             </div>
 
-            <div class="lore-chapter">Gran Cataclismo</div>
+            <div class="lore-chapter">C11: Gran Cataclismo</div>
             <div class="lore-content">
                 "Tras 5 años de una cruenta guerra de desgaste entre los Balaur y los humanos,<br>
                 en un intento desesperado por lograr la paz, el Señor Israel propuso un tratado de paz con los Balaur, todo el Consejo se puso de acuerdo, y los Balaur también se abrieron a negociar.<br>
@@ -199,7 +200,7 @@ if (!isLoggedIn()) {
                 Y este suceso es lo que llamamos El Gran Cataclismo."
             </div>
 
-            <div class="lore-chapter">El Presente lleno de traiciones</div>
+            <div class="lore-chapter">C12: El Presente lleno de traiciones</div>
             <div class="lore-content">
                 "Y así fue cuando despiertas sin saber por qué, de tu capsula perdida.<br>
                 Con los recuerdos de uno de los Señores que murieron en tu cerebro.<br>
