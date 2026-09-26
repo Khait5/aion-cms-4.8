@@ -9,7 +9,7 @@ if (!isLoggedIn()) {
     return; // Evita que cargue el resto de la página
 }
 ?>
-<div class="page-header-block "></div>
+
 
 <!-- Estilos específicos para simular un libro antiguo de atreia -->
 <style>
@@ -79,8 +79,8 @@ if (!isLoggedIn()) {
 
 <div class="server-info-container" style="padding: 20px;">
     <div class="book-container">
+        <div class="page-header-block "><div class="book-title">📖 ARCHIVOS DEL CÓDEX: HISTORIA DE ATREIA</div></div>
         
-        <div class="book-title">📖 ARCHIVOS DEL CÓDEX: HISTORIA DE ATREIA</div>
 
         <div id="lore-accordion">
             <div class="lore-chapter">Introducción</div>
