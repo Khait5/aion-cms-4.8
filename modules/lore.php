@@ -1,7 +1,7 @@
 <?php
 // Bloqueo de seguridad usando la función nativa de AIONCMS
 if (!isLoggedIn()) {
-    echo '<div class="server-info-container" style="padding: 50px; text-align: center; border: 1px solid #333; background: #000;">';
+    echo '<div class="server-info-container" style="padding: 50px; text-align: center; border: 1px solid background: #000;">';
     echo '<h2 style="color: #ff3333;">[ ACCESO RESTRINGIDO ]</h2>';
     echo '<p style="color: #0f0; font-family: monospace;">Nivel de autorización insuficiente.</p>';
     echo '<p style="color: #aaa;">Debes <a href="'.module_url('login', true).'" style="color: #fff; text-decoration: underline;">iniciar sesión</a> para acceder a este enlace de la red.</p>';
@@ -79,7 +79,9 @@ if (!isLoggedIn()) {
 
 <div class="server-info-container" style="padding: 20px;">
     <div class="book-container">
-        <div class="page-header-block "><div class="book-title">📖 ARCHIVOS DEL CÓDEX: HISTORIA DE ATREIA</div></div>
+        <div class="page-header-block ">
+            <div class="book-title">📖 ARCHIVOS DEL CÓDEX: HISTORIA DE ATREIA</div>
+        </div>
         
 
         <div id="lore-accordion">
