@@ -42,7 +42,7 @@ if (!isLoggedIn()) {
                 Los cienttificos empezaron a investigar con que fines podrían usarlos."</p>
         </div>
         <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
-           Diferencias.
+           Diferencias
         </h3>
         <div class="lore-content" style="padding: 10px; display: none; background: #111; color: #ddd; margin-bottom: 15px;">
             <p>"Y así empezaron los problemas.
@@ -65,7 +65,7 @@ if (!isLoggedIn()) {
         </div>
         
          <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
-           Diferencias.
+           La separación
         </h3>
         <div class="lore-content" style="padding: 10px; display: none; background: #111; color: #ddd; margin-bottom: 15px;">
             <p>"Unos querian seguir el camino de la tecnología y ciencia, y veían el camino militar como algo en lo que no se debería usar, algo peligroso.
@@ -80,7 +80,55 @@ if (!isLoggedIn()) {
                 Elyos, inteligentes, Asmodians, guerreros expertos, libraron una guerra de facciones que partió atreia en dos y hizo despertar a otras facciones que permanecian dormidas.
                 "</p>
         </div>
+         <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
+           Rozando la extinción.
+        </h3>
+        <div class="lore-content" style="padding: 10px; display: none; background: #111; color: #ddd; margin-bottom: 15px;">
+            <p>"En apenas 3 meses, una guerra empezó.
+                Todo el progreso que hicieron juntos, los humanos lo rompieron.
+                Ciudades destruidas.
+                Libros, academias, calles, casas, familias.
+                Todo destruido por la supervivencia de una de las dos facciones.
 
+                Aunque los Asmodians eran fuertes, los Elyos tenian armas de fuego, potenciar herramientas para uso de batalla, algo que ellos estudiaron antes de que todo sucediera, para confrontar a los Asmodians.
+                Los Asmodians robaron tecnologias y avances, todo quedando en un empate sin fin de guerra.
+
+                Así que ambas facciones, tomaron un interes común y dijeron:
+                Atreia Este es para vosotros,
+                Atreia Oeste es para nosotros.
+
+                Y así fue.
+                Con casi mas de la mitad de la humanidad destruida,
+                Fueron a lo que nunca antes hicieron desde que llegaron, explorar, y colonizar todo el planeta.
+                "</p>
+        </div>
+                 <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
+           No estamos solos.
+        </h3>
+        <div class="lore-content" style="padding: 10px; display: none; background: #111; color: #ddd; margin-bottom: 15px;">
+            <p>"Así fue como la humanidad se dio cuenta de algo importante que obvió,
+                No estamos solos.
+
+                Muchas otras facciones de monstruos que ya habitaban el planeta y vigilaban a los humanos desde hace mucho, surgieron a intentar acabar lo que ellos mismos casi consiguen, la destrucción.
+
+                Pero una facción fue la mas ruidosa; Balaur.
+                "</p>
+        </div>
+                 <h3 class="lore-chapter" style="cursor: pointer; background: #222; padding: 10px; margin-bottom: 5px; color: #d6be93;">
+           Okupas
+        </h3>
+        <div class="lore-content" style="padding: 10px; display: none; background: #111; color: #ddd; margin-bottom: 15px;">
+            <p>"Es una raza ancestral de poderosos dragones surgida originalmente para gobernar el planeta. 
+                Sin embargo, se corrompieron por su propio ansia de poder y también, cayeron en guerras entre ellos.
+
+                Pero ellos fueron mas inteligentes que los humanos,
+                Pues ellos,
+                Se unieron para atacarnos a ambas partes a la vez.
+                Pues ellos eran dueños del planeta, por derecho.
+                Y nosotros,
+                Solo vinimos a okuparlo porque el nuestro se destruyó.
+                "</p>
+        </div>
         
 
         <!-- More chapters can be added here following the same structure -->
