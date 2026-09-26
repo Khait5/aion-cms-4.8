@@ -1,0 +1,4 @@
+# Ignorar archivos de caché temporales
+cache/
+application/cache/
+*.cache

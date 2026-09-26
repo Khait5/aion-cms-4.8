@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteRule ^page/([a-zA-Z0-9\_/]+)/?$ index.php?request=$1 [L]
+RewriteRule ^legion/(.*)/?$ legion.php?request=profile/legion/$1 [L]
+RewriteRule ^legionemblem/([0-9]+)\.dds$ api/legionEmblem.php?key=WJaddps23DZM&legionid=$1 [L]
