@@ -15,18 +15,16 @@ if ($socket) {
     $estado_atreia = '<span style="color: #ff3333; text-shadow: 0 0 8px #ff3333; font-weight: bold; letter-spacing: 1px;">OFFLINE (SEÑAL PERDIDA)</span>';
 }
 
-// 2. SIMULADOR DE RADAR DE ENTIDADES (Conteo variable de NPCs)
-// Genera una base realista de NPCs en el mundo y le suma/resta un valor aleatorio 
-// cada vez que se recarga la página para simular escaneos en tiempo real.
-$humanos_elyos = 24500 + rand(-350, 420);
-$humanos_asmos = 25200 + rand(-410, 380);
-$radar_balaur = 18750 + rand(-800, 1200);
+// 2. SIMULADOR DE RADAR (Fluctuación muy reducida y estable)
+// Ahora varía solo un máximo de 30-50 unidades por recarga.
+$humanos_elyos = 24500 + rand(-20, 30);
+$humanos_asmos = 25200 + rand(-25, 25);
+$radar_balaur = 18750 + rand(-40, 50);
 
-// 3. MAPA TÁCTICO DE LA FALLA DIMENSIONAL (ABISMO)
-// Simula el control territorial para que el mapa SIEMPRE muestre datos activos.
-// Los porcentajes de Elyos y Asmos varían entre 25% y 40%, el resto es Balaur.
-$pct_elyos = rand(28, 38);
-$pct_asmos = rand(28, 38);
+// 3. MAPA TÁCTICO DE ZONAS (Fluctuación territorial mínima)
+// Varía solo entre 33% y 35% para no marear visualmente, manteniendo la inmersión.
+$pct_elyos = rand(33, 35);
+$pct_asmos = rand(33, 35);
 $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 ?>
 
@@ -40,6 +38,7 @@ $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
     color: #a3c2c2;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
 }
 .terminal-header {
     border-bottom: 2px solid #1f3a3d;
@@ -64,9 +63,10 @@ $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 }
 .abyss-map-container {
     margin-top: 40px;
-    background: #050505;
-    border: 1px solid #333;
+    background: #020202;
+    border: 1px solid #1f3a3d;
     padding: 20px;
+    position: relative;
 }
 .abyss-title {
     color: #ff9933;
@@ -76,25 +76,44 @@ $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 }
 .control-bar {
     display: flex;
-    height: 30px;
-    background: #111;
-    border: 1px solid #444;
-    border-radius: 3px;
+    height: 50px;
+    background: #000;
+    border: 2px solid #222;
+    border-radius: 4px;
     overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
 }
 .bar-segment {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px #000;
-    transition: width 1s ease-in-out;
+    font-size: 11px;
+    text-shadow: 1px 1px 3px #000;
+    transition: width 0.5s ease-in-out;
+    border-right: 1px solid #000;
 }
-.elyos-bg { background: linear-gradient(90deg, #1a5276, #2980b9); }
-.asmo-bg { background: linear-gradient(90deg, #7b241c, #c0392b); }
-.balaur-bg { background: linear-gradient(90deg, #145a32, #27ae60); }
+.bar-segment:last-child {
+    border-right: none;
+}
+.bar-segment span {
+    font-size: 15px;
+    font-weight: bold;
+}
+/* Colores de zona con brillo interno táctico */
+.elyos-zone { background: linear-gradient(180deg, #154360, #2980b9); box-shadow: inset 0 0 15px #3498db; }
+.balaur-zone { background: linear-gradient(180deg, #145a32, #27ae60); box-shadow: inset 0 0 15px #2ecc71; }
+.asmo-zone { background: linear-gradient(180deg, #7b241c, #c0392b); box-shadow: inset 0 0 15px #e74c3c; }
+
+/* Filtro de pantalla CRT sutil sobre el mapa */
+.scanlines {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+}
 </style>
 
 <div class="page-header-block info"></div>
@@ -111,37 +130,47 @@ $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
         </div>
         <div class="stat-row">
             <span class="stat-label">> HUMANOS ELYOS DETECTADOS:</span>
-            <span class="stat-value"><?php echo number_format($humanos_elyos); ?> Entidades (Aprox.)</span>
+            <span class="stat-value"><?php echo number_format($humanos_elyos); ?> Entidades</span>
         </div>
         <div class="stat-row">
             <span class="stat-label">> HUMANOS ASMODIANOS DETECTADOS:</span>
-            <span class="stat-value"><?php echo number_format($humanos_asmos); ?> Entidades (Aprox.)</span>
+            <span class="stat-value"><?php echo number_format($humanos_asmos); ?> Entidades</span>
         </div>
         <div class="stat-row">
             <span class="stat-label">> ANOMALÍAS BALAUR (ABISMO):</span>
-            <span class="stat-value" style="color: #ffaa00;"><?php echo number_format($radar_balaur); ?> Entidades (Fluctuando)</span>
+            <span class="stat-value" style="color: #ffaa00;"><?php echo number_format($radar_balaur); ?> Entidades</span>
         </div>
 
         <div class="abyss-map-container">
+            <div class="scanlines"></div>
             <div class="abyss-title">MAPA TÁCTICO DE LA FALLA DIMENSIONAL (ABISMO)</div>
-            <p style="text-align: center; font-size: 12px; color: #777; margin-top: -10px; margin-bottom: 20px;">Escaneo de control territorial mediante tecnología de partículas</p>
+            <p style="text-align: center; font-size: 12px; color: #777; margin-top: -10px; margin-bottom: 20px; position: relative; z-index: 2;">Análisis de control territorial mediante tecnología de partículas</p>
             
-            <div class="control-bar">
+            <div class="control-bar" style="position: relative; z-index: 2;">
                 <?php if($pct_elyos > 0): ?>
-                    <div class="bar-segment elyos-bg" style="width: <?php echo $pct_elyos; ?>%;">Elyos <?php echo $pct_elyos; ?>%</div>
+                    <div class="bar-segment elyos-zone" style="width: <?php echo $pct_elyos; ?>%;">
+                        ZONA AZUL
+                        <span><?php echo $pct_elyos; ?>%</span>
+                    </div>
                 <?php endif; ?>
                 
                 <?php if($pct_balaur > 0): ?>
-                    <div class="bar-segment balaur-bg" style="width: <?php echo $pct_balaur; ?>%;">Balaur <?php echo $pct_balaur; ?>%</div>
+                    <div class="bar-segment balaur-zone" style="width: <?php echo $pct_balaur; ?>%;">
+                        ZONA VERDE
+                        <span><?php echo $pct_balaur; ?>%</span>
+                    </div>
                 <?php endif; ?>
                 
                 <?php if($pct_asmos > 0): ?>
-                    <div class="bar-segment asmo-bg" style="width: <?php echo $pct_asmos; ?>%;">Asmodian <?php echo $pct_asmos; ?>%</div>
+                    <div class="bar-segment asmo-zone" style="width: <?php echo $pct_asmos; ?>%;">
+                        ZONA ROJA
+                        <span><?php echo $pct_asmos; ?>%</span>
+                    </div>
                 <?php endif; ?>
             </div>
             
-            <div style="margin-top: 15px; font-size: 11px; color: #555; text-align: justify;">
-                * INFO: El Sector Elíseo y el Sector Asmodiano mantienen una disputa activa por el control de la falla. La raza dominante de Dragones Ancestrales (Balaur) incrementa sus defensas en base a la inestabilidad energética detectada por la Red de Tierra.
+            <div style="margin-top: 15px; font-size: 11px; color: #555; text-align: justify; position: relative; z-index: 2;">
+                * INFO: El Sector Elíseo (Azul) y el Sector Asmodiano (Rojo) mantienen una disputa activa por el control de la falla. La raza dominante de Dragones Ancestrales (Verde) reajusta sus tropas de forma autónoma en respuesta a las fluctuaciones de la torre central.
             </div>
         </div>
     </div>
