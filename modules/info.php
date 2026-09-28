@@ -15,20 +15,21 @@ if ($socket) {
     $estado_atreia = '<span style="color: #ff3333; text-shadow: 0 0 8px #ff3333; font-weight: bold; letter-spacing: 1px;">OFFLINE (SEÑAL PERDIDA)</span>';
 }
 
-// 2. SIMULADOR DE RADAR (Entidades en tiempo real)
-// Los Balaur ahora tienen números muy superiores para justificar su control del mapa
-$humanos_elyos = 24500 + rand(-20, 30);
-$humanos_asmos = 25200 + rand(-25, 25);
-$radar_balaur = 37850 + rand(-60, 90); 
+// =====================================================================
+// SISTEMA DE SEMILLA TEMPORAL (Actualización Territorial cada 30 min)
+// 1800 segundos = 30 minutos. El mapa quedará estático durante este tiempo.
+// =====================================================================
+$semilla_tiempo = floor(time() / 1800); 
+mt_srand($semilla_tiempo);
 
-// 3. PORCENTAJES GLOBALES (Para la barra superior)
-$pct_elyos = rand(28, 33);
-$pct_asmos = rand(28, 33);
+// 2. PORCENTAJES GLOBALES (Para la barra superior)
+$pct_elyos = mt_rand(28, 33);
+$pct_asmos = mt_rand(28, 33);
 $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 
-// 4. GENERADOR DE ZONAS DE CONTROL TÁCTICO (Para el mapa visual)
+// 3. GENERADOR DE ZONAS DE CONTROL TÁCTICO (Para el mapa visual)
 function getControlZone($pct_elyos, $pct_asmo) {
-    $roll = rand(1, 100);
+    $roll = mt_rand(1, 100);
     if ($roll <= $pct_elyos) return 'rgba(0, 191, 255, 0.7)'; // Azul Elyos
     if ($roll <= ($pct_elyos + $pct_asmo)) return 'rgba(255, 50, 50, 0.7)'; // Rojo Asmo
     return 'rgba(46, 204, 113, 0.7)'; // Verde Balaur
@@ -46,6 +47,18 @@ $upper_right = getControlZone(20, 20);
 
 // NÚCLEO (Dominio Balaur casi absoluto)
 $core_zone = getControlZone(5, 5);
+
+
+// =====================================================================
+// RESTAURAR ALEATORIEDAD EN VIVO (Para el radar de entidades)
+// Rompemos la semilla fija para que las tropas sí fluctúen al recargar
+// =====================================================================
+mt_srand(); 
+
+// 4. SIMULADOR DE RADAR (Entidades en tiempo real)
+$humanos_elyos = 24500 + mt_rand(-20, 30);
+$humanos_asmos = 25199 + mt_rand(-25, 25);
+$radar_balaur = 37850 + mt_rand(-60, 90); 
 ?>
 
 <style>
@@ -195,7 +208,7 @@ $core_zone = getControlZone(5, 5);
             <span class="stat-label">> CONEXIÓN A ATREIA:</span>
             <span class="stat-value"><?php echo $estado_atreia; ?></span>
         </div>
-                <div class="terminal-header">
+                <div class="terminal-header" style="margin-top: 30px;">
            [ GUERRA ACTUAL POR EL ABISMO ]
         </div>
         
@@ -255,7 +268,7 @@ $core_zone = getControlZone(5, 5);
             </div>
             
             <div style="margin-top: 15px; font-size: 11px; color: #555; text-align: justify;">
-                * INFO: Actualización satelital en tiempo real. Las zonas marcadas en el mapa representan el control estratégico de las masas de tierra fragmentadas. El sector inferior experimenta alta volatilidad por la guerra de las dos facciones supervivientes.
+                * INFO: Actualización satelital cada 30 minutos. Las zonas marcadas en el mapa representan el control estratégico de las masas de tierra fragmentadas. El sector inferior experimenta alta volatilidad por la guerra de las dos facciones supervivientes.
             </div>
         </div>
     </div>
