@@ -188,23 +188,24 @@ $core_zone = getControlZone(5, 5);
     
     <div class="terminal-container">
         <div class="terminal-header">
-            [ TERMINAL DE RED DE TIERRA - ESTADO DEL PLANETA ]
+            [ ESTADO DEL PLANETA ATREIA ]
         </div>
 
         <div class="stat-row">
             <span class="stat-label">> CONEXIÓN A ATREIA:</span>
             <span class="stat-value"><?php echo $estado_atreia; ?></span>
         </div>
+        <h2>GUERRA ACTUAL POR EL ABISMO</h2>
         <div class="stat-row">
-            <span class="stat-label">> HUMANOS ELYOS DETECTADOS:</span>
+            <span class="stat-label">> HUMANOS ELYOS:</span>
             <span class="stat-value stat-elyos"><?php echo number_format($humanos_elyos); ?> Entidades</span>
         </div>
         <div class="stat-row">
-            <span class="stat-label">> HUMANOS ASMODIANOS DETECTADOS:</span>
+            <span class="stat-label">> HUMANOS ASMODIANOS:</span>
             <span class="stat-value stat-asmo"><?php echo number_format($humanos_asmos); ?> Entidades</span>
         </div>
         <div class="stat-row">
-            <span class="stat-label">> ANOMALÍAS BALAUR (ABISMO):</span>
+            <span class="stat-label">> BALAUR:</span>
             <span class="stat-value stat-balaur"><?php echo number_format($radar_balaur); ?> Entidades</span>
         </div>
 
