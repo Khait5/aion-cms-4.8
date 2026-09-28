@@ -16,9 +16,10 @@ if ($socket) {
 }
 
 // 2. SIMULADOR DE RADAR (Entidades en tiempo real)
+// Los Balaur ahora tienen números muy superiores para justificar su control del mapa
 $humanos_elyos = 24500 + rand(-20, 30);
 $humanos_asmos = 25200 + rand(-25, 25);
-$radar_balaur = 18750 + rand(-40, 50);
+$radar_balaur = 37850 + rand(-60, 90); 
 
 // 3. PORCENTAJES GLOBALES (Para la barra superior)
 $pct_elyos = rand(28, 33);
