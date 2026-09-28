@@ -29,7 +29,7 @@ $pct_elyos = mt_rand(28, 33);
 $pct_asmos = mt_rand(28, 33);
 $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 
-// 3. GENERADOR DE ZONAS (Equilibrio de opacidad: 0.85)
+// 3. GENERADOR DE ZONAS (Opacidad ajustada a 0.8)
 function getZoneData($pct_elyos, $pct_asmo, $top, $left, $width = 25) {
     $roll = mt_rand(1, 100);
     if ($roll <= $pct_elyos) return ['faction' => 'elyos', 'color' => 'rgba(0, 191, 255, 0.8)', 'top' => $top, 'left' => $left, 'w' => $width];
@@ -85,7 +85,7 @@ foreach ($shuffled_keys as $attacker_key) {
     }
 }
 
-// 5. GENERADOR DE TEXTO DE BATALLA (Log Narrativo)
+// 5. GENERADOR DE TEXTO DE BATALLA POR ZONAS Y EVENTOS ALEATORIOS
 $faction_tags = [
     'elyos' => '<span class="stat-elyos">Los Elyos</span>',
     'asmo' => '<span class="stat-asmo">Los Asmodianos</span>',
@@ -97,37 +97,60 @@ $zone_names = [
     'ul' => 'Noroeste Superior', 'uc' => 'Norte Superior', 'ur' => 'Noreste Superior', 'core' => 'Núcleo Central'
 ];
 
-$faction_actions = [
-    'elyos' => ['attacks' => [], 'defends' => []],
-    'asmo' => ['attacks' => [], 'defends' => []],
-    'balaur' => ['attacks' => [], 'defends' => []]
+$eventos_inactivos = [
+    "realizan patrullajes de rutina sin detectar anomalías biológicas.",
+    "detectan una extraña fluctuación de partículas y proceden a investigar las inmediaciones.",
+    "descubren una veta de minerales de alta energía y establecen un perímetro de excavación.",
+    "sufren fallos temporales en las comunicaciones debido a interferencias de la Torre.",
+    "interceptan transmisiones codificadas de origen desconocido y mantienen alerta máxima.",
+    "dedican el ciclo a reforzar las barreras estructurales de sus fortalezas tácticas.",
+    "realizan maniobras logísticas de reabastecimiento y mantenimiento de equipos.",
+    "reportan avistamientos de fauna mutada en la periferia, pero mantienen la posición.",
+    "establecen una torre temporal de relé para intentar enlazar con la Red de Tierra.",
+    "localizan ruinas subterráneas no cartografiadas y despliegan drones de reconocimiento."
 ];
 
-foreach ($attacks as $atk) {
-    $attacker_fac = $atk['from']['faction'];
-    $defender_fac = $atk['to']['faction'];
-    
-    $faction_actions[$attacker_fac]['attacks'][] = "inician una ofensiva contra " . $faction_tags[$defender_fac] . " en el sector " . $zone_names[$atk['to_key']] . " desde el sector " . $zone_names[$atk['from_key']];
-    $faction_actions[$defender_fac]['defends'][] = "defienden activamente el sector " . $zone_names[$atk['to_key']];
-}
-
 $battle_log = [];
-foreach (['elyos', 'asmo', 'balaur'] as $fac) {
-    $name = $faction_tags[$fac];
-    $attacks_made = $faction_actions[$fac]['attacks'];
-    $defenses_made = $faction_actions[$fac]['defends'];
+
+// Analizar cada zona individualmente
+foreach ($zones as $z_key => $z_data) {
+    $fac_name = $faction_tags[$z_data['faction']];
+    $z_name = $zone_names[$z_key];
     
-    if (count($attacks_made) > 0 && count($defenses_made) > 0) {
-        $battle_log[] = "> " . $name . " " . implode(" y ", $defenses_made) . ", mientras " . implode(" y ", $attacks_made) . ".";
-    } elseif (count($attacks_made) > 0) {
-        $battle_log[] = "> " . $name . " " . implode(" y ", $attacks_made) . ".";
-    } elseif (count($defenses_made) > 0) {
-        $battle_log[] = "> " . $name . " se atrincheran y " . implode(" y ", $defenses_made) . " tras sufrir un asalto.";
+    // Comprobar si esta zona está atacando a alguien
+    $is_attacking = false;
+    $target_zone = '';
+    $target_fac = '';
+    foreach ($attacks as $atk) {
+        if ($atk['from_key'] == $z_key) {
+            $is_attacking = true;
+            $target_zone = $zone_names[$atk['to_key']];
+            $target_fac = $faction_tags[$atk['to']['faction']];
+            break;
+        }
+    }
+    
+    // Comprobar si esta zona está siendo atacada
+    $is_defending = false;
+    $attacker_fac = '';
+    foreach ($attacks as $atk) {
+        if ($atk['to_key'] == $z_key) {
+            $is_defending = true;
+            $attacker_fac = $faction_tags[$atk['from']['faction']];
+            break;
+        }
+    }
+    
+    // Generar el registro según el estado de la zona
+    if ($is_attacking) {
+        $battle_log[] = "> " . $fac_name . " del sector " . $z_name . " lanzan una ofensiva táctica contra " . $target_fac . " en el sector " . $target_zone . ".";
+    } elseif ($is_defending) {
+        $battle_log[] = "> " . $fac_name . " del sector " . $z_name . " se atrincheran y defienden la posición ante el asalto enemigo de " . $attacker_fac . ".";
     } else {
-        $battle_log[] = "> " . $name . " mantienen sus posiciones actuales y aseguran el perímetro sin registrar hostilidades mayores.";
+        $evento_random = $eventos_inactivos[mt_rand(0, count($eventos_inactivos) - 1)];
+        $battle_log[] = "> " . $fac_name . " del sector " . $z_name . " " . $evento_random;
     }
 }
-
 
 // =====================================================================
 // RESTAURAR ALEATORIEDAD EN VIVO (Para el radar numérico)
@@ -287,7 +310,7 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
     border-bottom: 1px solid #333;
     padding-bottom: 5px;
 }
-.battle-entry { margin-bottom: 6px; }
+.battle-entry { margin-bottom: 8px; }
 
 .last-update { text-align: center; color: #669999; font-size: 13px; margin-top: 20px; letter-spacing: 1px; }
 .last-update span { color: #00ffcc; font-weight: bold; }
@@ -360,13 +383,13 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
             </div>
 
             <div class="map-legend">
-                <div class="legend-item"><div class="legend-color" style="background: rgba(0, 191, 255, 0.85); box-shadow: 0 0 5px #00bfff;"></div> Sector Elíseo</div>
-                <div class="legend-item"><div class="legend-color" style="background: rgba(255, 50, 50, 0.85); box-shadow: 0 0 5px #ff4d4d;"></div> Sector Asmodiano</div>
-                <div class="legend-item"><div class="legend-color" style="background: rgba(46, 204, 113, 0.85); box-shadow: 0 0 5px #2ecc71;"></div> Anomalía Balaur</div>
+                <div class="legend-item"><div class="legend-color" style="background: rgba(0, 191, 255, 0.8); box-shadow: 0 0 5px #00bfff;"></div> Sector Elíseo</div>
+                <div class="legend-item"><div class="legend-color" style="background: rgba(255, 50, 50, 0.8); box-shadow: 0 0 5px #ff4d4d;"></div> Sector Asmodiano</div>
+                <div class="legend-item"><div class="legend-color" style="background: rgba(46, 204, 113, 0.8); box-shadow: 0 0 5px #2ecc71;"></div> Anomalía Balaur</div>
             </div>
 
             <div class="battle-report-box">
-                <div class="battle-report-title">REGISTRO DE HOSTILIDADES ACTIVO</div>
+                <div class="battle-report-title">BITÁCORA DE ZONAS (ESCANEO DE RED)</div>
                 <?php foreach ($battle_log as $log_entry): ?>
                     <div class="battle-entry"><?php echo $log_entry; ?></div>
                 <?php endforeach; ?>
@@ -377,7 +400,7 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
             </div>
             
             <div style="margin-top: 15px; font-size: 11px; color: #555; text-align: justify;">
-                * INFO: Actualización estratégica cada 30 minutos. Las flechas animadas y el registro indican las rutas de asalto confirmadas por el escáner. Una fortaleza asediada desvía todas sus tropas a tareas defensivas.
+                * INFO: Actualización estratégica cada 30 minutos. El reporte clasifica las hostilidades y los eventos de supervivencia de cada punto clave en la falla.
             </div>
         </div>
     </div>
