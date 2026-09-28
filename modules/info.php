@@ -29,7 +29,7 @@ $pct_elyos = mt_rand(28, 33);
 $pct_asmos = mt_rand(28, 33);
 $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 
-// 3. GENERADOR DE ZONAS (Colores más intensos: opacidad 0.95)
+// 3. GENERADOR DE ZONAS
 function getZoneData($pct_elyos, $pct_asmo, $top, $left, $width = 25) {
     $roll = mt_rand(1, 100);
     if ($roll <= $pct_elyos) return ['faction' => 'elyos', 'color' => 'rgba(0, 191, 255, 0.95)', 'top' => $top, 'left' => $left, 'w' => $width];
@@ -47,7 +47,7 @@ $zones = [
     'core' => getZoneData(5, 5, 50, 50, 35)
 ];
 
-// 4. ALGORITMO DE ATAQUE TÁCTICO TIPO RADAR
+// 4. ALGORITMO DE ATAQUE TÁCTICO
 $attacks = [];
 $attacked_zones = [];
 $zone_keys = array_keys($zones);
@@ -64,12 +64,10 @@ foreach ($shuffled_keys as $attacker_key) {
 
     if (mt_rand(1, 100) <= 60) {
         $valid_targets = [];
-        
         foreach ($zones as $target_key => $target_data) {
             if ($target_key == $attacker_key) continue; 
             if (in_array($target_key, $attacked_zones)) continue; 
             if ($zones[$attacker_key]['faction'] == $target_data['faction']) continue; 
-
             $valid_targets[] = $target_key;
         }
 
@@ -79,11 +77,59 @@ foreach ($shuffled_keys as $attacker_key) {
             
             $attacks[] = [
                 'from' => $zones[$attacker_key],
-                'to' => $zones[$target]
+                'to' => $zones[$target],
+                'from_key' => $attacker_key,
+                'to_key' => $target
             ];
         }
     }
 }
+
+// 5. GENERADOR DE TEXTO DE BATALLA (Log Narrativo)
+$faction_tags = [
+    'elyos' => '<span class="stat-elyos">Los Elyos</span>',
+    'asmo' => '<span class="stat-asmo">Los Asmodianos</span>',
+    'balaur' => '<span class="stat-balaur">Los Balaur</span>'
+];
+
+$zone_names = [
+    'll' => 'Suroeste Inferior', 'lc' => 'Sur Inferior', 'lr' => 'Sureste Inferior',
+    'ul' => 'Noroeste Superior', 'uc' => 'Norte Superior', 'ur' => 'Noreste Superior', 'core' => 'Núcleo Central'
+];
+
+$faction_actions = [
+    'elyos' => ['attacks' => [], 'defends' => []],
+    'asmo' => ['attacks' => [], 'defends' => []],
+    'balaur' => ['attacks' => [], 'defends' => []]
+];
+
+// Recopilar acciones
+foreach ($attacks as $atk) {
+    $attacker_fac = $atk['from']['faction'];
+    $defender_fac = $atk['to']['faction'];
+    
+    $faction_actions[$attacker_fac]['attacks'][] = "inician una ofensiva contra " . $faction_tags[$defender_fac] . " en el sector " . $zone_names[$atk['to_key']] . " desde el sector " . $zone_names[$atk['from_key']];
+    $faction_actions[$defender_fac]['defends'][] = "defienden activamente el sector " . $zone_names[$atk['to_key']];
+}
+
+// Construir oraciones narrativas
+$battle_log = [];
+foreach (['elyos', 'asmo', 'balaur'] as $fac) {
+    $name = $faction_tags[$fac];
+    $attacks_made = $faction_actions[$fac]['attacks'];
+    $defenses_made = $faction_actions[$fac]['defends'];
+    
+    if (count($attacks_made) > 0 && count($defenses_made) > 0) {
+        $battle_log[] = "> " . $name . " " . implode(" y ", $defenses_made) . ", mientras " . implode(" y ", $attacks_made) . ".";
+    } elseif (count($attacks_made) > 0) {
+        $battle_log[] = "> " . $name . " " . implode(" y ", $attacks_made) . ".";
+    } elseif (count($defenses_made) > 0) {
+        $battle_log[] = "> " . $name . " se atrincheran y " . implode(" y ", $defenses_made) . " tras sufrir un asalto.";
+    } else {
+        $battle_log[] = "> " . $name . " mantienen sus posiciones actuales y aseguran el perímetro sin registrar hostilidades mayores.";
+    }
+}
+
 
 // =====================================================================
 // RESTAURAR ALEATORIEDAD EN VIVO (Para el radar numérico)
@@ -192,12 +238,11 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
     100% { background-position: 0 200%; }
 }
 
-/* Nodos de control más fuertes y marcados */
 .control-node {
     position: absolute;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    filter: blur(4px); /* Menos difuminado para colores más sólidos */
+    filter: blur(4px);
     animation: pulse 3s infinite alternate;
 }
 @keyframes pulse {
@@ -223,6 +268,28 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
 .map-legend { display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 12px; }
 .legend-item { display: flex; align-items: center; gap: 5px; color: #fff; }
 .legend-color { width: 12px; height: 12px; border-radius: 50%; }
+
+/* REPORTE DE BATALLA NARRATIVO */
+.battle-report-box {
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(5, 5, 5, 0.9);
+    border: 1px solid #1f3a3d;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #88b3b3;
+    line-height: 1.6;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+.battle-report-title {
+    color: #ff9933;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+.battle-entry { margin-bottom: 6px; }
 
 .last-update { text-align: center; color: #669999; font-size: 13px; margin-top: 20px; letter-spacing: 1px; }
 .last-update span { color: #00ffcc; font-weight: bold; }
@@ -269,22 +336,18 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
             <div class="interactive-map">
                 <div class="radar-sweep"></div>
                 
-                <!-- GENERAR NODOS DE CALOR DESDE PHP (Gradiente modificado para un núcleo más fuerte) -->
                 <?php foreach ($zones as $key => $zone): ?>
                 <div class="control-node" style="top: <?php echo $zone['top']; ?>%; left: <?php echo $zone['left']; ?>%; width: <?php echo $zone['w']; ?>%; height: <?php echo $zone['w']; ?>%; background: radial-gradient(circle, <?php echo $zone['color']; ?> 30%, transparent 80%);"></div>
                 <?php endforeach; ?>
                 
-                <!-- CAPA SVG PARA LAS FLECHAS DE ATAQUE TÁCTICAS -->
                 <svg class="attack-vectors">
                     <defs>
-                        <!-- Puntas de flecha por facción -->
                         <marker id="arrow-elyos" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#00bfff" /></marker>
                         <marker id="arrow-asmo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ff4d4d" /></marker>
                         <marker id="arrow-balaur" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2ecc71" /></marker>
                     </defs>
                     
                     <?php foreach ($attacks as $attack): 
-                        // Asignar color y marcador correcto según el atacante
                         $color = '#fff'; $marker = '';
                         if ($attack['from']['faction'] == 'elyos') { $color = '#00bfff'; $marker = 'url(#arrow-elyos)'; }
                         if ($attack['from']['faction'] == 'asmo') { $color = '#ff4d4d'; $marker = 'url(#arrow-asmo)'; }
@@ -303,13 +366,21 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
                 <div class="legend-item"><div class="legend-color" style="background: rgba(255, 50, 50, 0.95); box-shadow: 0 0 5px #ff4d4d;"></div> Sector Asmodiano</div>
                 <div class="legend-item"><div class="legend-color" style="background: rgba(46, 204, 113, 0.95); box-shadow: 0 0 5px #2ecc71;"></div> Anomalía Balaur</div>
             </div>
+
+            <!-- CUADRO DE REPORTE NARRATIVO -->
+            <div class="battle-report-box">
+                <div class="battle-report-title">REGISTRO DE HOSTILIDADES ACTIVO</div>
+                <?php foreach ($battle_log as $log_entry): ?>
+                    <div class="battle-entry"><?php echo $log_entry; ?></div>
+                <?php endforeach; ?>
+            </div>
             
             <div class="last-update">
                 > ACTUALIZACIÓN SATELITAL: <span><?php echo $fecha_actualizacion; ?></span>
             </div>
             
             <div style="margin-top: 15px; font-size: 11px; color: #555; text-align: justify;">
-                * INFO: Actualización estratégica cada 30 minutos. Las flechas animadas indican las rutas de asalto confirmadas por el escáner. Una fortaleza asediada desvía todas sus tropas a tareas defensivas.
+                * INFO: Actualización estratégica cada 30 minutos. Las flechas animadas y el registro indican las rutas de asalto confirmadas por el escáner. Una fortaleza asediada desvía todas sus tropas a tareas defensivas.
             </div>
         </div>
     </div>
