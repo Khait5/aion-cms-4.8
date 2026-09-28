@@ -195,7 +195,10 @@ $core_zone = getControlZone(5, 5);
             <span class="stat-label">> CONEXIÓN A ATREIA:</span>
             <span class="stat-value"><?php echo $estado_atreia; ?></span>
         </div>
-        <h2>GUERRA ACTUAL POR EL ABISMO</h2>
+                <div class="terminal-header">
+           GUERRA ACTUAL POR EL ABISMO<
+        </div>
+        
         <div class="stat-row">
             <span class="stat-label">> HUMANOS ELYOS:</span>
             <span class="stat-value stat-elyos"><?php echo number_format($humanos_elyos); ?> Entidades</span>
