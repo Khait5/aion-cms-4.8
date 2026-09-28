@@ -20,8 +20,12 @@ $humanos_elyos = 24500 + rand(-20, 30);
 $humanos_asmos = 25200 + rand(-25, 25);
 $radar_balaur = 18750 + rand(-40, 50);
 
-// 3. GENERADOR DE ZONAS DE CONTROL TÁCTICO
-// Función para calcular quién controla una zona basándose en probabilidades
+// 3. PORCENTAJES GLOBALES (Para la barra superior)
+$pct_elyos = rand(28, 33);
+$pct_asmos = rand(28, 33);
+$pct_balaur = 100 - ($pct_elyos + $pct_asmos);
+
+// 4. GENERADOR DE ZONAS DE CONTROL TÁCTICO (Para el mapa visual)
 function getControlZone($pct_elyos, $pct_asmo) {
     $roll = rand(1, 100);
     if ($roll <= $pct_elyos) return 'rgba(0, 191, 255, 0.7)'; // Azul Elyos
@@ -29,7 +33,6 @@ function getControlZone($pct_elyos, $pct_asmo) {
     return 'rgba(46, 204, 113, 0.7)'; // Verde Balaur
 }
 
-// Generación de los colores de cada fortaleza en el mapa
 // LOWER ABYSS (Pelea entre Elyos/Asmos, poco Balaur)
 $lower_left = getControlZone(45, 45);
 $lower_right = getControlZone(45, 45);
@@ -80,7 +83,7 @@ $core_zone = getControlZone(5, 5);
 .stat-asmo { color: #ff4d4d; }
 .stat-balaur { color: #2ecc71; }
 
-/* CONTENEDOR DEL MAPA (Basado en la imagen cuadrada) */
+/* CONTENEDOR DEL MAPA Y BARRA DE PROGRESO */
 .abyss-map-container {
     margin-top: 40px;
     background: #020202;
@@ -93,12 +96,41 @@ $core_zone = getControlZone(5, 5);
     text-align: center;
     letter-spacing: 2px;
 }
+
+/* BARRA DE PORCENTAJES SUPERIOR */
+.control-bar {
+    display: flex;
+    height: 28px;
+    background: #000;
+    border: 1px solid #222;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+.bar-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+    transition: width 0.5s ease-in-out;
+    border-right: 1px solid #000;
+}
+.bar-segment:last-child { border-right: none; }
+.elyos-bar { background: linear-gradient(180deg, #154360, #2980b9); box-shadow: inset 0 0 10px #3498db; }
+.balaur-bar { background: linear-gradient(180deg, #145a32, #27ae60); box-shadow: inset 0 0 10px #2ecc71; }
+.asmo-bar { background: linear-gradient(180deg, #7b241c, #c0392b); box-shadow: inset 0 0 10px #e74c3c; }
+
+/* MAPA VISUAL INTERACTIVO */
 .interactive-map {
     position: relative;
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-    aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada de tu imagen */
+    aspect-ratio: 1 / 1; 
     background-image: url('/static/abyss.webp');
     background-size: cover;
     background-position: center;
@@ -107,7 +139,7 @@ $core_zone = getControlZone(5, 5);
     overflow: hidden;
 }
 
-/* EFECTO DE RADAR (Línea que barre el mapa) */
+/* EFECTO DE RADAR */
 .radar-sweep {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -122,7 +154,7 @@ $core_zone = getControlZone(5, 5);
     100% { background-position: 0 200%; }
 }
 
-/* NODOS TÁCTICOS (Manchas de control en las islas) */
+/* NODOS TÁCTICOS */
 .control-node {
     position: absolute;
     width: 25%;
@@ -138,7 +170,7 @@ $core_zone = getControlZone(5, 5);
     100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
 }
 
-/* LEYENDA DEL MAPA */
+/* LEYENDA */
 .map-legend {
     display: flex;
     justify-content: center;
@@ -178,18 +210,34 @@ $core_zone = getControlZone(5, 5);
         <div class="abyss-map-container">
             <div class="abyss-title">MAPA TÁCTICO DE LA FALLA DIMENSIONAL</div>
             
+            <!-- BARRA DE PORCENTAJES SUPERIOR -->
+            <div class="control-bar">
+                <?php if($pct_elyos > 0): ?>
+                    <div class="bar-segment elyos-bar" style="width: <?php echo $pct_elyos; ?>%;">Elyos <?php echo $pct_elyos; ?>%</div>
+                <?php endif; ?>
+                
+                <?php if($pct_balaur > 0): ?>
+                    <div class="bar-segment balaur-bar" style="width: <?php echo $pct_balaur; ?>%;">Balaur <?php echo $pct_balaur; ?>%</div>
+                <?php endif; ?>
+                
+                <?php if($pct_asmos > 0): ?>
+                    <div class="bar-segment asmo-bar" style="width: <?php echo $pct_asmos; ?>%;">Asmodian <?php echo $pct_asmos; ?>%</div>
+                <?php endif; ?>
+            </div>
+            
+            <!-- MAPA CON ZONAS DE CALOR RADIALES -->
             <div class="interactive-map">
                 <div class="radar-sweep"></div>
                 
-                <!-- ZONAS DEL ABISMO SUPERIOR (Mucho Balaur) -->
+                <!-- ZONAS DEL ABISMO SUPERIOR -->
                 <div class="control-node" style="top: 25%; left: 25%; background: radial-gradient(circle, <?php echo $upper_left; ?> 0%, transparent 70%);"></div>
                 <div class="control-node" style="top: 22%; left: 50%; background: radial-gradient(circle, <?php echo $upper_center; ?> 0%, transparent 70%);"></div>
                 <div class="control-node" style="top: 25%; left: 75%; background: radial-gradient(circle, <?php echo $upper_right; ?> 0%, transparent 70%);"></div>
                 
-                <!-- ZONA DEL NÚCLEO CENTRAL (Casi siempre Balaur) -->
+                <!-- ZONA DEL NÚCLEO CENTRAL -->
                 <div class="control-node" style="top: 50%; left: 50%; width: 35%; height: 35%; background: radial-gradient(circle, <?php echo $core_zone; ?> 0%, transparent 70%);"></div>
                 
-                <!-- ZONAS DEL ABISMO INFERIOR (Peleado entre Elyos y Asmos) -->
+                <!-- ZONAS DEL ABISMO INFERIOR -->
                 <div class="control-node" style="top: 75%; left: 30%; background: radial-gradient(circle, <?php echo $lower_left; ?> 0%, transparent 70%);"></div>
                 <div class="control-node" style="top: 80%; left: 50%; background: radial-gradient(circle, <?php echo $lower_center; ?> 0%, transparent 70%);"></div>
                 <div class="control-node" style="top: 75%; left: 70%; background: radial-gradient(circle, <?php echo $lower_right; ?> 0%, transparent 70%);"></div>
