@@ -32,9 +32,9 @@ $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 // 3. GENERADOR DE ZONAS (Equilibrio de opacidad: 0.85)
 function getZoneData($pct_elyos, $pct_asmo, $top, $left, $width = 25) {
     $roll = mt_rand(1, 100);
-    if ($roll <= $pct_elyos) return ['faction' => 'elyos', 'color' => 'rgba(0, 191, 255, 0.85)', 'top' => $top, 'left' => $left, 'w' => $width];
-    if ($roll <= ($pct_elyos + $pct_asmo)) return ['faction' => 'asmo', 'color' => 'rgba(255, 50, 50, 0.85)', 'top' => $top, 'left' => $left, 'w' => $width];
-    return ['faction' => 'balaur', 'color' => 'rgba(46, 204, 113, 0.85)', 'top' => $top, 'left' => $left, 'w' => $width];
+    if ($roll <= $pct_elyos) return ['faction' => 'elyos', 'color' => 'rgba(0, 191, 255, 0.8)', 'top' => $top, 'left' => $left, 'w' => $width];
+    if ($roll <= ($pct_elyos + $pct_asmo)) return ['faction' => 'asmo', 'color' => 'rgba(255, 50, 50, 0.8)', 'top' => $top, 'left' => $left, 'w' => $width];
+    return ['faction' => 'balaur', 'color' => 'rgba(46, 204, 113, 0.8)', 'top' => $top, 'left' => $left, 'w' => $width];
 }
 
 $zones = [
