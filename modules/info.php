@@ -4,13 +4,7 @@
  * https://aioncms.com
  */
 
-// 1. CONFIGURACIÓN DE BASE DE DATOS (Rellena con tus datos)
-$db_host = '127.0.0.1';
-$db_user = 'root';
-$db_pass = 'TU_CONTRASEÑA_AQUI'; // Cambia esto por la contraseña de tu MySQL
-$db_name = 'aion_gs'; // Base de datos del GameServer (Donde están players y siege_locations)
-
-// 2. COMPROBACIÓN DE CONEXIÓN AL PLANETA (Ping al Login Server)
+// 1. COMPROBACIÓN DE CONEXIÓN AL PLANETA (Ping al Login Server)
 $ip_servidor = '127.0.0.1';
 $puerto_login = 2106;
 $socket = @fsockopen($ip_servidor, $puerto_login, $errno, $errstr, 1);
@@ -21,49 +15,19 @@ if ($socket) {
     $estado_atreia = '<span style="color: #ff3333; text-shadow: 0 0 8px #ff3333; font-weight: bold; letter-spacing: 1px;">OFFLINE (SEÑAL PERDIDA)</span>';
 }
 
-// 3. EXTRACCIÓN DE TELEMETRÍA (Facciones y Abismo)
-$humanos_elyos = 0;
-$humanos_asmos = 0;
-$fort_elyos = 0;
-$fort_asmos = 0;
-$fort_balaur = 0;
-$radar_balaur = "Señal no disponible";
+// 2. SIMULADOR DE RADAR DE ENTIDADES (Conteo variable de NPCs)
+// Genera una base realista de NPCs en el mundo y le suma/resta un valor aleatorio 
+// cada vez que se recarga la página para simular escaneos en tiempo real.
+$humanos_elyos = 24500 + rand(-350, 420);
+$humanos_asmos = 25200 + rand(-410, 380);
+$radar_balaur = 18750 + rand(-800, 1200);
 
-try {
-    $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_user, $db_pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-
-    // Conteo de Supervivientes (Personajes creados)
-    $stmt_ely = $pdo->query("SELECT COUNT(*) FROM players WHERE race = 'ELYOS'");
-    $humanos_elyos = $stmt_ely->fetchColumn();
-
-    $stmt_asmo = $pdo->query("SELECT COUNT(*) FROM players WHERE race = 'ASMODIANS'");
-    $humanos_asmos = $stmt_asmo->fetchColumn();
-
-    // Conteo de Fortalezas (Control del Abismo)
-    $stmt_siege = $pdo->query("SELECT race, COUNT(*) as total FROM siege_locations GROUP BY race");
-    $fortalezas = $stmt_siege->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($fortalezas as $fort) {
-        if ($fort['race'] == 'ELYOS') $fort_elyos = $fort['total'];
-        if ($fort['race'] == 'ASMODIANS') $fort_asmos = $fort['total'];
-        if ($fort['race'] == 'BALAUR') $fort_balaur = $fort['total'];
-    }
-
-    // Estimación del radar de anomalías (Más fortalezas controladas = más balaures detectados)
-    $radar_balaur = 15200 + ($fort_balaur * 3500);
-
-} catch (PDOException $e) {
-    $radar_balaur = "ERROR DE LECTURA DB";
-}
-
-// 4. CÁLCULO DE PORCENTAJES DEL MAPA TÁCTICO
-$total_fort = $fort_elyos + $fort_asmos + $fort_balaur;
-if ($total_fort == 0) $total_fort = 1; // Evitar división por cero
-
-$pct_elyos = round(($fort_elyos / $total_fort) * 100);
-$pct_asmos = round(($fort_asmos / $total_fort) * 100);
-$pct_balaur = round(($fort_balaur / $total_fort) * 100);
+// 3. MAPA TÁCTICO DE LA FALLA DIMENSIONAL (ABISMO)
+// Simula el control territorial para que el mapa SIEMPRE muestre datos activos.
+// Los porcentajes de Elyos y Asmos varían entre 25% y 40%, el resto es Balaur.
+$pct_elyos = rand(28, 38);
+$pct_asmos = rand(28, 38);
+$pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 ?>
 
 <style>
@@ -91,7 +55,7 @@ $pct_balaur = round(($fort_balaur / $total_fort) * 100);
 }
 .stat-label {
     display: inline-block;
-    width: 280px;
+    width: 290px;
     color: #669999;
 }
 .stat-value {
@@ -147,20 +111,20 @@ $pct_balaur = round(($fort_balaur / $total_fort) * 100);
         </div>
         <div class="stat-row">
             <span class="stat-label">> HUMANOS ELYOS DETECTADOS:</span>
-            <span class="stat-value"><?php echo number_format($humanos_elyos); ?> Supervivientes</span>
+            <span class="stat-value"><?php echo number_format($humanos_elyos); ?> Entidades (Aprox.)</span>
         </div>
         <div class="stat-row">
             <span class="stat-label">> HUMANOS ASMODIANOS DETECTADOS:</span>
-            <span class="stat-value"><?php echo number_format($humanos_asmos); ?> Supervivientes</span>
+            <span class="stat-value"><?php echo number_format($humanos_asmos); ?> Entidades (Aprox.)</span>
         </div>
         <div class="stat-row">
             <span class="stat-label">> ANOMALÍAS BALAUR (ABISMO):</span>
-            <span class="stat-value" style="color: #ffaa00;"><?php echo is_numeric($radar_balaur) ? number_format($radar_balaur) . ' Entidades (Estimado)' : $radar_balaur; ?></span>
+            <span class="stat-value" style="color: #ffaa00;"><?php echo number_format($radar_balaur); ?> Entidades (Fluctuando)</span>
         </div>
 
         <div class="abyss-map-container">
             <div class="abyss-title">MAPA TÁCTICO DE LA FALLA DIMENSIONAL (ABISMO)</div>
-            <p style="text-align: center; font-size: 12px; color: #777; margin-top: -10px; margin-bottom: 20px;">Control territorial de las Fortalezas de Partículas</p>
+            <p style="text-align: center; font-size: 12px; color: #777; margin-top: -10px; margin-bottom: 20px;">Escaneo de control territorial mediante tecnología de partículas</p>
             
             <div class="control-bar">
                 <?php if($pct_elyos > 0): ?>
@@ -177,7 +141,7 @@ $pct_balaur = round(($fort_balaur / $total_fort) * 100);
             </div>
             
             <div style="margin-top: 15px; font-size: 11px; color: #555; text-align: justify;">
-                * INFO: El Sector Elíseo y el Sector Asmodiano mantienen una disputa activa por el control de la falla. La raza dominante de Dragones Ancestrales (Balaur) incrementa sus defensas en base a la inestabilidad energética.
+                * INFO: El Sector Elíseo y el Sector Asmodiano mantienen una disputa activa por el control de la falla. La raza dominante de Dragones Ancestrales (Balaur) incrementa sus defensas en base a la inestabilidad energética detectada por la Red de Tierra.
             </div>
         </div>
     </div>
