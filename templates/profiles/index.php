@@ -10,7 +10,8 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>AionCMS - Aion Private Server</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ColombianAge - Aion Private Server</title>
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
@@ -25,6 +26,7 @@
 				
 			</div>
 			<div class="main-navbar">
+				<div class="mobile-menu-toggle">&#9776; Menú</div>
 				<div class="main-navbar-container">
 					<a href="<?php base_url(); ?>">Home</a>
 				</div>
@@ -40,6 +42,10 @@
 		<script>
 		$(function () {
 		  $('[data-toggle="tooltip"]').tooltip()
+
+		  $('.mobile-menu-toggle').click(function() {
+			  $('.main-navbar-container').toggleClass('show-menu');
+		  });
 		})
 		</script>
 	</body>

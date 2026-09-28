@@ -10,7 +10,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>AionCMS - Aion Private Server</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ColombianAge - Aion Private Server</title>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
@@ -41,6 +42,7 @@
 			</div>
 		</div>
 		<div class="main-navbar">
+			<div class="mobile-menu-toggle">&#9776; Menú</div>
 			<div class="main-navbar-container">
 			<ul class="left">
 				<li><a href="<?php base_url(); ?>">Inicio</a></li>
@@ -62,10 +64,10 @@
 				<!--<div class="col-xs-4 text-center">
 					Copyright &copy; 2019 Aion, All Rights Reserved.<br />
 					This site is in no way associated with or endorsed by &copy; NCSOFT Corp.<br />
-					<a href="https://aioncms.com/" style="color:#ffe4a9;" target="_blank">Powered by AionCMS v<?php echo __AIONCMS_VERSION__; ?></a><br />
+					<a href="https://aioncms.com/" style="color:#ffe4a9;" target="_blank">Powered by ColombianAge v<?php echo __AIONCMS_VERSION__; ?></a><br />
 				</div>
 				<div class="col-xs-4 text-left">
-					<a href="https://aioncms.com/" target="_blank"><img src="<?php template_img(); ?>aioncms_footer_logo_xs.png" height="40px" width="auto" title="AionCMS" style="margin-right: 15px;"/></a>
+					<a href="https://aioncms.com/" target="_blank"><img src="<?php template_img(); ?>aioncms_footer_logo_xs.png" height="40px" width="auto" title="ColombianAge" style="margin-right: 15px;"/></a>
 					<img src="<?php template_img(); ?>aion_logo_footer.png" height="40px" width="auto" title="Aion Online"/>
 				</div>-->
 			</div>
@@ -78,6 +80,10 @@
 	<script>
 	$(function () {
 	  $('[data-toggle="tooltip"]').tooltip()
+
+	  $('.mobile-menu-toggle').click(function() {
+		  $('.main-navbar-container').toggleClass('show-menu');
+	  });
 	})
 	</script>
 	

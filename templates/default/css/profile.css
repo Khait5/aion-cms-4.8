@@ -146,3 +146,27 @@
 	.leagion-profile-block .legion-members-table tr:hover {
 		background: rgba(0,0,0,0.30);
 	}
+/* RESPONSIVE DESIGN */
+@media (max-width: 991px) {
+	.legion-profile-container,
+	.legion-profile-background,
+	.leagion-profile-header,
+	.leagion-profile-block,
+	.leagion-profile-header .legion-info {
+		width: 100%;
+		min-width: 0;
+		height: auto;
+	}
+
+	.leagion-profile-header .legion-emblem,
+	.leagion-profile-header .legion-info {
+		float: none;
+		width: 100%;
+		text-align: center;
+	}
+
+	.leagion-profile-header .legion-emblem img {
+		position: static;
+		padding-top: 20px;
+	}
+}

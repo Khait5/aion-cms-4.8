@@ -944,3 +944,99 @@ a.alt:hover, a.alt:active {
 	background: url('../img/2017_giveaway.jpg') no-repeat bottom center;
 	cursor: pointer;
 }
+
+.mobile-menu-toggle {
+	display: none;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 991px) {
+	body {
+		min-width: 0;
+	}
+	.main-container,
+	.main-container .main-header,
+	.main-container .main-content,
+	.main-container .home-main-content,
+	.main-container .main-footer {
+		width: 100%;
+		min-width: 0;
+		height: auto;
+	}
+
+	.main-container .main-logo img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.mobile-menu-toggle {
+		display: block !important;
+		color: #c3f3ff;
+		font-size: 24px;
+		padding: 15px;
+		cursor: pointer;
+		text-align: center;
+	}
+
+	.main-container .main-navbar {
+		height: auto;
+	}
+
+	.main-container .main-navbar .main-navbar-container {
+		display: none;
+		position: static;
+		padding: 0;
+		background: #000;
+	}
+
+	.main-container .main-navbar .main-navbar-container.show-menu {
+		display: block !important;
+	}
+
+	.main-container .main-navbar ul.left,
+	.main-container .main-navbar ul.right {
+		width: 100%;
+		float: none;
+	}
+
+	.main-container .main-navbar ul li {
+		display: block;
+		width: 100%;
+		padding: 10px 0;
+		border-bottom: 1px solid #333;
+	}
+
+	.main-container .home-main-content .left-side,
+	.main-container .home-main-content .middle,
+	.main-container .home-main-content .right-side,
+	.main-container .main-content .main-content-container .main-sidebar,
+	.main-container .main-content .main-content-container .main-page-container {
+		float: none;
+		width: 100%;
+		margin: 0 auto;
+		height: auto;
+	}
+
+	.main-sidebar .login-box,
+	.main-container .home-main-content .left-side .left-side-container .account-box,
+	.main-container .home-main-content .left-side .left-side-container .login-box {
+		width: 100%;
+		max-width: 326px;
+		background-size: contain;
+		margin: 0 auto;
+	}
+
+	.main-container .home-main-content .right-side .right-side-container a.download-button,
+	.main-container .home-main-content .right-side .right-side-container .connect-title,
+	.main-container .home-main-content .middle .middle-container a.register-button {
+		max-width: 100%;
+		background-size: contain;
+	}
+
+	.main-container .home-main-content .middle .middle-container .home-rankings-container {
+		width: 100%;
+		left: 0;
+		padding: 0 10px;
+		top: 20px;
+	}
+}
