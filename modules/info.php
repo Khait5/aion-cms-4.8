@@ -99,7 +99,7 @@ $core_zone = getControlZone(5, 5);
     max-width: 500px;
     margin: 0 auto;
     aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada de tu imagen */
-    background-image: url('static/abyss.webp');
+    background-image: url('/static/abyss.webp');
     background-size: cover;
     background-position: center;
     border-radius: 5px;
