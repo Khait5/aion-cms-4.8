@@ -29,12 +29,12 @@ $pct_elyos = mt_rand(28, 33);
 $pct_asmos = mt_rand(28, 33);
 $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 
-// 3. GENERADOR DE ZONAS
+// 3. GENERADOR DE ZONAS (Equilibrio de opacidad: 0.85)
 function getZoneData($pct_elyos, $pct_asmo, $top, $left, $width = 25) {
     $roll = mt_rand(1, 100);
-    if ($roll <= $pct_elyos) return ['faction' => 'elyos', 'color' => 'rgba(0, 191, 255, 0.95)', 'top' => $top, 'left' => $left, 'w' => $width];
-    if ($roll <= ($pct_elyos + $pct_asmo)) return ['faction' => 'asmo', 'color' => 'rgba(255, 50, 50, 0.95)', 'top' => $top, 'left' => $left, 'w' => $width];
-    return ['faction' => 'balaur', 'color' => 'rgba(46, 204, 113, 0.95)', 'top' => $top, 'left' => $left, 'w' => $width];
+    if ($roll <= $pct_elyos) return ['faction' => 'elyos', 'color' => 'rgba(0, 191, 255, 0.85)', 'top' => $top, 'left' => $left, 'w' => $width];
+    if ($roll <= ($pct_elyos + $pct_asmo)) return ['faction' => 'asmo', 'color' => 'rgba(255, 50, 50, 0.85)', 'top' => $top, 'left' => $left, 'w' => $width];
+    return ['faction' => 'balaur', 'color' => 'rgba(46, 204, 113, 0.85)', 'top' => $top, 'left' => $left, 'w' => $width];
 }
 
 $zones = [
@@ -103,7 +103,6 @@ $faction_actions = [
     'balaur' => ['attacks' => [], 'defends' => []]
 ];
 
-// Recopilar acciones
 foreach ($attacks as $atk) {
     $attacker_fac = $atk['from']['faction'];
     $defender_fac = $atk['to']['faction'];
@@ -112,7 +111,6 @@ foreach ($attacks as $atk) {
     $faction_actions[$defender_fac]['defends'][] = "defienden activamente el sector " . $zone_names[$atk['to_key']];
 }
 
-// Construir oraciones narrativas
 $battle_log = [];
 foreach (['elyos', 'asmo', 'balaur'] as $fac) {
     $name = $faction_tags[$fac];
@@ -362,12 +360,11 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
             </div>
 
             <div class="map-legend">
-                <div class="legend-item"><div class="legend-color" style="background: rgba(0, 191, 255, 0.95); box-shadow: 0 0 5px #00bfff;"></div> Sector Elíseo</div>
-                <div class="legend-item"><div class="legend-color" style="background: rgba(255, 50, 50, 0.95); box-shadow: 0 0 5px #ff4d4d;"></div> Sector Asmodiano</div>
-                <div class="legend-item"><div class="legend-color" style="background: rgba(46, 204, 113, 0.95); box-shadow: 0 0 5px #2ecc71;"></div> Anomalía Balaur</div>
+                <div class="legend-item"><div class="legend-color" style="background: rgba(0, 191, 255, 0.85); box-shadow: 0 0 5px #00bfff;"></div> Sector Elíseo</div>
+                <div class="legend-item"><div class="legend-color" style="background: rgba(255, 50, 50, 0.85); box-shadow: 0 0 5px #ff4d4d;"></div> Sector Asmodiano</div>
+                <div class="legend-item"><div class="legend-color" style="background: rgba(46, 204, 113, 0.85); box-shadow: 0 0 5px #2ecc71;"></div> Anomalía Balaur</div>
             </div>
 
-            <!-- CUADRO DE REPORTE NARRATIVO -->
             <div class="battle-report-box">
                 <div class="battle-report-title">REGISTRO DE HOSTILIDADES ACTIVO</div>
                 <?php foreach ($battle_log as $log_entry): ?>
