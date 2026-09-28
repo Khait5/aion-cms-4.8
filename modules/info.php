@@ -196,7 +196,7 @@ $core_zone = getControlZone(5, 5);
             <span class="stat-value"><?php echo $estado_atreia; ?></span>
         </div>
                 <div class="terminal-header">
-           GUERRA ACTUAL POR EL ABISMO<
+           [ GUERRA ACTUAL POR EL ABISMO ]
         </div>
         
         <div class="stat-row">
