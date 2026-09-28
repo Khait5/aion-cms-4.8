@@ -153,6 +153,20 @@ if (!isLoggedIn()) {
                 "Así fue como la humanidad se dio cuenta de algo importante que obvió,<br>
                 No estamos solos.<br><br>
                 Muchas otras facciones de monstruos que ya habitaban el planeta y vigilaban a los humanos desde hace mucho, surgieron a intentar acabar lo que ellos mismos casi consiguen, la destrucción.<br><br>
+                Todas ellas nos llamaban de una manera especial; "Daevas"<br><br>
+                Los Elyos empezaron a crear traductores que permitian hablar el idioma de otras facciones.<br>
+                De esta manera, permitimos una subsistencia y hasta un comercio prospero con algunas.<br>
+            </div>
+            <div class="lore-chapter">C6.1: Información</div>
+            <div class="lore-content">
+                "Empezamos a no solo mantener relaciones con otros seres,<br>
+                Si no hasta compartir reinos con ellos.<br><br>
+                Los shugo, con sus amplia información en la creación y tecnología, nos enseñaron muchas cosas.<br><br>
+                Las "Particulas" tienen un nombre, Éter.<br><br>
+                Que existia un Dios del planeta, llamado Aion.<br>
+                "Daevas" significa Ser caido del cielo<br>
+                Los Elyos empezaron a crear traductores que permitian hablar el idioma de otras facciones.<br>
+                De esta manera, permitimos una subsistencia y hasta un comercio prospero con algunas.<br>
                 Pero una facción fue la mas ruidosa; Balaur."
             </div>
                         
@@ -197,7 +211,9 @@ if (!isLoggedIn()) {
                 pero el daño ya estaba hecho: la sección central de la torre se convirtió en un campo de escombros flotantes conocido como el Abismo, y el planeta quedó fragmentado para siempre en dos mitades:<br>
                 La luminosa Elysea y la oscura Asmodae, dando origen al odio eterno entre Elyos y Asmodianos, echandose las culpas uno al otro de quien fué que ataco a los balaur,<br>
                 originando la muerte de 2 de los 12 Señores del Cumulo, de los humanos mas fuertes jamas conocidos, dejandoles debiles, contra los balaur, los cuales ganaron más fuerza que nunca.<br>
-                Y este suceso es lo que llamamos El Gran Cataclismo."
+                Y este suceso es lo que llamamos El Gran Cataclismo.<br>
+                Y el lugar donde ocurrio, se le llamó el Abismo,<br>
+                Un lugar de guerra interminable.<br>"
             </div>
             <hr />
             <div class="lore-chapter">El Presente lleno de traiciones</div>
