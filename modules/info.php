@@ -17,9 +17,11 @@ if ($socket) {
 
 // =====================================================================
 // SISTEMA DE SEMILLA TEMPORAL (Actualización Territorial cada 30 min)
-// 1800 segundos = 30 minutos. El mapa quedará estático durante este tiempo.
 // =====================================================================
 $semilla_tiempo = floor(time() / 1800); 
+$tiempo_actualizacion = $semilla_tiempo * 1800; // Recuperamos el timestamp exacto del inicio del ciclo
+$fecha_actualizacion = date('d-m-Y H:i', $tiempo_actualizacion); // Formato: DIA-MES-AÑO HORA-MINUTOS
+
 mt_srand($semilla_tiempo);
 
 // 2. PORCENTAJES GLOBALES (Para la barra superior)
@@ -51,7 +53,6 @@ $core_zone = getControlZone(5, 5);
 
 // =====================================================================
 // RESTAURAR ALEATORIEDAD EN VIVO (Para el radar de entidades)
-// Rompemos la semilla fija para que las tropas sí fluctúen al recargar
 // =====================================================================
 mt_srand(); 
 
@@ -194,6 +195,18 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
 }
 .legend-item { display: flex; align-items: center; gap: 5px; color: #fff; }
 .legend-color { width: 12px; height: 12px; border-radius: 50%; }
+
+.last-update {
+    text-align: center;
+    color: #669999;
+    font-size: 13px;
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+.last-update span {
+    color: #00ffcc;
+    font-weight: bold;
+}
 </style>
 
 <div class="page-header-block info"></div>
@@ -265,6 +278,10 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
                 <div class="legend-item"><div class="legend-color" style="background: rgba(0, 191, 255, 0.8); box-shadow: 0 0 5px #00bfff;"></div> Sector Elíseo</div>
                 <div class="legend-item"><div class="legend-color" style="background: rgba(255, 50, 50, 0.8); box-shadow: 0 0 5px #ff4d4d;"></div> Sector Asmodiano</div>
                 <div class="legend-item"><div class="legend-color" style="background: rgba(46, 204, 113, 0.8); box-shadow: 0 0 5px #2ecc71;"></div> Anomalía Balaur</div>
+            </div>
+            
+            <div class="last-update">
+                > ACTUALIZADO: <span><?php echo $fecha_actualizacion; ?></span>
             </div>
             
             <div style="margin-top: 15px; font-size: 11px; color: #555; text-align: justify;">
