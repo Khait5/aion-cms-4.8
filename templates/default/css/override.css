@@ -35,4 +35,139 @@ body {
 /* vertical align on td */
 .table tbody>tr>td.vert-align{
     vertical-align: middle;
+}@media (max-width: 991px) {
+	body {
+		min-width: 100%;
+		background-size: cover;
+	}
+	.main-container {
+		width: 100%;
+		min-width: 100%;
+	}
+	.main-container .main-header {
+		width: 100%;
+	}
+	.main-container .main-header .main-logo img {
+		max-width: 100%;
+	}
+	.main-container .main-navbar {
+		top: 0;
+		height: auto;
+		background: #1a1a1a;
+		padding: 10px 0;
+		display: none; /* hidden by default on mobile */
+	}
+    .main-navbar.active {
+        display: block;
+    }
+	.main-container .main-navbar .main-navbar-container {
+		top: 0;
+		padding: 0;
+	}
+	.main-container .main-navbar ul.left,
+	.main-container .main-navbar ul.right {
+		float: none;
+		width: 100%;
+	}
+	.main-container .main-navbar ul li {
+		display: block;
+		width: 100%;
+		padding: 10px 0;
+		border-bottom: 1px solid #333;
+	}
+	.main-container .main-content,
+	.main-container .home-main-content {
+		width: 100%;
+		top: 0;
+		margin-bottom: 0;
+		height: auto;
+	}
+    .main-container .home-main-content {
+        padding-bottom: 30px;
+    }
+	.main-container .home-main-content .left-side,
+	.main-container .home-main-content .middle,
+	.main-container .home-main-content .right-side {
+		float: none;
+		width: 100%;
+		height: auto;
+	}
+    .main-container .home-main-content .middle .middle-container .home-rankings-container {
+        width: 100%;
+        left: 0;
+        top: 20px;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+    .home-rankings .abysstable, .home-rankings .legionstable {
+        width: 100%;
+    }
+	.main-container .main-content .main-content-container .main-sidebar {
+		float: none;
+		width: 100%;
+		margin: 0;
+		display: none; /* hidden by default */
+	}
+    .main-sidebar.active {
+        display: block;
+    }
+	.main-container .main-content .main-content-container .main-page-container {
+		float: none;
+		width: 100%;
+		padding: 15px;
+		box-sizing: border-box;
+	}
+	.main-container .main-footer {
+		width: 100%;
+		padding: 20px 15px;
+		box-sizing: border-box;
+	}
+
+    /* Toggles */
+    .mobile-nav-toggle {
+        display: block;
+        background: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px;
+        cursor: pointer;
+        font-size: 18px;
+        border: none;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .mobile-sidebar-toggle {
+        display: block;
+        background: #444;
+        color: #fff;
+        text-align: center;
+        padding: 15px;
+        cursor: pointer;
+        font-size: 16px;
+        border: none;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* Home page elements adjustment */
+    .main-container .home-main-content .left-side .left-side-container .account-box,
+    .main-container .home-main-content .left-side .left-side-container .login-box {
+        margin: 0 auto;
+        background-position: center;
+    }
+    .main-container .home-main-content .right-side .right-side-container a.download-button,
+    .main-container .home-main-content .right-side .right-side-container .connect-title {
+        max-width: 100%;
+        background-size: contain;
+    }
+}
+@media (min-width: 992px) {
+    .mobile-nav-toggle,
+    .mobile-sidebar-toggle {
+        display: none;
+    }
+    .main-container .main-navbar,
+    .main-container .main-content .main-content-container .main-sidebar {
+        display: block !important;
+    }
 }

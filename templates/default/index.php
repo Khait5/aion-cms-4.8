@@ -10,6 +10,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AionCMS - Aion Private Server</title>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -35,6 +36,7 @@
 </head>
 <body>
 	<div class="main-container">
+		<button class="mobile-nav-toggle" id="mobileNavToggle">&#9776; Menú</button>
 		<div class="main-header">
 			<div class="main-logo">
 				<img src="<?php template_img(); ?>logo.png" width="300px" height="auto"/>
@@ -78,7 +80,23 @@
 	<script>
 	$(function () {
 	  $('[data-toggle="tooltip"]').tooltip()
-	})
+	});
+
+    // Mobile toggles
+    $(document).ready(function() {
+        $("#mobileNavToggle").click(function() {
+            $(".main-navbar").toggleClass("active");
+        });
+
+        // Add sidebar toggle dynamically if sidebar exists
+        if($(".main-sidebar").length > 0) {
+            $("<button class='mobile-sidebar-toggle' id='mobileSidebarToggle'>Mostrar/Ocultar Menú Lateral (User CP)</button>").insertBefore(".main-sidebar");
+
+            $("#mobileSidebarToggle").click(function() {
+                $(".main-sidebar").toggleClass("active");
+            });
+        }
+    });
 	</script>
 	
 </body>
