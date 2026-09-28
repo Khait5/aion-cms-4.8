@@ -22,38 +22,37 @@ $semilla_tiempo = floor(time() / 1800);
 $tiempo_actualizacion = $semilla_tiempo * 1800;
 $fecha_actualizacion = date('d-m-Y H:i', $tiempo_actualizacion);
 
-mt_srand($semilla_tiempo); // Fijar la semilla para que no cambie al recargar
+mt_srand($semilla_tiempo);
 
 // 2. PORCENTAJES GLOBALES (Para la barra superior)
 $pct_elyos = mt_rand(28, 33);
 $pct_asmos = mt_rand(28, 33);
 $pct_balaur = 100 - ($pct_elyos + $pct_asmos);
 
-// 3. GENERADOR DE ZONAS (Guardando Facción, Color y Coordenadas)
+// 3. GENERADOR DE ZONAS (Colores más intensos: opacidad 0.95)
 function getZoneData($pct_elyos, $pct_asmo, $top, $left, $width = 25) {
     $roll = mt_rand(1, 100);
-    if ($roll <= $pct_elyos) return ['faction' => 'elyos', 'color' => 'rgba(0, 191, 255, 0.7)', 'top' => $top, 'left' => $left, 'w' => $width];
-    if ($roll <= ($pct_elyos + $pct_asmo)) return ['faction' => 'asmo', 'color' => 'rgba(255, 50, 50, 0.7)', 'top' => $top, 'left' => $left, 'w' => $width];
-    return ['faction' => 'balaur', 'color' => 'rgba(46, 204, 113, 0.7)', 'top' => $top, 'left' => $left, 'w' => $width];
+    if ($roll <= $pct_elyos) return ['faction' => 'elyos', 'color' => 'rgba(0, 191, 255, 0.95)', 'top' => $top, 'left' => $left, 'w' => $width];
+    if ($roll <= ($pct_elyos + $pct_asmo)) return ['faction' => 'asmo', 'color' => 'rgba(255, 50, 50, 0.95)', 'top' => $top, 'left' => $left, 'w' => $width];
+    return ['faction' => 'balaur', 'color' => 'rgba(46, 204, 113, 0.95)', 'top' => $top, 'left' => $left, 'w' => $width];
 }
 
 $zones = [
-    'll' => getZoneData(45, 45, 75, 30), // Lower Left
-    'lc' => getZoneData(40, 40, 80, 50), // Lower Center
-    'lr' => getZoneData(45, 45, 75, 70), // Lower Right
-    'ul' => getZoneData(20, 20, 25, 25), // Upper Left
-    'uc' => getZoneData(15, 15, 22, 50), // Upper Center
-    'ur' => getZoneData(20, 20, 25, 75), // Upper Right
-    'core' => getZoneData(5, 5, 50, 50, 35) // Core (Centro, es más grande: 35%)
+    'll' => getZoneData(45, 45, 75, 30),
+    'lc' => getZoneData(40, 40, 80, 50),
+    'lr' => getZoneData(45, 45, 75, 70),
+    'ul' => getZoneData(20, 20, 25, 25),
+    'uc' => getZoneData(15, 15, 22, 50),
+    'ur' => getZoneData(20, 20, 25, 75),
+    'core' => getZoneData(5, 5, 50, 50, 35)
 ];
 
 // 4. ALGORITMO DE ATAQUE TÁCTICO TIPO RADAR
 $attacks = [];
 $attacked_zones = [];
-
-// Desordenar las zonas de forma aleatoria atada a la semilla para elegir quién ataca primero
 $zone_keys = array_keys($zones);
 $shuffled_keys = [];
+
 while(count($zone_keys) > 0) {
     $idx = mt_rand(0, count($zone_keys) - 1);
     $shuffled_keys[] = $zone_keys[$idx];
@@ -61,26 +60,22 @@ while(count($zone_keys) > 0) {
 }
 
 foreach ($shuffled_keys as $attacker_key) {
-    // Regla: Si esta zona está siendo atacada, tiene que defenderse (no puede atacar)
     if (in_array($attacker_key, $attacked_zones)) continue;
 
-    // Regla: 60% de probabilidad de que decidan lanzar un ataque
     if (mt_rand(1, 100) <= 60) {
         $valid_targets = [];
         
-        // Buscar zonas válidas para atacar
         foreach ($zones as $target_key => $target_data) {
-            if ($target_key == $attacker_key) continue; // No atacarse a sí mismo
-            if (in_array($target_key, $attacked_zones)) continue; // No atacar a alguien ya asediado
-            if ($zones[$attacker_key]['faction'] == $target_data['faction']) continue; // Fuego amigo anulado
+            if ($target_key == $attacker_key) continue; 
+            if (in_array($target_key, $attacked_zones)) continue; 
+            if ($zones[$attacker_key]['faction'] == $target_data['faction']) continue; 
 
             $valid_targets[] = $target_key;
         }
 
-        // Si hay objetivos viables, elegir uno al azar y lanzar el ataque
         if (count($valid_targets) > 0) {
             $target = $valid_targets[mt_rand(0, count($valid_targets) - 1)];
-            $attacked_zones[] = $target; // Marcar como asediada
+            $attacked_zones[] = $target; 
             
             $attacks[] = [
                 'from' => $zones[$attacker_key],
@@ -91,7 +86,7 @@ foreach ($shuffled_keys as $attacker_key) {
 }
 
 // =====================================================================
-// RESTAURAR ALEATORIEDAD EN VIVO (Para el radar de entidades numéricas)
+// RESTAURAR ALEATORIEDAD EN VIVO (Para el radar numérico)
 // =====================================================================
 mt_srand(); 
 
@@ -197,17 +192,17 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
     100% { background-position: 0 200%; }
 }
 
+/* Nodos de control más fuertes y marcados */
 .control-node {
     position: absolute;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    filter: blur(8px);
+    filter: blur(4px); /* Menos difuminado para colores más sólidos */
     animation: pulse 3s infinite alternate;
-    mix-blend-mode: screen;
 }
 @keyframes pulse {
-    0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); }
-    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.95); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
 }
 
 /* VECTORES DE ATAQUE ANIMADOS */
@@ -222,7 +217,7 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
 .attack-line {
     stroke-dasharray: 6, 6;
     animation: dash-animation 1s linear infinite;
-    filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.8));
+    filter: drop-shadow(0px 0px 3px rgba(0,0,0,1));
 }
 
 .map-legend { display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 12px; }
@@ -274,9 +269,9 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
             <div class="interactive-map">
                 <div class="radar-sweep"></div>
                 
-                <!-- GENERAR NODOS DE CALOR DESDE PHP -->
+                <!-- GENERAR NODOS DE CALOR DESDE PHP (Gradiente modificado para un núcleo más fuerte) -->
                 <?php foreach ($zones as $key => $zone): ?>
-                <div class="control-node" style="top: <?php echo $zone['top']; ?>%; left: <?php echo $zone['left']; ?>%; width: <?php echo $zone['w']; ?>%; height: <?php echo $zone['w']; ?>%; background: radial-gradient(circle, <?php echo $zone['color']; ?> 0%, transparent 70%);"></div>
+                <div class="control-node" style="top: <?php echo $zone['top']; ?>%; left: <?php echo $zone['left']; ?>%; width: <?php echo $zone['w']; ?>%; height: <?php echo $zone['w']; ?>%; background: radial-gradient(circle, <?php echo $zone['color']; ?> 30%, transparent 80%);"></div>
                 <?php endforeach; ?>
                 
                 <!-- CAPA SVG PARA LAS FLECHAS DE ATAQUE TÁCTICAS -->
@@ -304,9 +299,9 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
             </div>
 
             <div class="map-legend">
-                <div class="legend-item"><div class="legend-color" style="background: rgba(0, 191, 255, 0.8); box-shadow: 0 0 5px #00bfff;"></div> Sector Elíseo</div>
-                <div class="legend-item"><div class="legend-color" style="background: rgba(255, 50, 50, 0.8); box-shadow: 0 0 5px #ff4d4d;"></div> Sector Asmodiano</div>
-                <div class="legend-item"><div class="legend-color" style="background: rgba(46, 204, 113, 0.8); box-shadow: 0 0 5px #2ecc71;"></div> Anomalía Balaur</div>
+                <div class="legend-item"><div class="legend-color" style="background: rgba(0, 191, 255, 0.95); box-shadow: 0 0 5px #00bfff;"></div> Sector Elíseo</div>
+                <div class="legend-item"><div class="legend-color" style="background: rgba(255, 50, 50, 0.95); box-shadow: 0 0 5px #ff4d4d;"></div> Sector Asmodiano</div>
+                <div class="legend-item"><div class="legend-color" style="background: rgba(46, 204, 113, 0.95); box-shadow: 0 0 5px #2ecc71;"></div> Anomalía Balaur</div>
             </div>
             
             <div class="last-update">
