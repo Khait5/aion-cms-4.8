@@ -36,3 +36,42 @@ body {
 .table tbody>tr>td.vert-align{
     vertical-align: middle;
 }
+/* Override responsive elements */
+.main-container,
+.main-content,
+.main-header,
+.main-footer,
+.main-content-container {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.home-main-content {
+    background: none !important;
+    height: auto !important;
+}
+
+/* UserCP Menu */
+.usercp-menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.page-header-block {
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.my-account-table {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+
+/* Hide old navbar if still taking up space */
+.main-navbar {
+    display: none !important;
+}

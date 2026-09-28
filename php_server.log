@@ -1,0 +1,13 @@
+[Mon Sep 28 22:52:27 2026] PHP 8.3.6 Development Server (http://localhost:8000) started
+[Mon Sep 28 22:52:39 2026] [::1]:32978 Accepted
+[Mon Sep 28 22:52:39 2026] [::1]:32978 [200]: GET /
+[Mon Sep 28 22:52:39 2026] [::1]:32978 Closing
+[Mon Sep 28 22:52:53 2026] [::1]:36998 Accepted
+[Mon Sep 28 22:52:53 2026] [::1]:36998 [200]: GET /
+[Mon Sep 28 22:52:53 2026] [::1]:36998 Closing
+[Mon Sep 28 22:53:05 2026] [::1]:41294 Accepted
+[Mon Sep 28 22:53:05 2026] [::1]:41294 [200]: GET /?request=usercp
+[Mon Sep 28 22:53:05 2026] [::1]:41294 Closing
+[Mon Sep 28 22:53:19 2026] [::1]:53254 Accepted
+[Mon Sep 28 22:53:19 2026] [::1]:53254 [200]: GET /index.php?request=usercp
+[Mon Sep 28 22:53:19 2026] [::1]:53254 Closing

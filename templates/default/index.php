@@ -10,7 +10,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>AionCMS - Aion Private Server</title>
+	<title>ColombianAion</title>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
@@ -40,18 +40,30 @@
 				<img src="<?php template_img(); ?>logo.png" width="300px" height="auto"/>
 			</div>
 		</div>
-		<div class="main-navbar">
-			<div class="main-navbar-container">
-			<ul class="left">
-				<li><a href="<?php base_url(); ?>">Inicio</a></li>
-				<li><a href="<?php module_url(); ?>connect/">Conectar</a></li>
-				<li><a href="<?php module_url(); ?>info/">Servidor</a></li>
+
+		<button id="floating-menu-btn" class="btn btn-primary" style="position: fixed; top: 50%; left: 0; z-index: 1001; transform: translateY(-50%); border-radius: 0 5px 5px 0;">Menú</button>
+		<div id="floating-sidebar" style="position: fixed; top: 0; bottom: 0; left: 0; width: 250px; background: rgba(0,0,0,0.9); z-index: 1000; transform: translateX(-100%); transition: 0.3s; padding-top: 60px; border-right: 2px solid #444;">
+			<ul style="list-style: none; padding: 0; margin: 0; text-align: center;">
+				<li style="margin-bottom: 15px;"><a href="<?php base_url(); ?>" style="color: #c3f3ff; font-size: 18px; text-decoration: none; display: block; padding: 10px;">Inicio</a></li>
+				<li style="margin-bottom: 15px;"><a href="<?php module_url(); ?>connect/" style="color: #c3f3ff; font-size: 18px; text-decoration: none; display: block; padding: 10px;">Conectar</a></li>
+				<li style="margin-bottom: 15px;"><a href="<?php module_url(); ?>info/" style="color: #c3f3ff; font-size: 18px; text-decoration: none; display: block; padding: 10px;">Servidor</a></li>
+				<li style="margin-bottom: 15px;"><a href="<?php module_url(); ?>rankings/" style="color: #c3f3ff; font-size: 18px; text-decoration: none; display: block; padding: 10px;">Clasificación</a></li>
 			</ul>
-			<ul class="right">
-				<li><a href="<?php module_url(); ?>rankings/">Clasificación</a></li>
-			</ul>
-			</div>
 		</div>
+
+		<?php if(isLoggedIn()) { ?>
+		<button id="floating-usercp-btn" class="btn btn-warning" style="position: fixed; top: 50%; right: 0; z-index: 1001; transform: translateY(-50%); border-radius: 5px 0 0 5px;">UserCP</button>
+		<div id="floating-usercp-sidebar" style="position: fixed; top: 0; bottom: 0; right: 0; width: 250px; background: rgba(0,0,0,0.9); z-index: 1000; transform: translateX(100%); transition: 0.3s; padding-top: 60px; border-left: 2px solid #444;">
+			<ul style="list-style: none; padding: 0; margin: 0; text-align: center;">
+				<li style="margin-bottom: 15px;"><a href="<?php module_url(); ?>usercp/account/" style="color: #c3f3ff; font-size: 16px; text-decoration: none; display: block; padding: 5px;">Mi Cuenta</a></li>
+				<li style="margin-bottom: 15px;"><a href="<?php module_url(); ?>usercp/characters/" style="color: #c3f3ff; font-size: 16px; text-decoration: none; display: block; padding: 5px;">Mis Personajes</a></li>
+				<li style="margin-bottom: 15px;"><a href="<?php module_url(); ?>usercp/password/" style="color: #c3f3ff; font-size: 16px; text-decoration: none; display: block; padding: 5px;">Cambiar Contraseña</a></li>
+				<li style="margin-bottom: 15px;"><a href="<?php module_url(); ?>usercp/" style="color: #c3f3ff; font-size: 16px; text-decoration: none; display: block; padding: 5px;">Panel Completo</a></li>
+				<li style="margin-top: 30px;"><a href="<?php module_url(); ?>logout/" style="color: #ff6363; font-size: 16px; text-decoration: none; display: block; padding: 5px;">Salir</a></li>
+			</ul>
+		</div>
+		<?php } ?>
+
 		<?php Handler::loadModule(isset($_GET['request']) ? $_GET['request'] : ''); ?>
 		<div class="main-footer">
 			<div class="row">
@@ -80,6 +92,26 @@
 	  $('[data-toggle="tooltip"]').tooltip()
 	})
 	</script>
-	
+	<script>
+	$(document).ready(function(){
+		$('#floating-menu-btn').click(function(){
+			var sidebar = $('#floating-sidebar');
+			if(sidebar.css('transform') == 'matrix(1, 0, 0, 1, 0, 0)' || sidebar.css('transform') == 'none') {
+				sidebar.css('transform', 'translateX(-100%)');
+			} else {
+				sidebar.css('transform', 'translateX(0%)');
+			}
+		});
+
+		$('#floating-usercp-btn').click(function(){
+			var sidebar = $('#floating-usercp-sidebar');
+			if(sidebar.css('transform') == 'matrix(1, 0, 0, 1, 0, 0)' || sidebar.css('transform') == 'none') {
+				sidebar.css('transform', 'translateX(100%)');
+			} else {
+				sidebar.css('transform', 'translateX(0%)');
+			}
+		});
+	});
+	</script>
 </body>
 </html>
