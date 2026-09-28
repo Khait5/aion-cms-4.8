@@ -209,7 +209,6 @@ $radar_balaur = 37850 + mt_rand(-60, 90);
 }
 </style>
 
-<div class="page-header-block info"></div>
 <div class="server-info-container" style="padding: 20px;">
     
     <div class="terminal-container">
