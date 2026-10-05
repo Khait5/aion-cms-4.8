@@ -35,7 +35,7 @@
 			</div>
 			<?php } ?>
 			<div class="left-text-container">
-				<p>Bienvenido al Servidor Privado <span style="color:#d6be93;">AionCMS</span>.</p>
+				<p>Bienvenido al portal de ColombianAge.</p>
 				<p>¡ColombianAge 4.8 ya está disponible!</p>
 				<div class="left-text-container-newsblock">
 					<?php
@@ -76,11 +76,11 @@
 				<!-- Nav tabs -->
 				<div class="text-center">
 					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a href="#abyss" aria-controls="abyss" role="tab" data-toggle="tab">Abismo</a></li>
+						<!--<li role="presentation" class="active"><a href="#abyss" aria-controls="abyss" role="tab" data-toggle="tab">Abismo</a></li>
 						<li role="presentation"><a href="#gp" aria-controls="gp" role="tab" data-toggle="tab">PG</a></li>
 						<li role="presentation"><a href="#kills" aria-controls="kills" role="tab" data-toggle="tab">Asesinatos</a></li>
 						<li role="presentation"><a href="#legions" aria-controls="legions" role="tab" data-toggle="tab">Legiones</a></li>
-						<li role="presentation"><a href="#votes" aria-controls="votes" role="tab" data-toggle="tab">Votos</a></li>
+						<li role="presentation"><a href="#votes" aria-controls="votes" role="tab" data-toggle="tab">Votos</a></li>-->
 					</ul>
 				</div>
 
@@ -294,14 +294,14 @@
 				<p><span style="color:#d6be93;font-size:16px;">Registro de Cuenta</span><br />
 				Crea tu Cuenta <a href="<?php module_url('register/'); ?>" class="alt">Haz clic aquí para registrarte</a></p>
 
-				<p><span style="color:#d6be93;font-size:16px;">Descarga e Instala Aion</span><br />
+				<p><span style="color:#d6be93;font-size:16px;">Descarga e Instala Colombian Age</span><br />
 				1. Descarga e Instala uTorrent <a href="http://www.utorrent.com/downloads/complete/os/win/track/stable" target="_blank" class="alt">Aquí</a><br />
-				1. Descarga Aion <a href="#" target="_blank" class="alt">Torrent</a> o <a href="#" target="_blank" class="alt">Mega</a><br />
+				1. Descarga ColombianAge <a href="#" target="_blank" class="alt">Torrent</a> o <a href="#" target="_blank" class="alt">Mega</a><br />
 				2. Descarga nuestro Lanzador <a href="#" target="_blank" class="alt">Aquí</a></p>
 
-				<p><span style="color:#d6be93;font-size:16px;">Conectándose a Aion</span><br />
+				<p><span style="color:#d6be93;font-size:16px;">Conectándose a ColombianAge</span><br />
 				1. Abre la carpeta de AION<br />
-				2. ¡Ejecuta AION.exe para conectar!</p>
+				2. ¡Ejecuta ColombianAge.exe para conectar!</p>
 			</div>
 		</div>
 	</div>
