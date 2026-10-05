@@ -38,30 +38,8 @@
 				<p>Bienvenido al portal de ColombianAge.</p>
 				<p>¡ColombianAge 4.8 ya está disponible!</p>
 				<div class="left-text-container-newsblock">
-					<?php
-					$forumRss = 'FORUM_NEWS_RSS_LINK';
-					$loadRssXml = @simplexml_load_file($forumRss);
-					if($loadRssXml) {
-						$eventsFeed = $loadRssXml->channel;
-						
-						echo '<span class="newsheader">Últimas Noticias:</span>';
-						echo '<table class="newstable">';
-							$newsIndex = 0;
-							foreach($eventsFeed->item as $item) {
-								if($newsIndex > 8) continue;
-								//if(!preg_match('/Carl/', $item->author) && !preg_match('/Lautaro/', $item->author)) continue;
-								$timestamp = strtotime($item->pubDate);
-								
-								echo '<tr>';
-									echo '<td class="newstitle"><a href="'.$item->link.'" target="_blank">'.$item->title.'</a></td>';
-									echo '<td class="newsdate">'.date("M j", $timestamp).'</td>';
-								echo '</tr>';
-								
-								$newsIndex++;
-							}
-						echo '</table>';
-					}
-					?>
+					Servidor Disponible </ br>
+					Conexión a tierra Disponible </>
 				</div>
 			</div>
 		</div>
