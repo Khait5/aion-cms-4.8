@@ -93,7 +93,7 @@
 	</div>
 	<div class="right-side">
 		<div class="right-side-container">
-			<a href="https://aioncms.com/" class="download-button"></a>
+			
 			
 			<div class="connect-title"></div>
 			<div class="right-text-container">
