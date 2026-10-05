@@ -38,8 +38,8 @@
 				<p>Bienvenido al portal de ColombianAge.</p>
 				<p>¡ColombianAge 4.8 ya está disponible!</p>
 				<div class="left-text-container-newsblock">
-					Servidor Disponible </ br>
-					Conexión a tierra Disponible </>
+					Servidor Disponible <br>
+					Conexión a tierra Disponible <br>
 				</div>
 			</div>
 		</div>
