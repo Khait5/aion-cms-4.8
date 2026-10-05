@@ -10,19 +10,15 @@
 <div class="page-header-block connect"></div>
 <br /><br />
 
-<h3>Account Registration</h3>
-<p>Create your account and play Aion by clicking <a href="<?php echo __BASE_URL__; ?>page/register/">here</a></p><br /><br />
+				<p><span style="color:#d6be93;font-size:16px;">Registro de Cuenta</span><br />
+				Crea tu Cuenta <a href="<?php module_url('register/'); ?>" class="alt">Haz clic aquí para registrarte</a></p>
 
-<h3>Download and Install Aion</h3>
-<ol>
-	<li>Download and install Aion, <a href="https://aioncms.com/">click here</a></li>
-	<li>Download Launcher, <a href="https://aioncms.com/">click here</a></li>
-</ol><br />
+				<p><span style="color:#d6be93;font-size:16px;">Descarga e Instala el juego</span><br />
+				1.1 Descarga el juego <a href="http://www.utorrent.com/downloads/complete/os/win/track/stable" target="_blank" class="alt">Aquí</a><br />
+				1.2 Extrae el juego<br />
 
-<h3>Connecting to Aion</h3>
-<ol>
-	<li>Open the Aion folder</li>
-	<li>Run Aion.exe to connect and enjoy playing!</li>
-</ol><br />
+				<p><span style="color:#d6be93;font-size:16px;">Conectándose</span><br />
+				1. Abre la carpeta de ColombianAge<br />
+				2. ¡Ejecuta ColombianAge.exe para conectar!</p>
 
 <p>If you have any issues, contact us in our community forum for support.</p>
